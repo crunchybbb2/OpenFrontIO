@@ -146,5 +146,527 @@
       "flag": "California",
       "name": "Encino"
     }
+  ],
+  "additionalNations": [
+    {
+      "coordinates": [1524, 441],
+      "flag": "California",
+      "name": "Arcadia"
+    },
+    {
+      "coordinates": [1544, 572],
+      "flag": "California",
+      "name": "El Monte"
+    },
+    {
+      "coordinates": [1355, 520],
+      "flag": "California",
+      "name": "Alhambra"
+    },
+    {
+      "coordinates": [1341, 623],
+      "flag": "California",
+      "name": "Monterey Park"
+    },
+    {
+      "coordinates": [1502, 820],
+      "flag": "California",
+      "name": "Whittier"
+    },
+    {
+      "coordinates": [1649, 1079],
+      "flag": "California",
+      "name": "Buena Park"
+    },
+    {
+      "coordinates": [1461, 1360],
+      "flag": "California",
+      "name": "Seal Beach"
+    },
+    {
+      "coordinates": [1645, 1354],
+      "flag": "California",
+      "name": "Westminster"
+    },
+    {
+      "coordinates": [1724, 1238],
+      "flag": "California",
+      "name": "Garden Grove"
+    },
+    {
+      "coordinates": [1523, 1065],
+      "flag": "California",
+      "name": "Cerritos"
+    },
+    {
+      "coordinates": [1550, 1181],
+      "flag": "California",
+      "name": "Cypress"
+    },
+    {
+      "coordinates": [1691, 890],
+      "flag": "California",
+      "name": "La Habra"
+    },
+    {
+      "coordinates": [1787, 935],
+      "flag": "California",
+      "name": "Brea"
+    },
+    {
+      "coordinates": [1737, 1013],
+      "flag": "California",
+      "name": "Fullerton"
+    },
+    {
+      "coordinates": [1527, 905],
+      "flag": "California",
+      "name": "Santa Fe Springs"
+    },
+    {
+      "coordinates": [1672, 760],
+      "flag": "California",
+      "name": "Hacienda Heights"
+    },
+    {
+      "coordinates": [1643, 645],
+      "flag": "California",
+      "name": "City of Industry"
+    },
+    {
+      "coordinates": [1658, 551],
+      "flag": "California",
+      "name": "Baldwin Park"
+    },
+    {
+      "coordinates": [1693, 474],
+      "flag": "California",
+      "name": "Irwindale"
+    },
+    {
+      "coordinates": [1589, 330],
+      "flag": "California",
+      "name": "Monrovia"
+    },
+    {
+      "coordinates": [1448, 588],
+      "flag": "California",
+      "name": "Rosemead"
+    },
+    {
+      "coordinates": [1768, 404],
+      "flag": "California",
+      "name": "Azusa"
+    },
+    {
+      "coordinates": [1749, 592],
+      "flag": "California",
+      "name": "West Covina"
+    },
+    {
+      "coordinates": [1372, 721],
+      "flag": "California",
+      "name": "Montebello"
+    },
+    {
+      "coordinates": [1438, 786],
+      "flag": "California",
+      "name": "Pico Rivera"
+    },
+    {
+      "coordinates": [1329, 802],
+      "flag": "California",
+      "name": "Commerce"
+    },
+    {
+      "coordinates": [1235, 658],
+      "flag": "California",
+      "name": "East Los Angeles"
+    },
+    {
+      "coordinates": [1196, 459],
+      "flag": "California",
+      "name": "Eagle Rock"
+    },
+    {
+      "coordinates": [1225, 549],
+      "flag": "California",
+      "name": "Highland Park"
+    },
+    {
+      "coordinates": [1057, 587],
+      "flag": "California",
+      "name": "Echo Park"
+    },
+    {
+      "coordinates": [1020, 654],
+      "flag": "California",
+      "name": "Koreatown"
+    },
+    {
+      "coordinates": [1117, 642],
+      "flag": "California",
+      "name": "DTLA"
+    },
+    {
+      "coordinates": [1173, 746],
+      "flag": "California",
+      "name": "Vernon"
+    },
+    {
+      "coordinates": [1158, 829],
+      "flag": "California",
+      "name": "Huntington Park"
+    },
+    {
+      "coordinates": [1216, 878],
+      "flag": "California",
+      "name": "South Gate"
+    },
+    {
+      "coordinates": [1258, 824],
+      "flag": "California",
+      "name": "Bell"
+    },
+    {
+      "coordinates": [1045, 861],
+      "flag": "California",
+      "name": "South LA"
+    },
+    {
+      "coordinates": [1225, 951],
+      "flag": "California",
+      "name": "Lynwood"
+    },
+    {
+      "coordinates": [1405, 1019],
+      "flag": "California",
+      "name": "Bellflower"
+    },
+    {
+      "coordinates": [1302, 1022],
+      "flag": "California",
+      "name": "Paramount"
+    },
+    {
+      "coordinates": [1387, 1123],
+      "flag": "California",
+      "name": "Lakewood"
+    },
+    {
+      "coordinates": [1322, 1229],
+      "flag": "California",
+      "name": "Signal Hill"
+    },
+    {
+      "coordinates": [1467, 1213],
+      "flag": "California",
+      "name": "Los Alamitos"
+    },
+    {
+      "coordinates": [1789, 1522],
+      "flag": "California",
+      "name": "Costa Mesa"
+    },
+    {
+      "coordinates": [1530, 710],
+      "flag": "California",
+      "name": "Rose Hills"
+    },
+    {
+      "coordinates": [1473, 501],
+      "flag": "California",
+      "name": "Temple City"
+    },
+    {
+      "coordinates": [1397, 456],
+      "flag": "California",
+      "name": "San Marino"
+    },
+    {
+      "coordinates": [891, 1358],
+      "flag": "California",
+      "name": "Palos Verdes"
+    },
+    {
+      "coordinates": [1082, 1371],
+      "flag": "California",
+      "name": "San Pedro"
+    },
+    {
+      "coordinates": [1111, 1172],
+      "flag": "California",
+      "name": "Carson"
+    },
+    {
+      "coordinates": [836, 1013],
+      "flag": "California",
+      "name": "El Segundo"
+    },
+    {
+      "coordinates": [896, 1212],
+      "flag": "California",
+      "name": "Redondo Beach"
+    },
+    {
+      "coordinates": [866, 1120],
+      "flag": "California",
+      "name": "Manhattan Beach"
+    },
+    {
+      "coordinates": [1028, 1243],
+      "flag": "California",
+      "name": "Lomita"
+    },
+    {
+      "coordinates": [1027, 1040],
+      "flag": "California",
+      "name": "Gardena"
+    },
+    {
+      "coordinates": [938, 1034],
+      "flag": "California",
+      "name": "Lawndale"
+    },
+    {
+      "coordinates": [870, 777],
+      "flag": "California",
+      "name": "Culver City"
+    },
+    {
+      "coordinates": [944, 791],
+      "flag": "California",
+      "name": "Baldwin Hills"
+    },
+    {
+      "coordinates": [811, 479],
+      "flag": "California",
+      "name": "Studio City"
+    },
+    {
+      "coordinates": [840, 551],
+      "flag": "California",
+      "name": "Laurel Canyon"
+    },
+    {
+      "coordinates": [945, 973],
+      "flag": "California",
+      "name": "Hawthorne"
+    },
+    {
+      "coordinates": [999, 1152],
+      "flag": "California",
+      "name": "Old Torrance"
+    },
+    {
+      "coordinates": [1033, 775],
+      "flag": "California",
+      "name": "Expo Park"
+    },
+    {
+      "coordinates": [937, 741],
+      "flag": "California",
+      "name": "Leimert Park"
+    },
+    {
+      "coordinates": [940, 611],
+      "flag": "California",
+      "name": "West Hollywood"
+    },
+    {
+      "coordinates": [937, 667],
+      "flag": "California",
+      "name": "La Brea"
+    },
+    {
+      "coordinates": [748, 889],
+      "flag": "California",
+      "name": "Marina Del Rey"
+    },
+    {
+      "coordinates": [828, 863],
+      "flag": "California",
+      "name": "Westchester"
+    },
+    {
+      "coordinates": [756, 781],
+      "flag": "California",
+      "name": "Westdale"
+    },
+    {
+      "coordinates": [1088, 962],
+      "flag": "California",
+      "name": "West Athens"
+    },
+    {
+      "coordinates": [1181, 1112],
+      "flag": "California",
+      "name": "Rancho Dominguez"
+    },
+    {
+      "coordinates": [1163, 1403],
+      "flag": "California",
+      "name": "Terminal Island"
+    },
+    {
+      "coordinates": [1332, 285],
+      "flag": "California",
+      "name": "Altadena"
+    },
+    {
+      "coordinates": [1448, 335],
+      "flag": "California",
+      "name": "Sierra Madre"
+    },
+    {
+      "coordinates": [1156, 268],
+      "flag": "California",
+      "name": "La Canada Flintridge"
+    },
+    {
+      "coordinates": [1009, 211],
+      "flag": "California",
+      "name": "La Crescenta"
+    },
+    {
+      "coordinates": [890, 135],
+      "flag": "California",
+      "name": "Tujunga"
+    },
+    {
+      "coordinates": [997, 348],
+      "flag": "California",
+      "name": "Burbank"
+    },
+    {
+      "coordinates": [1003, 479],
+      "flag": "California",
+      "name": "Griffith Park"
+    },
+    {
+      "coordinates": [848, 317],
+      "flag": "California",
+      "name": "Burbank Airport"
+    },
+    {
+      "coordinates": [860, 406],
+      "flag": "California",
+      "name": "NoHo"
+    },
+    {
+      "coordinates": [689, 322],
+      "flag": "California",
+      "name": "Van Nuys"
+    },
+    {
+      "coordinates": [705, 244],
+      "flag": "California",
+      "name": "Panorama City"
+    },
+    {
+      "coordinates": [267, 554],
+      "flag": "California",
+      "name": "Calabasas"
+    },
+    {
+      "coordinates": [472, 611],
+      "flag": "California",
+      "name": "Topanga"
+    },
+    {
+      "coordinates": [438, 254],
+      "flag": "California",
+      "name": "Chatsworth"
+    },
+    {
+      "coordinates": [566, 276],
+      "flag": "California",
+      "name": "Northridge"
+    },
+    {
+      "coordinates": [563, 391],
+      "flag": "California",
+      "name": "Reseda"
+    },
+    {
+      "coordinates": [429, 369],
+      "flag": "California",
+      "name": "Canoga Park"
+    },
+    {
+      "coordinates": [167, 473],
+      "flag": "California",
+      "name": "Agoura Hills"
+    },
+    {
+      "coordinates": [326, 416],
+      "flag": "California",
+      "name": "Hidden Hills"
+    },
+    {
+      "coordinates": [564, 156],
+      "flag": "California",
+      "name": "Granada Hills"
+    },
+    {
+      "coordinates": [645, 90],
+      "flag": "California",
+      "name": "Sylmar"
+    },
+    {
+      "coordinates": [33, 244],
+      "flag": "California",
+      "name": "Moorpark"
+    },
+    {
+      "coordinates": [642, 667],
+      "flag": "California",
+      "name": "Brentwood"
+    },
+    {
+      "coordinates": [580, 727],
+      "flag": "California",
+      "name": "Pacific Palisades"
+    },
+    {
+      "coordinates": [712, 469],
+      "flag": "California",
+      "name": "Sherman Oaks"
+    },
+    {
+      "coordinates": [154, 246],
+      "flag": "California",
+      "name": "Simi Valley"
+    },
+    {
+      "coordinates": [308, 245],
+      "flag": "California",
+      "name": "Santa Susana"
+    },
+    {
+      "coordinates": [1674, 1174],
+      "flag": "California",
+      "name": "Stanton"
+    },
+    {
+      "coordinates": [1292, 1147],
+      "flag": "California",
+      "name": "LGB Airport"
+    },
+    {
+      "coordinates": [958, 2132],
+      "flag": "California",
+      "name": "Avalon"
+    },
+    {
+      "coordinates": [607, 1951],
+      "flag": "California",
+      "name": "Two Harbors"
+    },
+    {
+      "coordinates": [1324, 874],
+      "flag": "California",
+      "name": "Bell Gardens"
+    }
   ]
 }
