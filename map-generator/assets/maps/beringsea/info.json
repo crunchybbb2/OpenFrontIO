@@ -137,5 +137,196 @@
         "y": 0
       }
     ]
-  }
+  },
+  "additionalNations": [
+    {
+      "coordinates": [1326, 731],
+      "name": "St. Lawrence Island",
+      "flag": "Alaska"
+    },
+    {
+      "coordinates": [1208, 1356],
+      "name": "Atka",
+      "flag": "Alaska"
+    },
+    {
+      "coordinates": [1137, 1380],
+      "name": "Adak",
+      "flag": "Alaska"
+    },
+    {
+      "coordinates": [378, 754],
+      "name": "Omsukchan",
+      "flag": "ru"
+    },
+    {
+      "coordinates": [72, 767],
+      "name": "Susuman",
+      "flag": "ru"
+    },
+    {
+      "coordinates": [800, 256],
+      "name": "Pevek",
+      "flag": "ru"
+    },
+    {
+      "coordinates": [2497, 1176],
+      "name": "Ketchikan",
+      "flag": "Alaska"
+    },
+    {
+      "coordinates": [2381, 1137],
+      "name": "Sitka",
+      "flag": "Alaska"
+    },
+    {
+      "coordinates": [2457, 1295],
+      "name": "Graham Island",
+      "flag": "ca"
+    },
+    {
+      "coordinates": [1884, 949],
+      "name": "Homer",
+      "flag": "Alaska"
+    },
+    {
+      "coordinates": [1959, 928],
+      "name": "Seward",
+      "flag": "Alaska"
+    },
+    {
+      "coordinates": [1662, 618],
+      "name": "Huslia",
+      "flag": "Alaska"
+    },
+    {
+      "coordinates": [2216, 682],
+      "name": "Chicken",
+      "flag": "Alaska"
+    },
+    {
+      "coordinates": [1451, 348],
+      "name": "Point Hope",
+      "flag": "Alaska"
+    },
+    {
+      "coordinates": [1582, 609],
+      "name": "White Mountain",
+      "flag": "Alaska"
+    },
+    {
+      "coordinates": [184, 203],
+      "name": "Chokurdakh",
+      "flag": "ru"
+    },
+    {
+      "coordinates": [2229, 933],
+      "name": "Yakutat",
+      "flag": "Alaska"
+    },
+    {
+      "coordinates": [1912, 761],
+      "name": "Denali National Park",
+      "flag": "Alaska"
+    },
+    {
+      "coordinates": [2460, 1100],
+      "name": "Wrangell",
+      "flag": "Alaska"
+    },
+    {
+      "coordinates": [2099, 906],
+      "name": "Cordova",
+      "flag": "Alaska"
+    },
+    {
+      "coordinates": [2089, 739],
+      "name": "Tok",
+      "flag": "Alaska"
+    },
+    {
+      "coordinates": [2493, 331],
+      "name": "Inuvik",
+      "flag": "ca"
+    },
+    {
+      "coordinates": [1722, 1035],
+      "name": "Naknek",
+      "flag": "Alaska"
+    },
+    {
+      "coordinates": [1724, 426],
+      "name": "Kobuk",
+      "flag": "Alaska"
+    },
+    {
+      "coordinates": [1950, 387],
+      "name": "Gates of the Arctic National Park",
+      "flag": "Alaska"
+    },
+    {
+      "coordinates": [1298, 526],
+      "name": "Uelen",
+      "flag": "ru"
+    },
+    {
+      "coordinates": [1362, 564],
+      "name": "Diomede Islands"
+    },
+    {
+      "coordinates": [1109, 392],
+      "name": "Mys Shmidta",
+      "flag": "ru"
+    },
+    {
+      "coordinates": [680, 897],
+      "name": "Tilichiki",
+      "flag": "ru"
+    },
+    {
+      "coordinates": [482, 978],
+      "name": "Palana",
+      "flag": "ru"
+    },
+    {
+      "coordinates": [527, 582],
+      "name": "Omolon",
+      "flag": "ru"
+    },
+    {
+      "coordinates": [458, 835],
+      "name": "Evensk",
+      "flag": "ru"
+    },
+    {
+      "coordinates": [774, 667],
+      "name": "Markovo",
+      "flag": "ru"
+    },
+    {
+      "coordinates": [856, 555],
+      "name": "Ust' Belaya",
+      "flag": "ru"
+    },
+    {
+      "coordinates": [1465, 843],
+      "name": "Hooper Bay",
+      "flag": "Alaska"
+    },
+    {
+      "coordinates": [1676, 968],
+      "name": "Eek",
+      "flag": "Alaska"
+    },
+    {
+      "coordinates": [1728, 848],
+      "name": "Red Devil",
+      "flag": "Alaska"
+    },
+    {
+      "coordinates": [2211, 819],
+      "name": "Wrangell-St. Elias National Park",
+      "flag": "Alaska"
+    }
+  ]
 }

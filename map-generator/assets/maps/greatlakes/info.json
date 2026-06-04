@@ -171,5 +171,147 @@
       "name": "Rouyn-Noranda",
       "flag": "ca"
     }
+  ],
+  "additionalNations": [
+    {
+      "coordinates": [1048, 1125],
+      "name": "Ann Arbor",
+      "flag": "Michigan"
+    },
+    {
+      "coordinates": [1106, 1008],
+      "name": "Flint",
+      "flag": "Michigan"
+    },
+    {
+      "coordinates": [863, 1060],
+      "name": "Grand Rapids",
+      "flag": "Michigan"
+    },
+    {
+      "coordinates": [803, 1188],
+      "name": "Kalamazoo",
+      "flag": "Michigan"
+    },
+    {
+      "coordinates": [831, 766],
+      "name": "Traverse City",
+      "flag": "Michigan"
+    },
+    {
+      "coordinates": [446, 1287],
+      "name": "Naperville",
+      "flag": "Illinois"
+    },
+    {
+      "coordinates": [357, 1196],
+      "name": "Rockford",
+      "flag": "Illinois"
+    },
+    {
+      "coordinates": [429, 948],
+      "name": "Oshkosh",
+      "flag": "Wisconsin"
+    },
+    {
+      "coordinates": [467, 868],
+      "name": "Appleton",
+      "flag": "Wisconsin"
+    },
+    {
+      "coordinates": [436, 162],
+      "name": "Isle Royale",
+      "flag": "Michigan"
+    },
+    {
+      "coordinates": [1618, 1032],
+      "name": "Niagara Falls",
+      "flag": "ca"
+    },
+    {
+      "coordinates": [1375, 1027],
+      "name": "London",
+      "flag": "ca"
+    },
+    {
+      "coordinates": [1750, 489],
+      "name": "Pembroke",
+      "flag": "ca"
+    },
+    {
+      "coordinates": [1342, 428],
+      "name": "Sudbury",
+      "flag": "ca"
+    },
+    {
+      "coordinates": [1530, 918],
+      "name": "Mississauga",
+      "flag": "ca"
+    },
+    {
+      "coordinates": [1526, 787],
+      "name": "Barrie",
+      "flag": "ca"
+    },
+    {
+      "coordinates": [512, 16],
+      "name": "Nipigon",
+      "flag": "ca"
+    },
+    {
+      "coordinates": [1711, 811],
+      "name": "Peterborough",
+      "flag": "ca"
+    },
+    {
+      "coordinates": [122, 771],
+      "name": "Eau Claire",
+      "flag": "Wisconsin"
+    },
+    {
+      "coordinates": [213, 919],
+      "name": "Wisconsin Dells",
+      "flag": "Wisconsin"
+    },
+    {
+      "coordinates": [427, 671],
+      "name": "Antigo",
+      "flag": "Wisconsin"
+    },
+    {
+      "coordinates": [9, 985],
+      "name": "Rochester",
+      "flag": "Minnesota"
+    },
+    {
+      "coordinates": [146, 1041],
+      "name": "La Crosse",
+      "flag": "Wisconsin"
+    },
+    {
+      "coordinates": [13, 1200],
+      "name": "Cedar Rapids",
+      "flag": "Iowa"
+    },
+    {
+      "coordinates": [177, 1150],
+      "name": "Dubuque",
+      "flag": "Iowa"
+    },
+    {
+      "coordinates": [914, 1276],
+      "name": "Fort Wayne",
+      "flag": "Indiana"
+    },
+    {
+      "coordinates": [1516, 982],
+      "name": "Hamilton",
+      "flag": "ca"
+    },
+    {
+      "coordinates": [1964, 1221],
+      "name": "Corning",
+      "flag": "New_York"
+    }
   ]
 }
