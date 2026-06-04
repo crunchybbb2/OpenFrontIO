@@ -364,6 +364,11 @@
       "name": "Temple City"
     },
     {
+      "coordinates": [1400, 498],
+      "flag": "California",
+      "name": "San Gabriel"
+    },
+    {
       "coordinates": [1397, 456],
       "flag": "California",
       "name": "San Marino"
