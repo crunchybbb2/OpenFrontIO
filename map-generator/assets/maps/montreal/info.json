@@ -61,5 +61,287 @@
       "flag": "Quebec",
       "name": "Pointe-aux-Trembles"
     }
+  ],
+  "additionalNations": [
+    {
+      "coordinates": [1235, 1033],
+      "name": "Nuns' Island",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1220, 821],
+      "name": "Downtown Montreal",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1226, 982],
+      "name": "Pointe-Saint-Charles",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1146, 996],
+      "name": "Saint-Henri",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1075, 1102],
+      "name": "Angrignon",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1446, 1106],
+      "name": "Brossard",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1401, 1214],
+      "name": "La Prairie",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1489, 877],
+      "name": "Longueuil",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1126, 1257],
+      "name": "Sainte-Catherine",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1159, 1330],
+      "name": "Saint-Constant",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1285, 1434],
+      "name": "Delson",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1369, 1355],
+      "name": "Candiac",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1487, 1447],
+      "name": "Saint-Philippe",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [882, 1307],
+      "name": "Kahnawake",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [671, 1307],
+      "name": "Saint-Bernard Island",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [703, 1088],
+      "name": "Dorval",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [696, 1001],
+      "name": "Montreal Intl Airport (YUL)",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [882, 1107],
+      "name": "Lacuine",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1014, 1168],
+      "name": "Lasalle",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [952, 1002],
+      "name": "Côte Saint-Luc",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [520, 1027],
+      "name": "Pointe-Claire",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [385, 1084],
+      "name": "Kirkland",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [326, 1179],
+      "name": "Beaconsfield",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [205, 1194],
+      "name": "Baie-D'Urfe",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [495, 917],
+      "name": "Dollard-Des Ormeaux",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [277, 941],
+      "name": "Bizard Island",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [923, 894],
+      "name": "Saint-Laurent",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [760, 830],
+      "name": "Saraguay",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [763, 675],
+      "name": "Chomedey",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [578, 739],
+      "name": "Sainte-Dorothée",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [238, 776],
+      "name": "Deux-Montagnes",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [482, 476],
+      "name": "Boisbriand",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [510, 637],
+      "name": "Fabreville",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [566, 574],
+      "name": "Sainte-Rose",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [674, 431],
+      "name": "Auteuil",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [693, 233],
+      "name": "Bois-des-Filion",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [600, 390],
+      "name": "Rosemere",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1024, 853],
+      "name": "Outremont",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1074, 699],
+      "name": "Saint-Michel",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1164, 605],
+      "name": "Saint-Leonard",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1063, 510],
+      "name": "North Montreal",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [867, 599],
+      "name": "Pont-Viau",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [943, 688],
+      "name": "Ahuntsic",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1328, 486],
+      "name": "East Montreal",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [985, 198],
+      "name": "Terrebonne",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [412, 256],
+      "name": "Lorraine",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [99, 134],
+      "name": "Mirabel Airport",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1175, 405],
+      "name": "Riviere Des Prairies",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1470, 662],
+      "name": "Boucherville",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1526, 352],
+      "name": "Varennes",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1528, 241],
+      "name": "La Saline",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1351, 148],
+      "name": "Charlemagne",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1497, 62],
+      "name": "Repentigny",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1213, 209],
+      "name": "Lachenaie",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [1447, 256],
+      "name": "Saint-Therese Island",
+      "flag": "Quebec"
+    },
+    {
+      "coordinates": [833, 31],
+      "name": "Mascouche",
+      "flag": "Quebec"
+    }
   ]
 }

@@ -71,5 +71,262 @@
       "flag": "eg",
       "name": "El Mansoura"
     }
+  ],
+  "additionalNations": [
+    {
+      "coordinates": [1383, 458],
+      "name": "Port Said",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [1443, 487],
+      "name": "Pelusium",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [977, 1015],
+      "name": "New Cairo",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [1330, 721],
+      "name": "Ismailia",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [958, 900],
+      "name": "Al Obour",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [1109, 854],
+      "name": "10th of Ramadan City",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [748, 544],
+      "name": "Tanta",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [501, 491],
+      "name": "Damanhour",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [511, 305],
+      "name": "Rosetta",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [1140, 518],
+      "name": "Tanis",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [1014, 751],
+      "name": "Zagazig",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [868, 824],
+      "name": "Banha",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [1446, 1029],
+      "name": "Suez",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [1163, 246],
+      "name": "Ras El Bar",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [838, 219],
+      "name": "Baltim",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [517, 805],
+      "name": "El Sadat City",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [782, 1032],
+      "name": "6th of  October City",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [929, 792],
+      "name": "Minya Al-Qamh",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [1105, 731],
+      "name": "Abu Hammad",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [1055, 528],
+      "name": "Dikirnis",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [1073, 623],
+      "name": "Kafr Saqr",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [1126, 677],
+      "name": "Abu Kibir",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [1178, 635],
+      "name": "Faqus",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [1373, 891],
+      "name": "Fayed",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [1359, 602],
+      "name": "El-Qantara el-Sharqiya",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [1045, 295],
+      "name": "Gamasa",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [976, 438],
+      "name": "Shirbin",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [1132, 440],
+      "name": "Al Jamaliyah",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [807, 738],
+      "name": "Shebeen El-kom",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [761, 823],
+      "name": "Menouf",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [685, 563],
+      "name": "Kafr Az-Zayyat",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [689, 496],
+      "name": "Basyoun",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [643, 425],
+      "name": "Desouk",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [598, 378],
+      "name": "Fuwwah",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [713, 351],
+      "name": "Sidi Salem",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [759, 438],
+      "name": "Kafr El-Shaikh",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [853, 510],
+      "name": "El-Mahalla El-Kubra",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [951, 375],
+      "name": "Belqas",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [737, 657],
+      "name": "Tala",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [515, 672],
+      "name": "Ad Dilinjat",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [433, 390],
+      "name": "Idku",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [378, 551],
+      "name": "Abu Al Matamir",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [222, 508],
+      "name": "El Agamy",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [80, 605],
+      "name": "El Hamam",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [320, 699],
+      "name": "An Nubariyah",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [1355, 1233],
+      "name": "Ain Sokhna",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [1546, 1212],
+      "name": "Ras Sedr",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [686, 535],
+      "name": "Sais",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [1140, 590],
+      "name": "Avaris",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [952, 669],
+      "name": "Bubastis",
+      "flag": "eg"
+    },
+    {
+      "coordinates": [577, 594],
+      "name": "Naucratis",
+      "flag": "eg"
+    }
   ]
 }
