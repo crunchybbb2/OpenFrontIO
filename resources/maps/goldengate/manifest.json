@@ -1,0 +1,18 @@
+{
+  "map": {
+    "height": 2952,
+    "num_land_tiles": 3536437,
+    "width": 2484
+  },
+  "map16x": {
+    "height": 738,
+    "num_land_tiles": 217590,
+    "width": 621
+  },
+  "map4x": {
+    "height": 1476,
+    "num_land_tiles": 879444,
+    "width": 1242
+  },
+  "name": "Golden Gate"
+}
