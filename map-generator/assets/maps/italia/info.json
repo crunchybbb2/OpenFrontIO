@@ -3,7 +3,8 @@
   "nations": [
     {
       "coordinates": [1038, 993],
-      "name": "Kingdom of the Two Sicilies"
+      "name": "Kingdom of the Two Sicilies",
+      "flag": "italy"
     },
     {
       "coordinates": [370, 1137],
@@ -17,7 +18,8 @@
     },
     {
       "coordinates": [625, 534],
-      "name": "Tuscany"
+      "name": "Tuscany",
+      "flag": "italy"
     },
     {
       "coordinates": [595, 190],
@@ -26,11 +28,13 @@
     },
     {
       "coordinates": [469, 386],
-      "name": "Modena"
+      "name": "Modena",
+      "flag": "italy"
     },
     {
       "coordinates": [391, 254],
-      "name": "Parma"
+      "name": "Parma",
+      "flag": "italy"
     },
     {
       "coordinates": [361, 68],
@@ -39,7 +43,8 @@
     },
     {
       "coordinates": [278, 774],
-      "name": "Kingdom of Sardinia"
+      "name": "Kingdom of Sardinia",
+      "flag": "italy"
     },
     {
       "coordinates": [29, 266],
@@ -53,7 +58,8 @@
     },
     {
       "coordinates": [1238, 349],
-      "name": "Ottoman Empire"
+      "name": "Ottoman Empire",
+      "flag": "Ottoman Empire"
     }
   ]
 }
