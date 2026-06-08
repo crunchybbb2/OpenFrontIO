@@ -522,6 +522,7 @@
     "featured": "Featured",
     "all": "All",
     "world": "World",
+    "worldinverted": "World Inverted",
     "giantworldmap": "Giant World Map",
     "europe": "Europe",
     "mena": "MENA",
@@ -609,7 +610,9 @@
     "yellowsea": "Yellow Sea",
     "labyrinth": "Labyrinth",
     "caribbean": "Caribbean",
-    "southeastasia": "Southeast Asia"
+    "choppingblock": "Chopping Block",
+    "southeastasia": "Southeast Asia",
+    "mississippiriver": "Mississippi River"
   },
   "map_categories": {
     "featured": "Featured",
@@ -669,7 +672,9 @@
     "tag": "TAG",
     "tag_too_short": "Clan tag must be 2-5 alphanumeric characters.",
     "tag_too_long": "Clan tag cannot exceed 5 characters.",
-    "tag_invalid_chars": "Clan tag can only contain letters and numbers."
+    "tag_invalid_chars": "Clan tag can only contain letters and numbers.",
+    "tag_not_member": "Join the {tag} clan before using its tag.",
+    "tag_check_failed": "Couldn't verify clan tag. Try again or remove it."
   },
   "host_modal": {
     "title": "Create Private Lobby",
@@ -932,6 +937,16 @@
     "section_structure_icons": "Structure Icons",
     "classic_icons_label": "Classic icons",
     "classic_icons_desc": "Lighter outline with near-black interior",
+    "section_map": "Map",
+    "highlight_fill_label": "Territory highlight",
+    "highlight_fill_desc": "How strongly territory brightens on hover (0 to disable)",
+    "highlight_brighten_label": "Border highlight amount",
+    "highlight_brighten_desc": "How strongly the border brightens on hover (0 to disable)",
+    "highlight_thicken_label": "Border highlight thickness",
+    "highlight_thicken_desc": "How much the border thickens on hover",
+    "rail_distance_label": "Train track draw distance",
+    "rail_distance_desc": "How far zoomed out train tracks remain visible",
+    "section_effects": "Effects",
     "reset_label": "Reset to defaults",
     "reset_desc": "Clear all graphics overrides"
   },

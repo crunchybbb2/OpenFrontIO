@@ -95,6 +95,7 @@ export const ColoredTeams: Record<string, Team> = {
 
 export enum GameMapType {
   World = "World",
+  WorldInverted = "World Inverted",
   GiantWorldMap = "Giant World Map",
   Europe = "Europe",
   EuropeClassic = "Europe Classic",
@@ -181,7 +182,9 @@ export enum GameMapType {
   Labyrinth = "Labyrinth",
   Caribbean = "Caribbean",
   Onion = "Onion",
+  ChoppingBlock = "Chopping Block",
   SoutheastAsia = "SoutheastAsia",
+  MississippiRiver = "Mississippi River",
 }
 
 export type GameMapName = keyof typeof GameMapType;
@@ -254,6 +257,7 @@ export const mapCategories: Record<string, GameMapType[]> = {
     GameMapType.YellowSea,
     GameMapType.Caribbean,
     GameMapType.SoutheastAsia,
+    GameMapType.MississippiRiver,
   ],
   fantasy: [
     GameMapType.Pangaea,
@@ -270,9 +274,11 @@ export const mapCategories: Record<string, GameMapType[]> = {
     GameMapType.MilkyWay,
     GameMapType.Dyslexdria,
     GameMapType.Luna,
+    GameMapType.WorldInverted,
   ],
   arcade: [
     GameMapType.TheBox,
+    GameMapType.ChoppingBlock,
     GameMapType.Didier,
     GameMapType.DidierFrance,
     GameMapType.Labyrinth,
@@ -888,7 +894,6 @@ export interface Game extends GameMap {
   teamSpawnArea(team: Team): SpawnArea | undefined;
 
   // Alliances
-  alliances(): MutableAlliance[];
   expireAlliance(alliance: Alliance): void;
 
   // Immunity timer
