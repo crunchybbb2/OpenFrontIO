@@ -47,6 +47,11 @@
     {
       "coordinates": [1555, 258],
       "name": "Andalusia"
+    },
+    {
+      "coordinates": [1480, 592],
+      "flag": "gi",
+      "name": "Gibraltar"
     }
   ],
   "teamGameSpawnAreas": {

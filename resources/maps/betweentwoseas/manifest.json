@@ -42,11 +42,6 @@
       "name": "Ukraine"
     },
     {
-      "coordinates": [980, 24],
-      "flag": "ru",
-      "name": "Russian Federation"
-    },
-    {
       "coordinates": [1003, 674],
       "flag": "ge",
       "name": "Georgia"
@@ -67,7 +62,7 @@
       "name": "Islamic Republic of Iran"
     },
     {
-      "coordinates": [1355, 18],
+      "coordinates": [1361, 784],
       "flag": "az",
       "name": "Republic of Azerbaijan"
     },
@@ -90,6 +85,51 @@
       "coordinates": [851, 589],
       "flag": "Circassia",
       "name": "Circassia"
+    },
+    {
+      "coordinates": [1278, 631],
+      "flag": "ru",
+      "name": "Dagestan"
+    },
+    {
+      "coordinates": [825, 460],
+      "flag": "ru",
+      "name": "Krasnodar"
+    },
+    {
+      "coordinates": [1070, 369],
+      "flag": "ru",
+      "name": "Volgograd"
+    },
+    {
+      "coordinates": [1254, 252],
+      "flag": "ru",
+      "name": "Samara"
+    },
+    {
+      "coordinates": [685, 41],
+      "flag": "ru",
+      "name": "Moscow"
+    },
+    {
+      "coordinates": [1125, 111],
+      "flag": "ru",
+      "name": "Tatarstan"
+    },
+    {
+      "coordinates": [1506, 302],
+      "flag": "ru",
+      "name": "Orenburg"
+    },
+    {
+      "coordinates": [1644, 81],
+      "flag": "ru",
+      "name": "Chelyabinsk"
+    },
+    {
+      "coordinates": [516, 508],
+      "flag": "ua",
+      "name": "Crimea"
     }
   ]
 }

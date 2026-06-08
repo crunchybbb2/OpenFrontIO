@@ -2,7 +2,7 @@
   "name": "Strait of Hormuz",
   "nations": [
     {
-      "coordinates": [837, 356],
+      "coordinates": [960, 255],
       "name": "Hormozgan",
       "flag": "ir"
     },
@@ -105,6 +105,61 @@
       "coordinates": [56, 554],
       "name": "Bahrain",
       "flag": "bh"
+    },
+    {
+      "coordinates": [1070, 413],
+      "name": "Qeshm",
+      "flag": "ir"
+    },
+    {
+      "coordinates": [1166, 305],
+      "name": "Bandar Abbas",
+      "flag": "ir"
+    },
+    {
+      "coordinates": [1435, 617],
+      "name": "Jask",
+      "flag": "ir"
+    },
+    {
+      "coordinates": [804, 403],
+      "name": "Bandar Lengeh",
+      "flag": "ir"
+    },
+    {
+      "coordinates": [646, 364],
+      "name": "Parsian",
+      "flag": "ir"
+    },
+    {
+      "coordinates": [402, 200],
+      "name": "Kangan",
+      "flag": "ir"
+    },
+    {
+      "coordinates": [509, 296],
+      "name": "Asaluyeh",
+      "flag": "ir"
+    },
+    {
+      "coordinates": [1325, 381],
+      "name": "Minab",
+      "flag": "ir"
+    },
+    {
+      "coordinates": [1154, 43],
+      "name": "Hajjiabad",
+      "flag": "ir"
+    },
+    {
+      "coordinates": [1765, 669],
+      "name": "Konarak",
+      "flag": "ir"
+    },
+    {
+      "coordinates": [1578, 154],
+      "name": "Kahnuj",
+      "flag": "ir"
     }
   ],
   "teamGameSpawnAreas": {
