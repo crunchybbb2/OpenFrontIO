@@ -14,25 +14,20 @@
     "num_land_tiles": 214937,
     "width": 780
   },
-  "name": "East Asia",
+  "name": "east_asia",
   "nations": [
     {
-      "coordinates": [1150, 660],
+      "coordinates": [1157, 614],
       "flag": "jp",
       "name": "Hokkaido"
     },
     {
-      "coordinates": [1005, 843],
+      "coordinates": [1052, 832],
       "flag": "jp",
       "name": "Tohoku"
     },
     {
-      "coordinates": [858, 1045],
-      "flag": "jp",
-      "name": "Chubu"
-    },
-    {
-      "coordinates": [948, 1037],
+      "coordinates": [897, 1072],
       "flag": "jp",
       "name": "Kanto"
     },
@@ -57,7 +52,7 @@
       "name": "Kyushu"
     },
     {
-      "coordinates": [274, 1058],
+      "coordinates": [265, 1010],
       "flag": "kr",
       "name": "South Korea"
     },
@@ -67,24 +62,14 @@
       "name": "North Korea"
     },
     {
-      "coordinates": [15, 795],
+      "coordinates": [15, 732],
       "flag": "cn",
-      "name": "China"
+      "name": "Liaoning"
     },
     {
-      "coordinates": [230, 75],
+      "coordinates": [388, 161],
       "flag": "ru",
-      "name": "Russia"
-    },
-    {
-      "coordinates": [898, 923],
-      "flag": "jp",
-      "name": "Sado Island"
-    },
-    {
-      "coordinates": [592, 1031],
-      "flag": "jp",
-      "name": "Oki Islands"
+      "name": "Amur Oblast"
     },
     {
       "coordinates": [741, 1108],
@@ -92,29 +77,9 @@
       "name": "Kyoto"
     },
     {
-      "coordinates": [219, 972],
-      "flag": "kr",
-      "name": "Seoul"
-    },
-    {
-      "coordinates": [976, 1073],
+      "coordinates": [1004, 1029],
       "flag": "jp",
       "name": "Tokyo"
-    },
-    {
-      "coordinates": [911, 1079],
-      "flag": "jp",
-      "name": "Mount Fuji"
-    },
-    {
-      "coordinates": [1298, 564],
-      "flag": "jp",
-      "name": "Shiretoko Peninsula"
-    },
-    {
-      "coordinates": [435, 1311],
-      "flag": "jp",
-      "name": "Sakurajima"
     },
     {
       "coordinates": [275, 1614],
@@ -122,9 +87,49 @@
       "name": "Okinawa"
     },
     {
-      "coordinates": [731, 1115],
-      "flag": "jp",
-      "name": "Kinki"
+      "coordinates": [274, 598],
+      "flag": "cn",
+      "name": "Jilin"
+    },
+    {
+      "coordinates": [740, 480],
+      "flag": "ru",
+      "name": "Primorsky Krai"
+    },
+    {
+      "coordinates": [161, 361],
+      "flag": "cn",
+      "name": "Heilongjiang"
+    },
+    {
+      "coordinates": [593, 293],
+      "flag": "ru",
+      "name": "Jewish Autonomous Oblast"
+    },
+    {
+      "coordinates": [918, 106],
+      "flag": "ru",
+      "name": "Khabarovsk Krai"
+    },
+    {
+      "coordinates": [25, 80],
+      "flag": "cn",
+      "name": "Inner Mongolia"
+    },
+    {
+      "coordinates": [584, 17],
+      "flag": "ru",
+      "name": "Sakha"
+    },
+    {
+      "coordinates": [1443, 512],
+      "flag": "Sakhalin",
+      "name": "Kuril Islands"
+    },
+    {
+      "coordinates": [187, 1204],
+      "flag": "kr",
+      "name": "Jeju"
     }
   ]
 }
