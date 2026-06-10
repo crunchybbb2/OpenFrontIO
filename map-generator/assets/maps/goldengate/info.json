@@ -1,0 +1,407 @@
+{
+  "name": "goldengate",
+  "nations": [
+    {
+      "coordinates": [613, 1156],
+      "name": "Fort Point",
+      "flag": "California"
+    },
+    {
+      "coordinates": [444, 1539],
+      "name": "Sunset District",
+      "flag": "California"
+    },
+    {
+      "coordinates": [923, 1496],
+      "name": "Mission District",
+      "flag": "California"
+    },
+    {
+      "coordinates": [671, 1486],
+      "name": "Twin Peaks",
+      "flag": "California"
+    },
+    {
+      "coordinates": [759, 1239],
+      "name": "Pacific Heights",
+      "flag": "California"
+    },
+    {
+      "coordinates": [932, 1163],
+      "name": "Fisherman's Wharf",
+      "flag": "California"
+    },
+    {
+      "coordinates": [597, 1925],
+      "name": "Daly City",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1001, 1888],
+      "name": "Brisbane",
+      "flag": "California"
+    },
+    {
+      "coordinates": [896, 1020],
+      "name": "Alcatraz Island",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1173, 1027],
+      "name": "Treasure Island",
+      "flag": "California"
+    },
+    {
+      "coordinates": [880, 789],
+      "name": "Angel Island",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1613, 1334],
+      "name": "Alameda",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1557, 1155],
+      "name": "Oakland",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1602, 994],
+      "name": "Emeryville",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1606, 804],
+      "name": "Berkeley",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1542, 490],
+      "name": "El Cerrito",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1341, 299],
+      "name": "Richmond",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1576, 660],
+      "name": "Albany",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1203, 63],
+      "name": "San Pablo",
+      "flag": "California"
+    },
+    {
+      "coordinates": [579, 888],
+      "name": "Sausalito",
+      "flag": "California"
+    },
+    {
+      "coordinates": [709, 681],
+      "name": "Tiburon",
+      "flag": "California"
+    },
+    {
+      "coordinates": [494, 783],
+      "name": "Marin City",
+      "flag": "California"
+    },
+    {
+      "coordinates": [440, 46],
+      "name": "San Rafael",
+      "flag": "California"
+    },
+    {
+      "coordinates": [337, 513],
+      "name": "Mill Valley",
+      "flag": "California"
+    },
+    {
+      "coordinates": [369, 346],
+      "name": "Corte Madera",
+      "flag": "California"
+    },
+    {
+      "coordinates": [236, 228],
+      "name": "Larkspur",
+      "flag": "California"
+    },
+    {
+      "coordinates": [264, 863],
+      "name": "Golden Gate Rec Area",
+      "flag": "California"
+    }
+  ],
+  "additionalNations": [
+    {
+      "coordinates": [913, 1599],
+      "name": "Dolores Heights",
+      "flag": "California"
+    },
+    {
+      "coordinates": [988, 1188],
+      "name": "Telegraph Hill",
+      "flag": "California"
+    },
+    {
+      "coordinates": [607, 1218],
+      "name": "The Presidio",
+      "flag": "California"
+    },
+    {
+      "coordinates": [657, 1169],
+      "name": "Crissy Field",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1035, 1256],
+      "name": "Salesforce Building",
+      "flag": "California"
+    },
+    {
+      "coordinates": [405, 1334],
+      "name": "Point Lobos",
+      "flag": "California"
+    },
+    {
+      "coordinates": [852, 1404],
+      "name": "The Painted Ladies",
+      "flag": "California"
+    },
+    {
+      "coordinates": [552, 1283],
+      "name": "Baker Beach",
+      "flag": "California"
+    },
+    {
+      "coordinates": [522, 1470],
+      "name": "Golden Gate Park",
+      "flag": "California"
+    },
+    {
+      "coordinates": [443, 1614],
+      "name": "Ocean Beach",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1046, 1588],
+      "name": "Potrero Hill",
+      "flag": "California"
+    },
+    {
+      "coordinates": [928, 1731],
+      "name": "Bernal Heights",
+      "flag": "California"
+    },
+    {
+      "coordinates": [671, 1753],
+      "name": "Oceanview",
+      "flag": "California"
+    },
+    {
+      "coordinates": [899, 1246],
+      "name": "Lombard Street",
+      "flag": "California"
+    },
+    {
+      "coordinates": [968, 1323],
+      "name": "Chinatown",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1056, 1423],
+      "name": "Mission Rock",
+      "flag": "California"
+    },
+    {
+      "coordinates": [538, 1738],
+      "name": "Lake Merced",
+      "flag": "California"
+    },
+    {
+      "coordinates": [453, 1695],
+      "name": "SF Zoo",
+      "flag": "California"
+    },
+    {
+      "coordinates": [291, 999],
+      "name": "Rodeo Beach",
+      "flag": "California"
+    },
+    {
+      "coordinates": [319, 1091],
+      "name": "Point Bonita",
+      "flag": "California"
+    },
+    {
+      "coordinates": [431, 1031],
+      "name": "Black Sands Beach",
+      "flag": "California"
+    },
+    {
+      "coordinates": [561, 1002],
+      "name": "Golden Gate Viewpoint",
+      "flag": "California"
+    },
+    {
+      "coordinates": [601, 958],
+      "name": "Bay Area Discovery Museum",
+      "flag": "California"
+    },
+    {
+      "coordinates": [659, 723],
+      "name": "Belvedere",
+      "flag": "California"
+    },
+    {
+      "coordinates": [675, 528],
+      "name": "Paradise Beach",
+      "flag": "California"
+    },
+    {
+      "coordinates": [358, 183],
+      "name": "Greenbrae",
+      "flag": "California"
+    },
+    {
+      "coordinates": [67, 380],
+      "name": "Mt. Tamalpais",
+      "flag": "California"
+    },
+    {
+      "coordinates": [218, 13],
+      "name": "San Anselmo",
+      "flag": "California"
+    },
+    {
+      "coordinates": [78, 760],
+      "name": "Muir Beach",
+      "flag": "California"
+    },
+    {
+      "coordinates": [252, 102],
+      "name": "Ross",
+      "flag": "California"
+    },
+    {
+      "coordinates": [535, 229],
+      "name": "San Quentin",
+      "flag": "California"
+    },
+    {
+      "coordinates": [588, 432],
+      "name": "Paradise Cay",
+      "flag": "California"
+    },
+    {
+      "coordinates": [365, 458],
+      "name": "Alto",
+      "flag": "California"
+    },
+    {
+      "coordinates": [292, 667],
+      "name": "Tamalpais Valley",
+      "flag": "California"
+    },
+    {
+      "coordinates": [75, 110],
+      "name": "Kentfield",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1388, 1137],
+      "name": "Middle Harbor",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1467, 1118],
+      "name": "West Oakland",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1632, 928],
+      "name": "North Oakland",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1473, 775],
+      "name": "Berkeley Point",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1023, 299],
+      "name": "Point Richmond",
+      "flag": "California"
+    },
+    {
+      "coordinates": [889, 90],
+      "name": "Point San Pablo",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1328, 440],
+      "name": "Marina Bay",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1097, 131],
+      "name": "North Richmond",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1379, 134],
+      "name": "East Richmond Heights",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1097, 443],
+      "name": "Brickyard Cove",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1256, 537],
+      "name": "Brooks Island",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1654, 762],
+      "name": "UC Berkeley",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1633, 574],
+      "name": "Kensington",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1551, 886],
+      "name": "Point Emery",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1479, 939],
+      "name": "Emeryville Marina",
+      "flag": "California"
+    },
+    {
+      "coordinates": [946, 189],
+      "name": "Point Molate",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1423, 1280],
+      "name": "Naval Air Station",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1465, 1184],
+      "name": "Prescott",
+      "flag": "California"
+    }
+  ]
+}
