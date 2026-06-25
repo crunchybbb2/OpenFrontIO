@@ -1,0 +1,8 @@
+{
+  "id": "LasVegas",
+  "name": "Las Vegas",
+  "translation_key": "map.lasvegas",
+  "categories": ["north_america"],
+  "multiplayer_frequency": 3,
+  "nations": []
+}

@@ -1,0 +1,25 @@
+{
+  "categories": [
+    "north_america"
+  ],
+  "id": "LasVegas",
+  "map": {
+    "height": 4448,
+    "num_land_tiles": 3264839,
+    "width": 2064
+  },
+  "map16x": {
+    "height": 1112,
+    "num_land_tiles": 190127,
+    "width": 516
+  },
+  "map4x": {
+    "height": 2224,
+    "num_land_tiles": 795606,
+    "width": 1032
+  },
+  "multiplayer_frequency": 3,
+  "name": "Las Vegas",
+  "nations": [],
+  "translation_key": "map.lasvegas"
+}
