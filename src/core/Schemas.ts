@@ -3,6 +3,7 @@ import { z } from "zod";
 import {
   ColorPaletteSchema,
   CosmeticNameSchema,
+  EffectTypeSchema,
   PatternDataSchema,
 } from "./CosmeticSchemas";
 import type { GameEvent } from "./EventBus";
@@ -94,6 +95,7 @@ export type GameConfig = z.infer<typeof GameConfigSchema>;
 
 export type ClientMessage =
   | ClientSendWinnerMessage
+  | ClientSendLiveStatsMessage
   | ClientPingMessage
   | ClientIntentMessage
   | ClientJoinMessage
@@ -108,7 +110,8 @@ export type ServerMessage =
   | ServerDesyncMessage
   | ServerPrestartMessage
   | ServerErrorMessage
-  | ServerLobbyInfoMessage;
+  | ServerLobbyInfoMessage
+  | ServerNewLobbyMessage;
 
 export type ServerTurnMessage = z.infer<typeof ServerTurnMessageSchema>;
 export type ServerStartGameMessage = z.infer<
@@ -121,7 +124,13 @@ export type ServerErrorMessage = z.infer<typeof ServerErrorSchema>;
 export type ServerLobbyInfoMessage = z.infer<
   typeof ServerLobbyInfoMessageSchema
 >;
+export type ServerNewLobbyMessage = z.infer<typeof ServerNewLobbyMessageSchema>;
 export type ClientSendWinnerMessage = z.infer<typeof ClientSendWinnerSchema>;
+export type ClientSendLiveStatsMessage = z.infer<
+  typeof ClientSendLiveStatsSchema
+>;
+export type PlayerLiveStats = z.infer<typeof PlayerLiveStatsSchema>;
+export type LiveStats = z.infer<typeof LiveStatsSchema>;
 export type ClientPingMessage = z.infer<typeof ClientPingMessageSchema>;
 export type ClientIntentMessage = z.infer<typeof ClientIntentMessageSchema>;
 export type ClientJoinMessage = z.infer<typeof ClientJoinMessageSchema>;
@@ -136,13 +145,43 @@ export type PlayerCosmeticRefs = z.infer<typeof PlayerCosmeticRefsSchema>;
 export type PlayerPattern = z.infer<typeof PlayerPatternSchema>;
 export type PlayerColor = z.infer<typeof PlayerColorSchema>;
 export type PlayerSkin = z.infer<typeof PlayerSkinSchema>;
+export type PlayerEffect = z.infer<typeof PlayerEffectSchema>;
 export type GameStartInfo = z.infer<typeof GameStartInfoSchema>;
 export type GameInfo = z.infer<typeof GameInfoSchema>;
 export type PublicGames = z.infer<typeof PublicGamesSchema>;
 export type PublicGameInfo = z.infer<typeof PublicGameInfoSchema>;
 export type PublicGameType = z.infer<typeof PublicGameTypeSchema>;
 
-export const PublicGameTypeSchema = z.enum(["ffa", "team", "special"]);
+export const PublicGameTypeSchema = z.enum([
+  "ffa",
+  "team",
+  "special",
+  "hosted",
+]);
+
+// Lobby types the master schedules from the map playlist. "hosted" is
+// excluded: those are player-created private lobbies that a subscriber has
+// listed publicly, and the host (not the master) controls their lifecycle.
+// Derived from PublicGameTypeSchema so a new lobby type is scheduled by
+// default and opting out is the explicit act.
+export const ScheduledPublicGameTypeSchema = PublicGameTypeSchema.exclude([
+  "hosted",
+]);
+export const SCHEDULED_PUBLIC_GAME_TYPES =
+  ScheduledPublicGameTypeSchema.options;
+export type ScheduledPublicGameType = z.infer<
+  typeof ScheduledPublicGameTypeSchema
+>;
+
+// Cluster-wide cap on subscriber-listed (hosted) lobbies, to prevent listing
+// spam. Workers reject listings past the cap; the master caps the broadcast
+// and delists any overflow as the authoritative backstop.
+export const MAX_HOSTED_LOBBIES = 10;
+
+// How long a lobby may stay publicly listed before it starts automatically,
+// so hosts can't sit on a listing indefinitely. Unlisting cancels the
+// deadline; relisting starts a fresh one.
+export const HOSTED_LOBBY_AUTO_START_MS = 5 * 60 * 1000;
 
 export const UsernameSchema = z
   .string()
@@ -170,8 +209,20 @@ export const GameInfoSchema = z.object({
   serverTime: z.number(),
   gameConfig: z.lazy(() => GameConfigSchema).optional(),
   publicGameType: PublicGameTypeSchema.optional(),
+  // Private lobbies only: whether the lobby is publicly listed. Server-owned
+  // (only /api/game/:id/listing sets it); carried in lobby info so the host
+  // UI stays in sync when the server delists (whitelist enabled, duplicate
+  // creator resolved by the master).
+  listed: z.boolean().optional(),
+  // Listed lobbies only: server timestamp when the lobby starts
+  // automatically (hosts can't sit on a public listing indefinitely).
+  autoStartAt: z.number().optional(),
 });
 
+// Browser-facing lobby info. Master/worker-internal fields (the creator hash
+// used for the one-listed-lobby-per-creator check) live on
+// InternalGameInfoSchema in IPCBridgeSchema.ts, so client payloads cannot
+// carry them by construction.
 export const PublicGameInfoSchema = z.object({
   gameID: z.string(),
   numClients: z.number(),
@@ -182,7 +233,9 @@ export const PublicGameInfoSchema = z.object({
 
 export const PublicGamesSchema = z.object({
   serverTime: z.number(),
-  games: z.record(PublicGameTypeSchema, z.array(PublicGameInfoSchema)),
+  // partialRecord: every consumer already treats buckets as optional, and it
+  // lets clients tolerate servers that don't send every lobby type.
+  games: z.partialRecord(PublicGameTypeSchema, z.array(PublicGameInfoSchema)),
 });
 
 // Wire message sent from server to lobby WebSocket clients.
@@ -191,7 +244,7 @@ export const PublicGamesSchema = z.object({
 export const PublicLobbyFullSchema = z.object({
   type: z.literal("full"),
   serverTime: z.number(),
-  games: z.record(PublicGameTypeSchema, z.array(PublicGameInfoSchema)),
+  games: z.partialRecord(PublicGameTypeSchema, z.array(PublicGameInfoSchema)),
 });
 
 export const PublicLobbyCountsSchema = z.object({
@@ -241,6 +294,16 @@ const TeamCountConfigSchema = z.union([
 ]);
 export type TeamCountConfig = z.infer<typeof TeamCountConfigSchema>;
 
+// Doomsday Clock (anti-stall). Below a rising share of the map a player (or, in
+// team modes, their whole team) gets skulled and their troops drain to zero. The
+// required share rises in discrete waves per the `speed` preset (see
+// DoomsdayClock.ts). Only `enabled` and `speed` are wire-configurable; the
+// drain/warn tuning lives in DOOMSDAY_CLOCK_DEFAULTS (Config.ts).
+export const DoomsdayClockConfigSchema = z.object({
+  enabled: z.boolean().optional(),
+  speed: z.enum(["slow", "normal", "fast", "veryfast"]).optional(),
+});
+
 export const GameConfigSchema = z.object({
   gameMap: z.enum(GameMapType),
   difficulty: z.enum(Difficulty),
@@ -250,6 +313,7 @@ export const GameConfigSchema = z.object({
   gameMode: z.enum(GameMode),
   rankedType: z.enum(RankedType).optional(), // Only set for ranked games.
   gameMapSize: z.enum(GameMapSize),
+  doomsdayClock: DoomsdayClockConfigSchema.optional(),
   publicGameModifiers: z
     .object({
       isCompact: z.boolean().optional(),
@@ -279,12 +343,24 @@ export const GameConfigSchema = z.object({
   disableNavMesh: z.boolean().optional(),
   disableAlliances: z.boolean().nullable().optional(),
   disableClanTags: z.boolean().optional(),
+  // Opt-in live game stats reporting for the admin bot. Off by default and has
+  // no UI — the admin bot sets it when creating tournament games, since it adds
+  // per-client traffic. See LiveStatsController / GameServer.handleLiveStats.
+  liveStatsEnabled: z.boolean().optional(),
+  anonymizeNames: z.boolean().optional(),
+  // While anonymizeNames is on, clientIDs the host has granted real-name
+  // visibility to (e.g. casters / observers). Everyone else stays anonymized.
+  nameReveals: z.string().array().optional(),
+  // Like nameReveals but keyed by stable account publicId (for automated hosts
+  // that only know publicIds at create_game); resolved to clientID at lookup.
+  nameRevealPublicIds: z.string().array().max(200).optional(),
   waterNukes: z.boolean().nullable().optional(),
   randomSpawn: z.boolean(),
   maxPlayers: z.number().optional(),
   // OFM: allowlist of publicIds allowed to join (admin-only, see create_game).
   allowedPublicIds: z.array(z.string()).max(200).optional(),
   maxTimerValue: z.number().int().min(1).max(120).nullable().optional(), // In minutes
+  customAllianceDuration: z.number().int().min(0).max(15).nullable().optional(), // In minutes; 0 disables alliances
   startDelay: z.number().int().min(0).max(600).nullable().optional(), // In seconds
   spawnImmunityDuration: z.number().int().min(0).nullable().optional(), // In ticks
   disabledUnits: z.enum(UnitType).array().optional(),
@@ -473,7 +549,11 @@ export const MarkDisconnectedIntentSchema = z.object({
 
 export const KickPlayerIntentSchema = z.object({
   type: z.literal("kick_player"),
-  target: ID,
+  // Either a live clientID (lobby / in-game kick) OR an account publicID, for
+  // callers that identify a player by account rather than per-session clientID;
+  // the server resolves the publicID to the live clientID. Exactly one is set.
+  targetClientID: ID.optional(),
+  targetPublicID: ID.optional(),
 });
 
 export const TogglePauseIntentSchema = z.object({
@@ -490,7 +570,7 @@ export const ToggleGameStartTimerIntentSchema = z.object({
   type: z.literal("toggle_game_start_timer"),
 });
 
-const IntentSchema = z.discriminatedUnion("type", [
+export const IntentSchema = z.discriminatedUnion("type", [
   AttackIntentSchema,
   CancelAttackIntentSchema,
   SpawnIntentSchema,
@@ -521,6 +601,12 @@ const IntentSchema = z.discriminatedUnion("type", [
 // StampedIntent = Intent with server-stamped clientID (used in turns and execution)
 export const StampedIntentSchema = IntentSchema.and(z.object({ clientID: ID }));
 export type StampedIntent = Intent & { clientID: ClientID };
+
+// Placeholder clientID stamped onto admin-bot intents (HTTP admin API). The bot
+// is not a player, but toggle_pause — the one bot intent that reaches the turn
+// queue — needs a valid clientID. Chosen so it can never collide with a real id:
+// generateID() omits 0/l/I/O, and this contains I and O.
+export const ADMIN_BOT_CLIENT_ID: ClientID = "ADMINBOT";
 
 //
 // Server utility types
@@ -566,11 +652,23 @@ export const PlayerCosmeticRefsSchema = z.object({
   patternName: CosmeticNameSchema.optional(),
   patternColorPaletteName: z.string().optional(),
   skinName: CosmeticNameSchema.optional(),
+  // One selected effect per slot: key = slot (effectType for trails, nukeType for
+  // nuke explosions — see effectTypeForSlot), value = effect name.
+  effects: z.record(z.string(), CosmeticNameSchema).optional(),
 });
 
 export const PlayerSkinSchema = z.object({
   name: CosmeticNameSchema,
   url: z.string(),
+});
+
+// A resolved effect is just an identity: which effect, of which type. Its
+// attributes (the visual style) are resolved from the cosmetics catalog by
+// (effectType, name), so this needs no per-type variants — a new effectType
+// just becomes a new EFFECT_TYPES entry, no change here.
+export const PlayerEffectSchema = z.object({
+  name: CosmeticNameSchema,
+  effectType: EffectTypeSchema,
 });
 
 // Server converts refs to the actual cosmetics here
@@ -579,6 +677,9 @@ export const PlayerCosmeticsSchema = z.object({
   pattern: PlayerPatternSchema.optional(),
   color: PlayerColorSchema.optional(),
   skin: PlayerSkinSchema.optional(),
+  // Resolved effects keyed by slot (effectType for trails, nukeType for nuke
+  // explosions).
+  effects: z.record(z.string(), PlayerEffectSchema).optional(),
 });
 
 export const PlayerSchema = z.object({
@@ -659,6 +760,14 @@ export const ServerLobbyInfoMessageSchema = z.object({
   myClientID: ID,
 });
 
+// Broadcast by a finished private game's server to every still-connected client
+// when the host starts a successor lobby, so the whole group can hop to the new
+// game without re-sharing the link. gameID is the freshly minted successor.
+export const ServerNewLobbyMessageSchema = z.object({
+  type: z.literal("new_lobby"),
+  gameID: ID,
+});
+
 export const ServerMessageSchema = z.discriminatedUnion("type", [
   ServerTurnMessageSchema,
   ServerPrestartMessageSchema,
@@ -667,6 +776,7 @@ export const ServerMessageSchema = z.discriminatedUnion("type", [
   ServerDesyncSchema,
   ServerErrorSchema,
   ServerLobbyInfoMessageSchema,
+  ServerNewLobbyMessageSchema,
 ]);
 
 //
@@ -677,6 +787,32 @@ export const ClientSendWinnerSchema = z.object({
   type: z.literal("winner"),
   winner: WinnerSchema,
   allPlayersStats: AllPlayersStatsSchema,
+});
+
+// A live snapshot of one human player at a given turn. Only deterministic sim
+// values are included so in-sync clients produce an identical snapshot that can
+// be agreed on by majority vote. gold is a decimal string because it is a
+// bigint in the engine.
+export const PlayerLiveStatsSchema = z.object({
+  clientID: ID,
+  tilesOwned: z.number().int().nonnegative(),
+  troops: z.number(),
+  gold: z.string(),
+  isAlive: z.boolean(),
+  team: z.string().nullable(),
+});
+
+// A full live snapshot of a running game at a given turn. Reported by clients
+// (which run the sim) so the server can answer "what's happening" queries for
+// the admin bot.
+export const LiveStatsSchema = z.object({
+  turn: z.number().int().nonnegative(),
+  players: PlayerLiveStatsSchema.array(),
+});
+
+export const ClientSendLiveStatsSchema = z.object({
+  type: z.literal("live_stats"),
+  stats: LiveStatsSchema,
 });
 
 export const ClientHashSchema = z.object({
@@ -723,6 +859,7 @@ export const ClientRejoinMessageSchema = z.object({
 
 export const ClientMessageSchema = z.discriminatedUnion("type", [
   ClientSendWinnerSchema,
+  ClientSendLiveStatsSchema,
   ClientPingMessageSchema,
   ClientIntentMessageSchema,
   ClientJoinMessageSchema,
