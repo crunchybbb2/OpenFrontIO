@@ -175,5 +175,147 @@
       "name": "Hard Rock Casino",
       "flag": "Nevada"
     }
+  ],
+  "additionalNations": [
+    {
+      "coordinates": [720, 2987],
+      "name": "Horseshoe",
+      "flag": "Nevada"
+    },
+    {
+      "coordinates": [604, 3623],
+      "name": "Tropicana",
+      "flag": "Nevada"
+    },
+    {
+      "coordinates": [504, 4014],
+      "name": "Four Seasons Hotel",
+      "flag": "Nevada"
+    },
+    {
+      "coordinates": [624, 2806],
+      "name": "The LINQ",
+      "flag": "Nevada"
+    },
+    {
+      "coordinates": [427, 2760],
+      "name": "The Forum Shops",
+      "flag": "SPQR"
+    },
+    {
+      "coordinates": [1119, 2407],
+      "name": "Wynn Golf Club",
+      "flag": "us"
+    },
+    {
+      "coordinates": [1086, 2054],
+      "name": "Convention Center",
+      "flag": "Nevada"
+    },
+    {
+      "coordinates": [823, 2260],
+      "name": "Encore",
+      "flag": "Nevada"
+    },
+    {
+      "coordinates": [320, 3209],
+      "name": "Vdara",
+      "flag": "Nevada"
+    },
+    {
+      "coordinates": [348, 3498],
+      "name": "T-Mobile Arena",
+      "flag": "Nevada"
+    },
+    {
+      "coordinates": [1811, 449],
+      "name": "El Cortez Casino",
+      "flag": "Nevada"
+    },
+    {
+      "coordinates": [1669, 367],
+      "name": "Binion's Casino",
+      "flag": "Nevada"
+    },
+    {
+      "coordinates": [1665, 445],
+      "name": "Four Queens Casino",
+      "flag": "Nevada"
+    },
+    {
+      "coordinates": [1491, 356],
+      "name": "Plaza Casino",
+      "flag": "Nevada"
+    },
+    {
+      "coordinates": [1566, 334],
+      "name": "Circa Casino",
+      "flag": "Nevada"
+    },
+    {
+      "coordinates": [1578, 405],
+      "name": "Golden Nugget Casino",
+      "flag": "California"
+    },
+    {
+      "coordinates": [750, 1996],
+      "name": "Hilton",
+      "flag": "us"
+    },
+    {
+      "coordinates": [848, 2050],
+      "name": "Conrad",
+      "flag": "Nevada"
+    },
+    {
+      "coordinates": [730, 1864],
+      "name": "The Adventuredome",
+      "flag": "Nevada"
+    },
+    {
+      "coordinates": [568, 3483],
+      "name": "M&M's World",
+      "flag": "Nevada"
+    },
+    {
+      "coordinates": [531, 3530],
+      "name": "Hershey's World",
+      "flag": "Nevada"
+    },
+    {
+      "coordinates": [738, 3619],
+      "name": "OYO",
+      "flag": "Nevada"
+    },
+    {
+      "coordinates": [959, 2001],
+      "name": "The Riviera",
+      "flag": "Nevada"
+    },
+    {
+      "coordinates": [675, 2036],
+      "name": "The Stardust",
+      "flag": "Nevada"
+    },
+    {
+      "coordinates": [484, 2997],
+      "name": "The Dunes",
+      "flag": "Nevada"
+    },
+    {
+      "coordinates": [692, 2494],
+      "name": "The Sands",
+      "flag": "Nevada"
+    },
+    {
+      "coordinates": [573, 3121],
+      "name": "Aladdin Hotel",
+      "flag": "sa"
+    },
+    {
+      "coordinates": [593, 3391],
+      "name": "Polo Towers",
+      "flag": "Nevada"
+    }
   ]
 }
