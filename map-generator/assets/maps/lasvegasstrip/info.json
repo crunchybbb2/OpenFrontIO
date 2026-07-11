@@ -289,26 +289,21 @@
     },
     {
       "coordinates": [959, 2001],
-      "name": "The Riviera",
       "flag": "Nevada"
     },
     {
       "coordinates": [675, 2036],
-      "name": "The Stardust",
       "flag": "Nevada"
     },
     {
-      "coordinates": [484, 2997],
       "name": "The Dunes",
       "flag": "Nevada"
     },
     {
-      "coordinates": [692, 2494],
       "name": "The Sands",
       "flag": "Nevada"
     },
     {
-      "coordinates": [573, 3121],
       "name": "Aladdin Hotel",
       "flag": "sa"
     },
