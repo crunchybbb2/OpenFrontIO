@@ -64,6 +64,10 @@ export interface RenderSettings {
      * per-depth brightness gradient is preserved relative to this color.
      */
     oceanColor: string;
+    sandColor: string;
+    plainsColor: string;
+    highlandColor: string;
+    mountainColor: string;
   };
   falloutBloom: {
     broilSpeedCold: number;
@@ -227,6 +231,15 @@ export interface RenderSettings {
     colorGreenR: number;
     colorGreenG: number;
     colorGreenB: number;
+    // Warship veterancy rank pips (gold lines at the sprite's bottom-right)
+    veterancyPipW: number;
+    veterancyPipH: number;
+    veterancyPipGap: number;
+    veterancyPipOffsetX: number;
+    veterancyPipOffsetY: number;
+    veterancyR: number;
+    veterancyG: number;
+    veterancyB: number;
   };
   unit: {
     unitSize: number;
@@ -366,6 +379,11 @@ export interface RenderSettings {
     animSpeed: number; // breathing animation speed
     gradientInnerEdge: number; // static gradient inner ramp end (0–1)
     gradientSolidEnd: number; // static gradient solid band end (0–1)
+  };
+  smallPlayerGlow: {
+    color: number[]; // RGB, each 0–1
+    alpha: number; // peak opacity (0–1)
+    pulseSpeed: number; // breath animation speed
   };
   altView: {
     gridFontSize: number;
