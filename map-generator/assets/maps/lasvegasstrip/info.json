@@ -287,19 +287,39 @@
       "flag": "Nevada"
     },
     {
-      "coordinates": [959, 2001],
-      "flag": "Nevada"
-    },
-    {
-      "coordinates": [675, 2036],
-      "flag": "Nevada"
-    },
-    {
       "name": "The Dunes",
       "flag": "Nevada"
     },
     {
       "name": "The Sands",
+      "flag": "Nevada"
+    },
+    {
+      "name": "Desert Inn",
+      "flag": "Nevada"
+    },
+    {
+      "name": "The New Frontier",
+      "flag": "Nevada"
+    },
+    {
+      "name": "El Rancho",
+      "flag": "Nevada"
+    },
+    {
+      "name": "Riviera",
+      "flag": "Nevada"
+    },
+    {
+      "name": "The Landmark",
+      "flag": "Nevada"
+    },
+    {
+      "name": "The Hacienda",
+      "flag": "Nevada"
+    },
+    {
+      "name": "The Castaways",
       "flag": "Nevada"
     },
     {
