@@ -1,11 +1,13 @@
+import featuredStreamFallback from "resources/featured-stream.json";
 import newsItemsFallback from "resources/news.json";
 import { z } from "zod";
-import type { NewsItem } from "../core/ApiSchemas";
+import type { FeaturedStreamConfig, NewsItem } from "../core/ApiSchemas";
 import {
   ClaimAllRewardsResponse,
   ClaimAllRewardsResponseSchema,
   ClaimRewardResponse,
   ClaimRewardResponseSchema,
+  FeaturedStreamSchema,
   NewsItemSchema,
   PlayerGameModeFilter,
   PlayerGameTypeFilter,
@@ -13,6 +15,8 @@ import {
   PlayerProfileSchema,
   PublicPlayerGamesResponse,
   PublicPlayerGamesResponseSchema,
+  PutUsernameResponse,
+  PutUsernameResponseSchema,
   RankedLeaderboardResponse,
   RankedLeaderboardResponseSchema,
   UserMeResponse,
@@ -20,7 +24,7 @@ import {
 } from "../core/ApiSchemas";
 import {
   AnalyticsRecord,
-  AnalyticsRecordSchema,
+  ArchivedAnalyticsRecordSchema,
   GameInfo,
 } from "../core/Schemas";
 import { getAuthHeader, getPlayToken, logOut, userAuth } from "./Auth";
@@ -62,6 +66,44 @@ export async function fetchPlayerById(
     return parsed.data;
   } catch (err) {
     console.warn("fetchPlayerById: request failed", err);
+    return false;
+  }
+}
+
+// GET /public/player/:publicId — public player profile (stats tree). No auth,
+// so logged-out visitors can view shared profiles.
+export async function fetchPublicPlayerProfile(
+  publicId: string,
+): Promise<PlayerProfile | false> {
+  try {
+    const url = `${getApiBase()}/public/player/${encodeURIComponent(publicId)}`;
+
+    const res = await fetch(url, {
+      headers: { Accept: "application/json" },
+    });
+
+    if (res.status !== 200) {
+      console.warn(
+        "fetchPublicPlayerProfile: unexpected status",
+        res.status,
+        res.statusText,
+      );
+      return false;
+    }
+
+    const json = await res.json();
+    const parsed = PlayerProfileSchema.safeParse(json);
+    if (!parsed.success) {
+      console.warn(
+        "fetchPublicPlayerProfile: Zod validation failed",
+        parsed.error,
+      );
+      return false;
+    }
+
+    return parsed.data;
+  } catch (err) {
+    console.warn("fetchPublicPlayerProfile: request failed", err);
     return false;
   }
 }
@@ -191,8 +233,81 @@ export async function setMarketingConsent(
   }
 }
 
+export type UpdateUsernameResult =
+  | { ok: true; data: PutUsernameResponse }
+  | { ok: false; code: "invalid"; message?: string }
+  | { ok: false; code: "profane" }
+  | { ok: false; code: "taken" }
+  | { ok: false; code: "cooldown"; retryAfterSeconds: number | null }
+  | { ok: false; code: "failed" };
+
+// PUT /users/@me/username — renames the account username. Every failure is
+// atomic (no name change, no cooldown consumed). Both 409 bodies ("name
+// exclusively held" and "suffix space exhausted") map to "taken": the user
+// remedy is the same — pick another name. Invalidates the cached /users/@me
+// on success so the next read reflects the new name.
+export async function updateUsername(
+  username: string,
+): Promise<UpdateUsernameResult> {
+  try {
+    const response = await fetch(`${getApiBase()}/users/@me/username`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: await getAuthHeader(),
+      },
+      body: JSON.stringify({ username }),
+    });
+    if (response.status === 401) {
+      await logOut();
+      return { ok: false, code: "failed" };
+    }
+    if (response.status === 400) {
+      const body = await response.json().catch(() => null);
+      if (body?.code === "USERNAME_PROFANE") {
+        return { ok: false, code: "profane" };
+      }
+      return {
+        ok: false,
+        code: "invalid",
+        message: typeof body?.reason === "string" ? body.reason : undefined,
+      };
+    }
+    if (response.status === 409) {
+      return { ok: false, code: "taken" };
+    }
+    if (response.status === 429) {
+      const retryAfter = response.headers.get("Retry-After");
+      const seconds = retryAfter === null ? NaN : Number(retryAfter);
+      return {
+        ok: false,
+        code: "cooldown",
+        retryAfterSeconds: Number.isFinite(seconds) ? seconds : null,
+      };
+    }
+    if (!response.ok) {
+      console.error(
+        "updateUsername: request failed",
+        response.status,
+        response.statusText,
+      );
+      return { ok: false, code: "failed" };
+    }
+    const parsed = PutUsernameResponseSchema.safeParse(await response.json());
+    if (!parsed.success) {
+      console.error("updateUsername: Zod validation failed", parsed.error);
+      return { ok: false, code: "failed" };
+    }
+    invalidateUserMe();
+    return { ok: true, data: parsed.data };
+  } catch (e) {
+    console.error("updateUsername: request failed", e);
+    return { ok: false, code: "failed" };
+  }
+}
+
 export async function purchaseWithCurrency(
-  cosmeticType: "pattern" | "skin" | "flag" | "effect",
+  cosmeticType: "pattern" | "skin" | "flag" | "crown" | "effect",
   cosmeticName: string,
   currencyType: "hard" | "soft",
   colorPaletteName?: string,
@@ -410,7 +525,7 @@ export async function cancelSubscription(): Promise<boolean> {
 
 export async function changeSubscriptionTier(
   tierName: string,
-): Promise<boolean> {
+): Promise<boolean | "rate_limited"> {
   try {
     const response = await fetch(
       `${getApiBase()}/subscriptions/@me/change-tier`,
@@ -426,6 +541,10 @@ export async function changeSubscriptionTier(
     if (response.status === 401) {
       await logOut();
       return false;
+    }
+    // The API allows one tier change per minute per player.
+    if (response.status === 429) {
+      return "rate_limited";
     }
     if (!response.ok) {
       console.error(
@@ -609,7 +728,9 @@ export async function fetchGameById(
     }
 
     const json = await res.json();
-    const parsed = AnalyticsRecordSchema.safeParse(json);
+    // Lenient schema: archives written by older builds predate several
+    // schema changes (see ArchivedAnalyticsRecordSchema).
+    const parsed = ArchivedAnalyticsRecordSchema.safeParse(json);
     if (!parsed.success) {
       console.warn("fetchGameById: Zod validation failed", parsed.error);
       return false;
@@ -681,5 +802,27 @@ export async function getNews(): Promise<NewsItem[]> {
   } catch (err) {
     console.warn("getNews: request failed, using fallback", err);
     return newsItemsFallback as NewsItem[];
+  }
+}
+
+// Featured-stream config, served like news.json (API-hosted JSON + bundled fallback).
+export async function getFeaturedStream(): Promise<FeaturedStreamConfig> {
+  try {
+    const res = await fetch(`${getApiBase()}/featured-stream.json`, {
+      headers: { Accept: "application/json" },
+    });
+    if (res.status !== 200) {
+      console.warn("getFeaturedStream: unexpected status", res.status);
+      return FeaturedStreamSchema.parse(featuredStreamFallback);
+    }
+    const parsed = FeaturedStreamSchema.safeParse(await res.json());
+    if (!parsed.success) {
+      console.warn("getFeaturedStream: Zod validation failed", parsed.error);
+      return FeaturedStreamSchema.parse(featuredStreamFallback);
+    }
+    return parsed.data;
+  } catch (err) {
+    console.warn("getFeaturedStream: request failed, using fallback", err);
+    return FeaturedStreamSchema.parse(featuredStreamFallback);
   }
 }

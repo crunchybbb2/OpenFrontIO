@@ -125,6 +125,7 @@ export enum GameMode {
 
 export enum RankedType {
   OneVOne = "1v1",
+  TwoVTwo = "2v2",
 }
 
 export const isGameMode = (value: unknown): value is GameMode =>
@@ -148,6 +149,7 @@ export interface PublicGameModifiers {
   isSAMsDisabled?: boolean;
   isPeaceTime?: boolean;
   isWaterNukes?: boolean;
+  isDoomsdayClock?: boolean;
 }
 
 export interface UnitInfo {
@@ -418,6 +420,9 @@ export class PlayerInfo {
     public readonly isLobbyCreator: boolean = false,
     public readonly clanTag: string | null = null,
     public readonly friends: ClientID[] = [],
+    // Server-pinned team slot (index into the game's team list) for
+    // matchmade team games; null = assign normally.
+    public readonly teamIndex: number | null = null,
   ) {
     this.displayName = formatPlayerDisplayName(this.name, this.clanTag);
   }
@@ -569,7 +574,7 @@ export interface Player {
   spawnTile(): TileRef | undefined;
 
   // Territory
-  tiles(): ReadonlySet<TileRef>;
+  tiles(): ReadonlyTileSet;
   borderTiles(): ReadonlyTileSet;
   numTilesOwned(): number;
   conquer(tile: TileRef): void;
@@ -757,7 +762,12 @@ export interface Game extends GameMap {
   drainPackedMotionPlans(): Uint32Array | null;
   drainPackedPlayerUpdates(): Float64Array | null;
   drainPackedAttackUpdates(): Float64Array | null;
-  setWinner(winner: Player | Team, allPlayersStats: AllPlayersStats): void;
+  // null ends the game with no winner (a cancelled match, e.g. a ranked game
+  // that didn't fill): the record is archived winnerless and never ranked.
+  setWinner(
+    winner: Player | Team | null,
+    allPlayersStats: AllPlayersStats,
+  ): void;
   getWinner(): Player | Team | null;
   config(): Config;
   isPaused(): boolean;

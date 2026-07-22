@@ -1,4 +1,4 @@
-import { html, LitElement, type TemplateResult } from "lit";
+import { html, LitElement, nothing, type TemplateResult } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { GameMapType } from "../../../core/game/Game";
 import {
@@ -16,6 +16,7 @@ import {
   groupByDay,
 } from "../baseComponents/stats/GameHistoryDates";
 import { formatGameType, isFfa } from "../baseComponents/stats/GameTypeLabels";
+import { verifiedBadge } from "../ui/VerifiedBadge";
 import { renderLoadingSpinner, showToast } from "./ClanShared";
 
 type FilterKey = ClanGameFilter | "all";
@@ -195,6 +196,26 @@ export class ClanGameHistoryView extends LitElement {
     } catch {
       showToast(translateText("clan_modal.error_failed"), "red");
     }
+  }
+
+  private showStats(gameId: string) {
+    this.dispatchEvent(
+      new CustomEvent<{ gameId: string }>("view-stats", {
+        detail: { gameId },
+        bubbles: true,
+        composed: true,
+      }),
+    );
+  }
+
+  private viewProfile(publicId: string) {
+    this.dispatchEvent(
+      new CustomEvent<{ publicId: string }>("view-profile", {
+        detail: { publicId },
+        bubbles: true,
+        composed: true,
+      }),
+    );
   }
 
   render() {
@@ -423,13 +444,22 @@ export class ClanGameHistoryView extends LitElement {
               .showVisibilityToggle=${false}
             ></copy-button>
           </div>
-          <button
-            type="button"
-            @click=${() => this.watchReplay(game.gameId)}
-            class="shrink-0 px-3 py-1.5 text-xs font-bold text-white uppercase tracking-wider bg-malibu-blue hover:bg-aquarius active:bg-malibu-blue/80 rounded-lg transition-all"
-          >
-            ${translateText("clan_modal.history_watch_replay")}
-          </button>
+          <div class="flex items-center gap-2 shrink-0">
+            <button
+              type="button"
+              @click=${() => this.showStats(game.gameId)}
+              class="px-3 py-1.5 text-xs font-bold text-white/80 uppercase tracking-wider bg-white/10 hover:bg-white/20 border border-white/10 rounded-lg transition-colors"
+            >
+              ${translateText("game_list.stats")}
+            </button>
+            <button
+              type="button"
+              @click=${() => this.watchReplay(game.gameId)}
+              class="px-3 py-1.5 text-xs font-bold text-white uppercase tracking-wider bg-malibu-blue hover:bg-aquarius active:bg-malibu-blue/80 rounded-lg transition-all"
+            >
+              ${translateText("clan_modal.history_watch_replay")}
+            </button>
+          </div>
         </div>
         <div
           class="px-4 py-3 grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-2 justify-items-center text-center"
@@ -549,18 +579,31 @@ export class ClanGameHistoryView extends LitElement {
           class="text-[10px] font-bold uppercase tracking-wider mr-1 ${labelClass}"
           >${label}:</span
         >
-        ${players.map(
-          (p) => html`
-            <copy-button
-              compact
-              .copyText=${p.publicId}
-              .displayText=${p.username ?? p.publicId}
-              .showVisibilityToggle=${false}
-              .showCopyIcon=${false}
-            ></copy-button>
-          `,
-        )}
+        ${players.map((p) => this.renderClanPlayerName(p))}
       </div>
+    `;
+  }
+
+  // Game history shows the name each player actually used *in that game* (their
+  // in-game/session name), not their current account name — the record should
+  // reflect who they were at match time. `verified` is recorded per session at
+  // ingest (server-validated at join), so the blue check reflects whether they
+  // actually played under their verified account name in that specific game.
+  private renderClanPlayerName(
+    p: ClanGame["clanPlayers"][number],
+  ): TemplateResult {
+    return html`
+      <span class="inline-flex items-center gap-1 min-w-0 max-w-full">
+        <button
+          type="button"
+          class="font-bold text-blue-300 truncate hover:underline"
+          title=${translateText("player_profile.view")}
+          @click=${() => this.viewProfile(p.publicId)}
+        >
+          ${p.username}
+        </button>
+        ${p.verified === true ? verifiedBadge() : nothing}
+      </span>
     `;
   }
 
