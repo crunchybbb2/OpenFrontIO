@@ -1,5 +1,1375 @@
 {
   "categories": ["north_america"],
+  "custom_tribes": [
+    {
+      "coordinates": [342, 1882],
+      "name": "DuPage County"
+    },
+    {
+      "coordinates": [595, 929],
+      "name": "Emmet County"
+    },
+    {
+      "coordinates": [1082, 1651],
+      "name": "Erie County"
+    },
+    {
+      "coordinates": [1032, 1787],
+      "name": "Chautauqua County"
+    },
+    {
+      "coordinates": [702, 1863],
+      "name": "Monroe County"
+    },
+    {
+      "coordinates": [770, 1607],
+      "name": "St. Clair County"
+    },
+    {
+      "coordinates": [1157, 1660],
+      "name": "Livingston County"
+    },
+    {
+      "coordinates": [1039, 1892],
+      "name": "Warren County"
+    },
+    {
+      "coordinates": [384, 913],
+      "name": "Menominee County"
+    },
+    {
+      "coordinates": [52, 1232],
+      "name": "Buffalo County"
+    },
+    {
+      "coordinates": [1123, 1987],
+      "name": "Cameron County"
+    },
+    {
+      "coordinates": [349, 1763],
+      "name": "Lake County"
+    },
+    {
+      "coordinates": [103, 1975],
+      "name": "Muscatine County"
+    },
+    {
+      "coordinates": [722, 1774],
+      "name": "Wayne County"
+    },
+    {
+      "coordinates": [774, 2005],
+      "name": "Erie County"
+    },
+    {
+      "coordinates": [96, 657],
+      "name": "Bayfield County"
+    },
+    {
+      "coordinates": [523, 1447],
+      "name": "Newaygo County"
+    },
+    {
+      "coordinates": [377, 683],
+      "name": "Marquette County"
+    },
+    {
+      "coordinates": [1282, 1589],
+      "name": "Onondaga County"
+    },
+    {
+      "coordinates": [1081, 1539],
+      "name": "Niagara County"
+    },
+    {
+      "coordinates": [692, 1941],
+      "name": "Lucas County"
+    },
+    {
+      "coordinates": [733, 1962],
+      "name": "Ottawa County"
+    },
+    {
+      "coordinates": [598, 1334],
+      "name": "Clare County"
+    },
+    {
+      "coordinates": [215, 689],
+      "name": "Gogebic County"
+    },
+    {
+      "coordinates": [579, 778],
+      "name": "Mackinac County"
+    },
+    {
+      "coordinates": [553, 1996],
+      "name": "Noble County"
+    },
+    {
+      "coordinates": [351, 1985],
+      "name": "Will County"
+    },
+    {
+      "coordinates": [617, 1243],
+      "name": "Roscommon County"
+    },
+    {
+      "coordinates": [77, 349],
+      "name": "Lake County"
+    },
+    {
+      "coordinates": [315, 353],
+      "name": "Keweenaw County"
+    },
+    {
+      "coordinates": [135, 1624],
+      "name": "Grant County"
+    },
+    {
+      "coordinates": [49, 827],
+      "name": "Washburn County"
+    },
+    {
+      "coordinates": [212, 978],
+      "name": "Lincoln County"
+    },
+    {
+      "coordinates": [398, 1992],
+      "name": "Lake County"
+    },
+    {
+      "coordinates": [320, 619],
+      "name": "Baraga County"
+    },
+    {
+      "coordinates": [363, 1885],
+      "name": "Cook County"
+    },
+    {
+      "coordinates": [695, 1059],
+      "name": "Alpena County"
+    },
+    {
+      "coordinates": [743, 1375],
+      "name": "Huron County"
+    },
+    {
+      "coordinates": [195, 1480],
+      "name": "Sauk County"
+    },
+    {
+      "coordinates": [83, 1252],
+      "name": "Trempealeau County"
+    },
+    {
+      "coordinates": [542, 1156],
+      "name": "Grand Traverse County"
+    },
+    {
+      "coordinates": [117, 1529],
+      "name": "Crawford County"
+    },
+    {
+      "coordinates": [172, 729],
+      "name": "Iron County"
+    },
+    {
+      "coordinates": [146, 1979],
+      "name": "Rock Island County"
+    },
+    {
+      "coordinates": [142, 1937],
+      "name": "Scott County"
+    },
+    {
+      "coordinates": [403, 1082],
+      "name": "Door County"
+    },
+    {
+      "coordinates": [1086, 1782],
+      "name": "Cattaraugus County"
+    },
+    {
+      "coordinates": [672, 977],
+      "name": "Presque Isle County"
+    },
+    {
+      "coordinates": [750, 1668],
+      "name": "Macomb County"
+    },
+    {
+      "coordinates": [850, 1990],
+      "name": "Cuyahoga County"
+    },
+    {
+      "coordinates": [293, 1067],
+      "name": "Menominee County"
+    },
+    {
+      "coordinates": [459, 689],
+      "name": "Alger County"
+    },
+    {
+      "coordinates": [317, 841],
+      "name": "Florence County"
+    },
+    {
+      "coordinates": [1286, 1480],
+      "name": "Oswego County"
+    },
+    {
+      "coordinates": [655, 1244],
+      "name": "Ogemaw County"
+    },
+    {
+      "coordinates": [182, 1351],
+      "name": "Juneau County"
+    },
+    {
+      "coordinates": [617, 1515],
+      "name": "Gratiot County"
+    },
+    {
+      "coordinates": [522, 1084],
+      "name": "Leelanau County"
+    },
+    {
+      "coordinates": [346, 966],
+      "name": "Marinette County"
+    },
+    {
+      "coordinates": [137, 714],
+      "name": "Ashland County"
+    },
+    {
+      "coordinates": [576, 988],
+      "name": "Charlevoix County"
+    },
+    {
+      "coordinates": [307, 743],
+      "name": "Iron County"
+    },
+    {
+      "coordinates": [209, 1339],
+      "name": "Adams County"
+    },
+    {
+      "coordinates": [284, 1763],
+      "name": "Boone County"
+    },
+    {
+      "coordinates": [245, 1834],
+      "name": "Ogle County"
+    },
+    {
+      "coordinates": [1188, 1777],
+      "name": "Steuben County"
+    },
+    {
+      "coordinates": [543, 1582],
+      "name": "Kent County"
+    },
+    {
+      "coordinates": [364, 1300],
+      "name": "Manitowoc County"
+    },
+    {
+      "coordinates": [1198, 1903],
+      "name": "Tioga County"
+    },
+    {
+      "coordinates": [1148, 1909],
+      "name": "Potter County"
+    },
+    {
+      "coordinates": [26, 1416],
+      "name": "Fillmore County"
+    },
+    {
+      "coordinates": [246, 1909],
+      "name": "Lee County"
+    },
+    {
+      "coordinates": [82, 1517],
+      "name": "Allamakee County"
+    },
+    {
+      "coordinates": [599, 1694],
+      "name": "Eaton County"
+    },
+    {
+      "coordinates": [580, 1604],
+      "name": "Ionia County"
+    },
+    {
+      "coordinates": [574, 1510],
+      "name": "Montcalm County"
+    },
+    {
+      "coordinates": [507, 1601],
+      "name": "Ottawa County"
+    },
+    {
+      "coordinates": [618, 1062],
+      "name": "Otsego County"
+    },
+    {
+      "coordinates": [544, 1783],
+      "name": "Kalamazoo County"
+    },
+    {
+      "coordinates": [579, 1243],
+      "name": "Missaukee County"
+    },
+    {
+      "coordinates": [1, 1330],
+      "name": "Olmsted County"
+    },
+    {
+      "coordinates": [672, 1692],
+      "name": "Livingston County"
+    },
+    {
+      "coordinates": [491, 746],
+      "name": "Schoolcraft County"
+    },
+    {
+      "coordinates": [508, 1866],
+      "name": "Cass County"
+    },
+    {
+      "coordinates": [1124, 1590],
+      "name": "Genesee County"
+    },
+    {
+      "coordinates": [552, 1935],
+      "name": "LaGrange County"
+    },
+    {
+      "coordinates": [306, 1675],
+      "name": "Walworth County"
+    },
+    {
+      "coordinates": [1088, 1990],
+      "name": "Elk County"
+    },
+    {
+      "coordinates": [635, 1423],
+      "name": "Midland County"
+    },
+    {
+      "coordinates": [100, 832],
+      "name": "Sawyer County"
+    },
+    {
+      "coordinates": [222, 1672],
+      "name": "Green County"
+    },
+    {
+      "coordinates": [264, 1675],
+      "name": "Rock County"
+    },
+    {
+      "coordinates": [101, 941],
+      "name": "Rusk County"
+    },
+    {
+      "coordinates": [39, 682],
+      "name": "Douglas County"
+    },
+    {
+      "coordinates": [237, 1573],
+      "name": "Dane County"
+    },
+    {
+      "coordinates": [312, 1222],
+      "name": "Outagamie County"
+    },
+    {
+      "coordinates": [157, 1493],
+      "name": "Richland County"
+    },
+    {
+      "coordinates": [288, 889],
+      "name": "Forest County"
+    },
+    {
+      "coordinates": [581, 1866],
+      "name": "Branch County"
+    },
+    {
+      "coordinates": [518, 1947],
+      "name": "Elkhart County"
+    },
+    {
+      "coordinates": [506, 1164],
+      "name": "Benzie County"
+    },
+    {
+      "coordinates": [474, 1857],
+      "name": "Berrien County"
+    },
+    {
+      "coordinates": [257, 1760],
+      "name": "Winnebago County"
+    },
+    {
+      "coordinates": [434, 822],
+      "name": "Delta County"
+    },
+    {
+      "coordinates": [1238, 1809],
+      "name": "Chemung County"
+    },
+    {
+      "coordinates": [1233, 1646],
+      "name": "Seneca County"
+    },
+    {
+      "coordinates": [180, 1677],
+      "name": "Lafayette County"
+    },
+    {
+      "coordinates": [1292, 1694],
+      "name": "Cortland County"
+    },
+    {
+      "coordinates": [714, 1677],
+      "name": "Oakland County"
+    },
+    {
+      "coordinates": [655, 1152],
+      "name": "Oscoda County"
+    },
+    {
+      "coordinates": [695, 2006],
+      "name": "Wood County"
+    },
+    {
+      "coordinates": [449, 1959],
+      "name": "LaPorte County"
+    },
+    {
+      "coordinates": [733, 2007],
+      "name": "Sandusky County"
+    },
+    {
+      "coordinates": [423, 1981],
+      "name": "Porter County"
+    },
+    {
+      "coordinates": [618, 1873],
+      "name": "Hillsdale County"
+    },
+    {
+      "coordinates": [516, 1695],
+      "name": "Allegan County"
+    },
+    {
+      "coordinates": [506, 1781],
+      "name": "Van Buren County"
+    },
+    {
+      "coordinates": [586, 1997],
+      "name": "DeKalb County"
+    },
+    {
+      "coordinates": [586, 1935],
+      "name": "Steuben County"
+    },
+    {
+      "coordinates": [636, 1693],
+      "name": "Ingham County"
+    },
+    {
+      "coordinates": [660, 1872],
+      "name": "Lenawee County"
+    },
+    {
+      "coordinates": [758, 1481],
+      "name": "Sanilac County"
+    },
+    {
+      "coordinates": [83, 1726],
+      "name": "Delaware County"
+    },
+    {
+      "coordinates": [28, 1825],
+      "name": "Benton County"
+    },
+    {
+      "coordinates": [626, 949],
+      "name": "Cheboygan County"
+    },
+    {
+      "coordinates": [632, 1782],
+      "name": "Jackson County"
+    },
+    {
+      "coordinates": [617, 1152],
+      "name": "Crawford County"
+    },
+    {
+      "coordinates": [523, 1334],
+      "name": "Lake County"
+    },
+    {
+      "coordinates": [46, 1726],
+      "name": "Buchanan County"
+    },
+    {
+      "coordinates": [85, 1630],
+      "name": "Clayton County"
+    },
+    {
+      "coordinates": [245, 619],
+      "name": "Ontonagon County"
+    },
+    {
+      "coordinates": [101, 1903],
+      "name": "Cedar County"
+    },
+    {
+      "coordinates": [973, 1925],
+      "name": "Crawford County"
+    },
+    {
+      "coordinates": [1296, 1966],
+      "name": "Wyoming County"
+    },
+    {
+      "coordinates": [586, 1783],
+      "name": "Calhoun County"
+    },
+    {
+      "coordinates": [121, 1726],
+      "name": "Dubuque County"
+    },
+    {
+      "coordinates": [45, 1626],
+      "name": "Fayette County"
+    },
+    {
+      "coordinates": [73, 1417],
+      "name": "Houston County"
+    },
+    {
+      "coordinates": [1195, 1628],
+      "name": "Ontario County"
+    },
+    {
+      "coordinates": [1228, 1745],
+      "name": "Schuyler County"
+    },
+    {
+      "coordinates": [562, 1694],
+      "name": "Barry County"
+    },
+    {
+      "coordinates": [618, 1605],
+      "name": "Clinton County"
+    },
+    {
+      "coordinates": [65, 1928],
+      "name": "Johnson County"
+    },
+    {
+      "coordinates": [1042, 1968],
+      "name": "Forest County"
+    },
+    {
+      "coordinates": [90, 1049],
+      "name": "Chippewa County"
+    },
+    {
+      "coordinates": [4, 837],
+      "name": "Burnett County"
+    },
+    {
+      "coordinates": [45, 955],
+      "name": "Barron County"
+    },
+    {
+      "coordinates": [229, 785],
+      "name": "Vilas County"
+    },
+    {
+      "coordinates": [293, 1483],
+      "name": "Dodge County"
+    },
+    {
+      "coordinates": [89, 1140],
+      "name": "Eau Claire County"
+    },
+    {
+      "coordinates": [142, 1138],
+      "name": "Clark County"
+    },
+    {
+      "coordinates": [210, 1095],
+      "name": "Marathon County"
+    },
+    {
+      "coordinates": [196, 1828],
+      "name": "Carroll County"
+    },
+    {
+      "coordinates": [344, 1655],
+      "name": "Racine County"
+    },
+    {
+      "coordinates": [188, 1212],
+      "name": "Wood County"
+    },
+    {
+      "coordinates": [230, 1206],
+      "name": "Portage County"
+    },
+    {
+      "coordinates": [103, 1356],
+      "name": "La Crosse County"
+    },
+    {
+      "coordinates": [273, 1208],
+      "name": "Waupaca County"
+    },
+    {
+      "coordinates": [310, 1395],
+      "name": "Fond du Lac County"
+    },
+    {
+      "coordinates": [162, 886],
+      "name": "Price County"
+    },
+    {
+      "coordinates": [41, 1082],
+      "name": "Dunn County"
+    },
+    {
+      "coordinates": [1164, 1553],
+      "name": "Monroe County"
+    },
+    {
+      "coordinates": [151, 1011],
+      "name": "Taylor County"
+    },
+    {
+      "coordinates": [218, 1756],
+      "name": "Stephenson County"
+    },
+    {
+      "coordinates": [8, 1498],
+      "name": "Howard County"
+    },
+    {
+      "coordinates": [666, 1407],
+      "name": "Bay County"
+    },
+    {
+      "coordinates": [8, 1575],
+      "name": "Chickasaw County"
+    },
+    {
+      "coordinates": [315, 1861],
+      "name": "Kane County"
+    },
+    {
+      "coordinates": [33, 1178],
+      "name": "Pepin County"
+    },
+    {
+      "coordinates": [353, 1491],
+      "name": "Ozaukee County"
+    },
+    {
+      "coordinates": [688, 1585],
+      "name": "Genesee County"
+    },
+    {
+      "coordinates": [180, 2008],
+      "name": "Henry County"
+    },
+    {
+      "coordinates": [8, 1648],
+      "name": "Bremer County"
+    },
+    {
+      "coordinates": [28, 1924],
+      "name": "Iowa County"
+    },
+    {
+      "coordinates": [979, 1847],
+      "name": "Erie County"
+    },
+    {
+      "coordinates": [1257, 1898],
+      "name": "Bradford County"
+    },
+    {
+      "coordinates": [279, 2010],
+      "name": "LaSalle County"
+    },
+    {
+      "coordinates": [101, 1814],
+      "name": "Jones County"
+    },
+    {
+      "coordinates": [655, 1060],
+      "name": "Montmorency County"
+    },
+    {
+      "coordinates": [678, 1781],
+      "name": "Washtenaw County"
+    },
+    {
+      "coordinates": [125, 1437],
+      "name": "Vernon County"
+    },
+    {
+      "coordinates": [711, 1471],
+      "name": "Tuscola County"
+    },
+    {
+      "coordinates": [598, 1425],
+      "name": "Isabella County"
+    },
+    {
+      "coordinates": [346, 1699],
+      "name": "Kenosha County"
+    },
+    {
+      "coordinates": [332, 1310],
+      "name": "Calumet County"
+    },
+    {
+      "coordinates": [315, 1948],
+      "name": "Kendall County"
+    },
+    {
+      "coordinates": [888, 1971],
+      "name": "Geauga County"
+    },
+    {
+      "coordinates": [1213, 2010],
+      "name": "Lycoming County"
+    },
+    {
+      "coordinates": [1216, 1550],
+      "name": "Wayne County"
+    },
+    {
+      "coordinates": [544, 1867],
+      "name": "St. Joseph County"
+    },
+    {
+      "coordinates": [503, 1244],
+      "name": "Manistee County"
+    },
+    {
+      "coordinates": [325, 1586],
+      "name": "Waukesha County"
+    },
+    {
+      "coordinates": [673, 1314],
+      "name": "Arenac County"
+    },
+    {
+      "coordinates": [288, 1585],
+      "name": "Jefferson County"
+    },
+    {
+      "coordinates": [1121, 1525],
+      "name": "Orleans County"
+    },
+    {
+      "coordinates": [8, 1726],
+      "name": "Black Hawk County"
+    },
+    {
+      "coordinates": [694, 1238],
+      "name": "Iosco County"
+    },
+    {
+      "coordinates": [922, 1919],
+      "name": "Ashtabula County"
+    },
+    {
+      "coordinates": [174, 1752],
+      "name": "Jo Daviess County"
+    },
+    {
+      "coordinates": [1210, 1684],
+      "name": "Yates County"
+    },
+    {
+      "coordinates": [379, 1196],
+      "name": "Kewaunee County"
+    },
+    {
+      "coordinates": [145, 1802],
+      "name": "Jackson County"
+    },
+    {
+      "coordinates": [180, 1590],
+      "name": "Iowa County"
+    },
+    {
+      "coordinates": [142, 1345],
+      "name": "Monroe County"
+    },
+    {
+      "coordinates": [127, 1248],
+      "name": "Jackson County"
+    },
+    {
+      "coordinates": [697, 1151],
+      "name": "Alcona County"
+    },
+    {
+      "coordinates": [50, 1335],
+      "name": "Winona County"
+    },
+    {
+      "coordinates": [64, 1825],
+      "name": "Linn County"
+    },
+    {
+      "coordinates": [264, 998],
+      "name": "Langlade County"
+    },
+    {
+      "coordinates": [238, 1378],
+      "name": "Marquette County"
+    },
+    {
+      "coordinates": [634, 1334],
+      "name": "Gladwin County"
+    },
+    {
+      "coordinates": [331, 1495],
+      "name": "Washington County"
+    },
+    {
+      "coordinates": [1260, 1730],
+      "name": "Tompkins County"
+    },
+    {
+      "coordinates": [661, 1504],
+      "name": "Saginaw County"
+    },
+    {
+      "coordinates": [579, 1151],
+      "name": "Kalkaska County"
+    },
+    {
+      "coordinates": [313, 1763],
+      "name": "McHenry County"
+    },
+    {
+      "coordinates": [619, 1956],
+      "name": "Williams County"
+    },
+    {
+      "coordinates": [1001, 1996],
+      "name": "Venango County"
+    },
+    {
+      "coordinates": [540, 1243],
+      "name": "Wexford County"
+    },
+    {
+      "coordinates": [1137, 1780],
+      "name": "Allegany County"
+    },
+    {
+      "coordinates": [328, 1061],
+      "name": "Oconto County"
+    },
+    {
+      "coordinates": [1122, 1667],
+      "name": "Wyoming County"
+    },
+    {
+      "coordinates": [1273, 1802],
+      "name": "Tioga County"
+    },
+    {
+      "coordinates": [655, 1945],
+      "name": "Fulton County"
+    },
+    {
+      "coordinates": [298, 1313],
+      "name": "Winnebago County"
+    },
+    {
+      "coordinates": [560, 1334],
+      "name": "Osceola County"
+    },
+    {
+      "coordinates": [1095, 1894],
+      "name": "McKean County"
+    },
+    {
+      "coordinates": [575, 1068],
+      "name": "Antrim County"
+    },
+    {
+      "coordinates": [654, 1602],
+      "name": "Shiawassee County"
+    },
+    {
+      "coordinates": [884, 1922],
+      "name": "Lake County"
+    },
+    {
+      "coordinates": [487, 1333],
+      "name": "Mason County"
+    },
+    {
+      "coordinates": [228, 1995],
+      "name": "Bureau County"
+    },
+    {
+      "coordinates": [288, 1872],
+      "name": "DeKalb County"
+    },
+    {
+      "coordinates": [45, 1515],
+      "name": "Winneshiek County"
+    },
+    {
+      "coordinates": [15, 1257],
+      "name": "Wabasha County"
+    },
+    {
+      "coordinates": [266, 1383],
+      "name": "Green Lake County"
+    },
+    {
+      "coordinates": [560, 1425],
+      "name": "Mecosta County"
+    },
+    {
+      "coordinates": [495, 1515],
+      "name": "Muskegon County"
+    },
+    {
+      "coordinates": [1254, 1611],
+      "name": "Cayuga County"
+    },
+    {
+      "coordinates": [543, 672],
+      "name": "Luce County"
+    },
+    {
+      "coordinates": [295, 555],
+      "name": "Houghton County"
+    },
+    {
+      "coordinates": [484, 1942],
+      "name": "St. Joseph County"
+    },
+    {
+      "coordinates": [486, 1425],
+      "name": "Oceana County"
+    },
+    {
+      "coordinates": [353, 1404],
+      "name": "Sheboygan County"
+    },
+    {
+      "coordinates": [149, 276],
+      "name": "Cook County"
+    },
+    {
+      "coordinates": [198, 1907],
+      "name": "Whiteside County"
+    },
+    {
+      "coordinates": [349, 1213],
+      "name": "Brown County"
+    },
+    {
+      "coordinates": [251, 1302],
+      "name": "Waushara County"
+    },
+    {
+      "coordinates": [359, 797],
+      "name": "Dickinson County"
+    },
+    {
+      "coordinates": [229, 879],
+      "name": "Oneida County"
+    },
+    {
+      "coordinates": [1257, 1985],
+      "name": "Sullivan County"
+    },
+    {
+      "coordinates": [149, 1871],
+      "name": "Clinton County"
+    },
+    {
+      "coordinates": [727, 1567],
+      "name": "Lapeer County"
+    },
+    {
+      "coordinates": [619, 717],
+      "name": "Chippewa County"
+    },
+    {
+      "coordinates": [288, 1124],
+      "name": "Shawano County"
+    },
+    {
+      "coordinates": [244, 1470],
+      "name": "Columbia County"
+    },
+    {
+      "coordinates": [352, 1588],
+      "name": "Milwaukee County"
+    },
+    {
+      "coordinates": [974, 1352],
+      "name": "Orangeville"
+    },
+    {
+      "coordinates": [1222, 1267],
+      "name": "Napanee"
+    },
+    {
+      "coordinates": [974, 1221],
+      "name": "Stayner"
+    },
+    {
+      "coordinates": [776, 1832],
+      "name": "Leamington"
+    },
+    {
+      "coordinates": [987, 1129],
+      "name": "Penetanguishene"
+    },
+    {
+      "coordinates": [990, 1134],
+      "name": "Midland"
+    },
+    {
+      "coordinates": [1278, 1095],
+      "name": "Perth"
+    },
+    {
+      "coordinates": [991, 1458],
+      "name": "Milton"
+    },
+    {
+      "coordinates": [765, 1836],
+      "name": "Kingsville"
+    },
+    {
+      "coordinates": [1296, 1094],
+      "name": "Smiths Falls"
+    },
+    {
+      "coordinates": [957, 1632],
+      "name": "Simcoe"
+    },
+    {
+      "coordinates": [793, 1695],
+      "name": "Wallaceburg"
+    },
+    {
+      "coordinates": [1041, 1339],
+      "name": "Stouffville"
+    },
+    {
+      "coordinates": [1285, 1245],
+      "name": "Gananoque"
+    },
+    {
+      "coordinates": [1196, 827],
+      "name": "Petawawa"
+    },
+    {
+      "coordinates": [1036, 1057],
+      "name": "Bracebridge"
+    },
+    {
+      "coordinates": [1016, 1541],
+      "name": "Grimsby"
+    },
+    {
+      "coordinates": [1160, 1320],
+      "name": "Brighton"
+    },
+    {
+      "coordinates": [1023, 1548],
+      "name": "Beamsville"
+    },
+    {
+      "coordinates": [989, 1422],
+      "name": "Georgetown"
+    },
+    {
+      "coordinates": [1041, 1619],
+      "name": "Port Colborne"
+    },
+    {
+      "coordinates": [1012, 1614],
+      "name": "Dunnville"
+    },
+    {
+      "coordinates": [987, 701],
+      "name": "Sturgeon Falls"
+    },
+    {
+      "coordinates": [1007, 385],
+      "name": "Temiskaming Shores"
+    },
+    {
+      "coordinates": [1244, 942],
+      "name": "Renfrew"
+    },
+    {
+      "coordinates": [1019, 1350],
+      "name": "King City"
+    },
+    {
+      "coordinates": [990, 1246],
+      "name": "Angus"
+    },
+    {
+      "coordinates": [1270, 952],
+      "name": "Arnprior"
+    },
+    {
+      "coordinates": [988, 1422],
+      "name": "Halton Hills"
+    },
+    {
+      "coordinates": [759, 1768],
+      "name": "Lakeshore"
+    },
+    {
+      "coordinates": [992, 1291],
+      "name": "New Tecumseth"
+    },
+    {
+      "coordinates": [1017, 1249],
+      "name": "Innisfil"
+    },
+    {
+      "coordinates": [914, 1375],
+      "name": "Minto"
+    },
+    {
+      "coordinates": [973, 1345],
+      "name": "Mono"
+    },
+    {
+      "coordinates": [873, 1201],
+      "name": "Saugeen Shores"
+    },
+    {
+      "coordinates": [881, 1166],
+      "name": "South Bruce Peninsula"
+    },
+    {
+      "coordinates": [1024, 1272],
+      "name": "Georgina"
+    },
+    {
+      "coordinates": [1022, 1306],
+      "name": "East Gwillimbury"
+    },
+    {
+      "coordinates": [1085, 1354],
+      "name": "Bowmanville"
+    },
+    {
+      "coordinates": [1038, 1579],
+      "name": "Pelham"
+    },
+    {
+      "coordinates": [1030, 1421],
+      "name": "Toronto"
+    },
+    {
+      "coordinates": [991, 1524],
+      "name": "Hamilton"
+    },
+    {
+      "coordinates": [957, 1498],
+      "name": "Cambridge"
+    },
+    {
+      "coordinates": [249, 134],
+      "name": "Thunder Bay"
+    },
+    {
+      "coordinates": [791, 1597],
+      "name": "Sarnia"
+    },
+    {
+      "coordinates": [1114, 1251],
+      "name": "Peterborough"
+    },
+    {
+      "coordinates": [1041, 1550],
+      "name": "St. Catharines"
+    },
+    {
+      "coordinates": [962, 1449],
+      "name": "Guelph"
+    },
+    {
+      "coordinates": [1027, 1171],
+      "name": "Orillia"
+    },
+    {
+      "coordinates": [907, 1182],
+      "name": "Owen Sound"
+    },
+    {
+      "coordinates": [1210, 847],
+      "name": "Pembroke"
+    },
+    {
+      "coordinates": [997, 1507],
+      "name": "Burlington"
+    },
+    {
+      "coordinates": [1000, 1413],
+      "name": "Brampton"
+    },
+    {
+      "coordinates": [1010, 1438],
+      "name": "Mississauga"
+    },
+    {
+      "coordinates": [961, 1554],
+      "name": "Brantford"
+    },
+    {
+      "coordinates": [1059, 181],
+      "name": "Rouyn-Noranda"
+    },
+    {
+      "coordinates": [922, 1557],
+      "name": "Woodstock"
+    },
+    {
+      "coordinates": [940, 1470],
+      "name": "Waterloo"
+    },
+    {
+      "coordinates": [741, 1765],
+      "name": "Windsor"
+    },
+    {
+      "coordinates": [809, 1742],
+      "name": "Chatham"
+    },
+    {
+      "coordinates": [942, 1474],
+      "name": "Kitchener"
+    },
+    {
+      "coordinates": [1071, 1358],
+      "name": "Oshawa"
+    },
+    {
+      "coordinates": [1056, 1569],
+      "name": "Niagara Falls"
+    },
+    {
+      "coordinates": [1019, 1385],
+      "name": "Vaughan"
+    },
+    {
+      "coordinates": [1041, 1592],
+      "name": "Welland"
+    },
+    {
+      "coordinates": [904, 1495],
+      "name": "Stratford"
+    },
+    {
+      "coordinates": [883, 1594],
+      "name": "London"
+    },
+    {
+      "coordinates": [1053, 1374],
+      "name": "Pickering"
+    },
+    {
+      "coordinates": [1065, 1363],
+      "name": "Whitby"
+    },
+    {
+      "coordinates": [876, 114],
+      "name": "Timmins"
+    },
+    {
+      "coordinates": [887, 1647],
+      "name": "St. Thomas"
+    },
+    {
+      "coordinates": [1041, 1619],
+      "name": "Port Colborne"
+    },
+    {
+      "coordinates": [1034, 1369],
+      "name": "Markham"
+    },
+    {
+      "coordinates": [903, 666],
+      "name": "Sudbury"
+    },
+    {
+      "coordinates": [1045, 1558],
+      "name": "Thorold"
+    },
+    {
+      "coordinates": [1007, 385],
+      "name": "Temiskaming Shores"
+    },
+    {
+      "coordinates": [772, 698],
+      "name": "Elliot Lake"
+    },
+    {
+      "coordinates": [1260, 1271],
+      "name": "Kingston"
+    },
+    {
+      "coordinates": [1026, 1363],
+      "name": "Richmond Hill"
+    },
+    {
+      "coordinates": [1024, 716],
+      "name": "North Bay"
+    },
+    {
+      "coordinates": [1156, 220],
+      "name": "Val-d'Or"
+    },
+    {
+      "coordinates": [1081, 1237],
+      "name": "Kawartha Lakes"
+    },
+    {
+      "coordinates": [1173, 1305],
+      "name": "Quinte West"
+    },
+    {
+      "coordinates": [1006, 1229],
+      "name": "Barrie"
+    },
+    {
+      "coordinates": [1173, 1305],
+      "name": "Trenton"
+    }
+  ],
   "id": "GreatLakes",
   "map": {
     "height": 1300,
