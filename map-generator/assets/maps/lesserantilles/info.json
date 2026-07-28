@@ -1,0 +1,176 @@
+{
+  "id": "LesserAntilles",
+  "name": "Lesser Antilles",
+  "translation_key": "map.lesserantilles",
+  "categories": ["north_america", "new"],
+  "multiplayer_frequency": 3,
+  "nations": [
+    {
+      "coordinates": [50, 256],
+      "name": "Puerto Rico",
+      "flag": "pr"
+    },
+    {
+      "coordinates": [512, 295],
+      "name": "US Virgin Islands",
+      "flag": "vi"
+    },
+    {
+      "coordinates": [662, 265],
+      "name": "British Virgin Islands",
+      "flag": "vg"
+    },
+    {
+      "coordinates": [561, 519],
+      "name": "St. Croix",
+      "flag": "vi"
+    },
+    {
+      "coordinates": [1034, 306],
+      "name": "Sint Maarten",
+      "flag": "sx"
+    },
+    {
+      "coordinates": [1047, 212],
+      "name": "Anguilla",
+      "flag": "ai"
+    },
+    {
+      "coordinates": [1108, 552],
+      "name": "Saint Kitts and Nevis",
+      "flag": "kn"
+    },
+    {
+      "coordinates": [1479, 659],
+      "name": "Antigua and Barbuda",
+      "flag": "ag"
+    },
+    {
+      "coordinates": [1338, 788],
+      "name": "Montserrat",
+      "flag": "ms"
+    },
+    {
+      "coordinates": [1473, 909],
+      "name": "Guadeloupe",
+      "flag": "gp"
+    },
+    {
+      "coordinates": [1602, 1150],
+      "name": "Dominica",
+      "flag": "dm"
+    },
+    {
+      "coordinates": [1700, 1391],
+      "name": "Martinique",
+      "flag": "mq"
+    },
+    {
+      "coordinates": [1700, 1656],
+      "name": "Saint Lucia",
+      "flag": "lc"
+    },
+    {
+      "coordinates": [1921, 1828],
+      "name": "Barbados",
+      "flag": "bb"
+    },
+    {
+      "coordinates": [1654, 1867],
+      "name": "Saint Vincent and the Grenadines",
+      "flag": "vc"
+    },
+    {
+      "coordinates": [1444, 2318],
+      "name": "Grenada",
+      "flag": "gd"
+    },
+    {
+      "coordinates": [1403, 2628],
+      "name": "Trinidad and Tobago",
+      "flag": "tt"
+    },
+    {
+      "coordinates": [810, 2754],
+      "name": "Venezuela",
+      "flag": "ve"
+    }
+  ],
+  "additionalNations": [
+    {
+      "coordinates": [604, 307],
+      "name": "St. John",
+      "flag": "vi"
+    },
+    {
+      "coordinates": [333, 290],
+      "name": "Vieques",
+      "flag": "pr"
+    },
+    {
+      "coordinates": [140, 198],
+      "name": "San Juan",
+      "flag": "pr"
+    },
+    {
+      "coordinates": [372, 228],
+      "name": "Culebra",
+      "flag": "pr"
+    },
+    {
+      "coordinates": [807, 115],
+      "name": "Anegada",
+      "flag": "vg"
+    },
+    {
+      "coordinates": [768, 232],
+      "name": "Virgin Gorda",
+      "flag": "vg"
+    },
+    {
+      "coordinates": [1038, 491],
+      "name": "Sint Eustatius",
+      "flag": "bq"
+    },
+    {
+      "coordinates": [935, 434],
+      "name": "Saba",
+      "flag": "bq"
+    },
+    {
+      "coordinates": [1144, 385],
+      "name": "Saint Barthélemy",
+      "flag": "bl"
+    },
+    {
+      "coordinates": [1614, 990],
+      "name": "Marie-Galante",
+      "flag": "gp"
+    },
+    {
+      "coordinates": [1638, 1955],
+      "name": "Bequia",
+      "flag": "vc"
+    },
+    {
+      "coordinates": [1545, 2175],
+      "name": "Carriacou",
+      "flag": "vc"
+    },
+    {
+      "coordinates": [1578, 2401],
+      "name": "Tobago",
+      "flag": "tt"
+    },
+    {
+      "coordinates": [559, 2584],
+      "name": "Isla de Margarita",
+      "flag": "ve"
+    },
+    {
+      "coordinates": [55, 2760],
+      "name": "Miranda",
+      "flag": "ve"
+    }
+  ]
+}
