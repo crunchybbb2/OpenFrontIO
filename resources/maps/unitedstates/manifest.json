@@ -1,72 +1,1965 @@
 {
   "additionalNations": [
     {
-      "coordinates": [661, 237],
+      "coordinates": [
+        661,
+        237
+      ],
       "flag": "Lincoln",
       "name": "Lincoln"
     },
     {
-      "coordinates": [304, 605],
+      "coordinates": [
+        304,
+        605
+      ],
       "flag": "Jefferson",
       "name": "Jefferson"
     },
     {
-      "coordinates": [958, 442],
+      "coordinates": [
+        958,
+        442
+      ],
       "flag": "Arapaho",
       "name": "Arapaho"
     },
     {
-      "coordinates": [1464, 909],
+      "coordinates": [
+        1464,
+        909
+      ],
       "flag": "Cherokee Nation",
       "name": "Cherokee"
     },
     {
-      "coordinates": [1378, 1010],
+      "coordinates": [
+        1378,
+        1010
+      ],
       "flag": "Chickasaw",
       "name": "Chickasaw"
     },
     {
-      "coordinates": [1494, 1019],
+      "coordinates": [
+        1494,
+        1019
+      ],
       "flag": "Choctaw",
       "name": "Choctaw"
     },
     {
-      "coordinates": [613, 620],
+      "coordinates": [
+        613,
+        620
+      ],
       "flag": "Deseret",
       "name": "Deseret"
     },
     {
-      "coordinates": [1158, 516],
+      "coordinates": [
+        1158,
+        516
+      ],
       "flag": "Lakotah",
       "name": "Lakotah"
     },
     {
-      "coordinates": [381, 257],
+      "coordinates": [
+        381,
+        257
+      ],
       "flag": "Chinook",
       "name": "Chinook"
     },
     {
-      "coordinates": [819, 814],
+      "coordinates": [
+        819,
+        814
+      ],
       "flag": "Navajo",
       "name": "Navajo"
     },
     {
-      "coordinates": [2488, 263],
+      "coordinates": [
+        2488,
+        263
+      ],
       "flag": "New England",
       "name": "New England"
     },
     {
-      "coordinates": [2062, 570],
+      "coordinates": [
+        2062,
+        570
+      ],
       "flag": "Haudenosaunee",
       "name": "Iroquois Confederacy"
     },
     {
-      "coordinates": [1991, 1201],
+      "coordinates": [
+        1991,
+        1201
+      ],
       "flag": "Miccosukee",
       "name": "Miccosukee"
     }
   ],
-  "categories": ["north_america", "new", "countries"],
+  "categories": [
+    "north_america",
+    "new",
+    "countries"
+  ],
+  "custom_tribes": [
+    {
+      "coordinates": [
+        429,
+        918
+      ],
+      "name": "Los Angeles"
+    },
+    {
+      "coordinates": [
+        463,
+        989
+      ],
+      "name": "San Diego"
+    },
+    {
+      "coordinates": [
+        441,
+        932
+      ],
+      "name": "Anaheim"
+    },
+    {
+      "coordinates": [
+        418,
+        916
+      ],
+      "name": "Hollywood"
+    },
+    {
+      "coordinates": [
+        392,
+        766
+      ],
+      "name": "Fresno"
+    },
+    {
+      "coordinates": [
+        401,
+        839
+      ],
+      "name": "Bakersfield"
+    },
+    {
+      "coordinates": [
+        363,
+        871
+      ],
+      "name": "Santa Barbara"
+    },
+    {
+      "coordinates": [
+        309,
+        753
+      ],
+      "name": "Monterey"
+    },
+    {
+      "coordinates": [
+        471,
+        847
+      ],
+      "name": "Barstow"
+    },
+    {
+      "coordinates": [
+        296,
+        682
+      ],
+      "name": "San Francisco"
+    },
+    {
+      "coordinates": [
+        318,
+        687
+      ],
+      "name": "Oakland"
+    },
+    {
+      "coordinates": [
+        309,
+        707
+      ],
+      "name": "San Jose"
+    },
+    {
+      "coordinates": [
+        338,
+        626
+      ],
+      "name": "Sacramento"
+    },
+    {
+      "coordinates": [
+        335,
+        527
+      ],
+      "name": "Redding"
+    },
+    {
+      "coordinates": [
+        513,
+        932
+      ],
+      "name": "Palm Springs"
+    },
+    {
+      "coordinates": [
+        466,
+        922
+      ],
+      "name": "San Bernardino"
+    },
+    {
+      "coordinates": [
+        485,
+        958
+      ],
+      "name": "Riverside"
+    },
+    {
+      "coordinates": [
+        585,
+        854
+      ],
+      "name": "Needles"
+    },
+    {
+      "coordinates": [
+        623,
+        797
+      ],
+      "name": "Henderson"
+    },
+    {
+      "coordinates": [
+        573,
+        766
+      ],
+      "name": "Las Vegas"
+    },
+    {
+      "coordinates": [
+        783,
+        613
+      ],
+      "name": "Salt Lake City"
+    },
+    {
+      "coordinates": [
+        478,
+        747
+      ],
+      "name": "Yosemite National Park"
+    },
+    {
+      "coordinates": [
+        431,
+        599
+      ],
+      "name": "Reno"
+    },
+    {
+      "coordinates": [
+        451,
+        649
+      ],
+      "name": "Carson City"
+    },
+    {
+      "coordinates": [
+        553,
+        569
+      ],
+      "name": "Elko"
+    },
+    {
+      "coordinates": [
+        753,
+        669
+      ],
+      "name": "Provo"
+    },
+    {
+      "coordinates": [
+        681,
+        763
+      ],
+      "name": "St. George"
+    },
+    {
+      "coordinates": [
+        773,
+        548
+      ],
+      "name": "Ogden"
+    },
+    {
+      "coordinates": [
+        421,
+        929
+      ],
+      "name": "Long Beach"
+    },
+    {
+      "coordinates": [
+        360,
+        675
+      ],
+      "name": "Stockton"
+    },
+    {
+      "coordinates": [
+        726,
+        961
+      ],
+      "name": "Phoenix"
+    },
+    {
+      "coordinates": [
+        757,
+        1057
+      ],
+      "name": "Tucson"
+    },
+    {
+      "coordinates": [
+        606,
+        1045
+      ],
+      "name": "Yuma"
+    },
+    {
+      "coordinates": [
+        708,
+        880
+      ],
+      "name": "Grand Canyon"
+    },
+    {
+      "coordinates": [
+        414,
+        275
+      ],
+      "name": "Portland"
+    },
+    {
+      "coordinates": [
+        424,
+        242
+      ],
+      "name": "Vancouver"
+    },
+    {
+      "coordinates": [
+        457,
+        151
+      ],
+      "name": "Seattle"
+    },
+    {
+      "coordinates": [
+        434,
+        182
+      ],
+      "name": "Tacoma"
+    },
+    {
+      "coordinates": [
+        583,
+        192
+      ],
+      "name": "Spokane"
+    },
+    {
+      "coordinates": [
+        475,
+        119
+      ],
+      "name": "Bellingham"
+    },
+    {
+      "coordinates": [
+        392,
+        439
+      ],
+      "name": "Klamath Falls"
+    },
+    {
+      "coordinates": [
+        363,
+        337
+      ],
+      "name": "Salem"
+    },
+    {
+      "coordinates": [
+        575,
+        428
+      ],
+      "name": "Boise"
+    },
+    {
+      "coordinates": [
+        681,
+        500
+      ],
+      "name": "Twin Falls"
+    },
+    {
+      "coordinates": [
+        507,
+        431
+      ],
+      "name": "Nampa"
+    },
+    {
+      "coordinates": [
+        537,
+        294
+      ],
+      "name": "Pendleton"
+    },
+    {
+      "coordinates": [
+        619,
+        662
+      ],
+      "name": "Area 51"
+    },
+    {
+      "coordinates": [
+        792,
+        403
+      ],
+      "name": "Idaho Falls"
+    },
+    {
+      "coordinates": [
+        885,
+        409
+      ],
+      "name": "Yellowstone"
+    },
+    {
+      "coordinates": [
+        674,
+        202
+      ],
+      "name": "Couer d'Alene"
+    },
+    {
+      "coordinates": [
+        737,
+        273
+      ],
+      "name": "Missoula"
+    },
+    {
+      "coordinates": [
+        815,
+        242
+      ],
+      "name": "Helena"
+    },
+    {
+      "coordinates": [
+        889,
+        329
+      ],
+      "name": "Bozeman"
+    },
+    {
+      "coordinates": [
+        1003,
+        325
+      ],
+      "name": "Billings"
+    },
+    {
+      "coordinates": [
+        860,
+        476
+      ],
+      "name": "Jackson Hole"
+    },
+    {
+      "coordinates": [
+        976,
+        406
+      ],
+      "name": "Cody"
+    },
+    {
+      "coordinates": [
+        1081,
+        582
+      ],
+      "name": "Cheyenne"
+    },
+    {
+      "coordinates": [
+        1011,
+        536
+      ],
+      "name": "Laramie"
+    },
+    {
+      "coordinates": [
+        1040,
+        474
+      ],
+      "name": "Casper"
+    },
+    {
+      "coordinates": [
+        1067,
+        699
+      ],
+      "name": "Denver"
+    },
+    {
+      "coordinates": [
+        1036,
+        655
+      ],
+      "name": "Boulder"
+    },
+    {
+      "coordinates": [
+        1054,
+        772
+      ],
+      "name": "Colorado Springs"
+    },
+    {
+      "coordinates": [
+        909,
+        731
+      ],
+      "name": "Grand Junction"
+    },
+    {
+      "coordinates": [
+        1010,
+        830
+      ],
+      "name": "Pueblo"
+    },
+    {
+      "coordinates": [
+        942,
+        901
+      ],
+      "name": "Santa Fe"
+    },
+    {
+      "coordinates": [
+        901,
+        970
+      ],
+      "name": "Albuquerque"
+    },
+    {
+      "coordinates": [
+        959,
+        1144
+      ],
+      "name": "El Paso"
+    },
+    {
+      "coordinates": [
+        1104,
+        931
+      ],
+      "name": "Amarillo"
+    },
+    {
+      "coordinates": [
+        892,
+        1074
+      ],
+      "name": "Truth or Consequences"
+    },
+    {
+      "coordinates": [
+        847,
+        817
+      ],
+      "name": "Durango"
+    },
+    {
+      "coordinates": [
+        1093,
+        1024
+      ],
+      "name": "Lubbock"
+    },
+    {
+      "coordinates": [
+        1133,
+        1208
+      ],
+      "name": "Fort Stockton"
+    },
+    {
+      "coordinates": [
+        1241,
+        1347
+      ],
+      "name": "Laredo"
+    },
+    {
+      "coordinates": [
+        1337,
+        1464
+      ],
+      "name": "Brownsville"
+    },
+    {
+      "coordinates": [
+        1357,
+        1371
+      ],
+      "name": "Corpus Christi"
+    },
+    {
+      "coordinates": [
+        1312,
+        1301
+      ],
+      "name": "San Antonio"
+    },
+    {
+      "coordinates": [
+        1338,
+        1204
+      ],
+      "name": "Austin"
+    },
+    {
+      "coordinates": [
+        1468,
+        1231
+      ],
+      "name": "Houston"
+    },
+    {
+      "coordinates": [
+        1380,
+        1136
+      ],
+      "name": "Waco"
+    },
+    {
+      "coordinates": [
+        1416,
+        1074
+      ],
+      "name": "Dallas"
+    },
+    {
+      "coordinates": [
+        1377,
+        1061
+      ],
+      "name": "Fort Worth"
+    },
+    {
+      "coordinates": [
+        1138,
+        1120
+      ],
+      "name": "Odessa"
+    },
+    {
+      "coordinates": [
+        1220,
+        1114
+      ],
+      "name": "Abilene"
+    },
+    {
+      "coordinates": [
+        1415,
+        1041
+      ],
+      "name": "Plano"
+    },
+    {
+      "coordinates": [
+        1524,
+        1094
+      ],
+      "name": "Shreveport"
+    },
+    {
+      "coordinates": [
+        1303,
+        929
+      ],
+      "name": "Oklahoma City"
+    },
+    {
+      "coordinates": [
+        1403,
+        917
+      ],
+      "name": "Tulsa"
+    },
+    {
+      "coordinates": [
+        1169,
+        1096
+      ],
+      "name": "Midland"
+    },
+    {
+      "coordinates": [
+        1459,
+        1303
+      ],
+      "name": "Galveston"
+    },
+    {
+      "coordinates": [
+        1682,
+        1268
+      ],
+      "name": "New Orleans"
+    },
+    {
+      "coordinates": [
+        1649,
+        1250
+      ],
+      "name": "Baton Rouge"
+    },
+    {
+      "coordinates": [
+        1569,
+        1245
+      ],
+      "name": "Lafayette"
+    },
+    {
+      "coordinates": [
+        1661,
+        1072
+      ],
+      "name": "Vicksburg"
+    },
+    {
+      "coordinates": [
+        1739,
+        1223
+      ],
+      "name": "Biloxi"
+    },
+    {
+      "coordinates": [
+        1732,
+        1076
+      ],
+      "name": "Jackson"
+    },
+    {
+      "coordinates": [
+        1719,
+        942
+      ],
+      "name": "Memphis"
+    },
+    {
+      "coordinates": [
+        1657,
+        1169
+      ],
+      "name": "Natchez"
+    },
+    {
+      "coordinates": [
+        1721,
+        1170
+      ],
+      "name": "Hattiesburg"
+    },
+    {
+      "coordinates": [
+        1683,
+        1002
+      ],
+      "name": "Helena-West Helena"
+    },
+    {
+      "coordinates": [
+        1577,
+        960
+      ],
+      "name": "Little Rock"
+    },
+    {
+      "coordinates": [
+        1607,
+        1041
+      ],
+      "name": "Pine Bluff"
+    },
+    {
+      "coordinates": [
+        1667,
+        785
+      ],
+      "name": "St. Louis"
+    },
+    {
+      "coordinates": [
+        1643,
+        767
+      ],
+      "name": "St. Charles"
+    },
+    {
+      "coordinates": [
+        1480,
+        965
+      ],
+      "name": "Fort Smith"
+    },
+    {
+      "coordinates": [
+        1539,
+        893
+      ],
+      "name": "Bentonville"
+    },
+    {
+      "coordinates": [
+        1499,
+        842
+      ],
+      "name": "Joplin"
+    },
+    {
+      "coordinates": [
+        1466,
+        757
+      ],
+      "name": "Kansas City"
+    },
+    {
+      "coordinates": [
+        1554,
+        790
+      ],
+      "name": "Jefferson City"
+    },
+    {
+      "coordinates": [
+        1383,
+        779
+      ],
+      "name": "Topeka"
+    },
+    {
+      "coordinates": [
+        1319,
+        824
+      ],
+      "name": "Wichita"
+    },
+    {
+      "coordinates": [
+        1190,
+        885
+      ],
+      "name": "Dodge City"
+    },
+    {
+      "coordinates": [
+        1227,
+        644
+      ],
+      "name": "North Platte"
+    },
+    {
+      "coordinates": [
+        1336,
+        666
+      ],
+      "name": "Grand Island"
+    },
+    {
+      "coordinates": [
+        1408,
+        705
+      ],
+      "name": "Lincoln (NE)"
+    },
+    {
+      "coordinates": [
+        1440,
+        647
+      ],
+      "name": "Omaha"
+    },
+    {
+      "coordinates": [
+        1395,
+        539
+      ],
+      "name": "Sioux City"
+    },
+    {
+      "coordinates": [
+        1276,
+        442
+      ],
+      "name": "Sioux Falls"
+    },
+    {
+      "coordinates": [
+        1127,
+        470
+      ],
+      "name": "Rapid City"
+    },
+    {
+      "coordinates": [
+        1119,
+        530
+      ],
+      "name": "Mount Rushmore"
+    },
+    {
+      "coordinates": [
+        1213,
+        512
+      ],
+      "name": "Pierre"
+    },
+    {
+      "coordinates": [
+        1264,
+        322
+      ],
+      "name": "Fargo"
+    },
+    {
+      "coordinates": [
+        1182,
+        340
+      ],
+      "name": "Bismarck"
+    },
+    {
+      "coordinates": [
+        1274,
+        229
+      ],
+      "name": "Grand Forks"
+    },
+    {
+      "coordinates": [
+        1105,
+        219
+      ],
+      "name": "Minot"
+    },
+    {
+      "coordinates": [
+        926,
+        204
+      ],
+      "name": "Havre"
+    },
+    {
+      "coordinates": [
+        1084,
+        381
+      ],
+      "name": "Miles City"
+    },
+    {
+      "coordinates": [
+        1254,
+        751
+      ],
+      "name": "Hays"
+    },
+    {
+      "coordinates": [
+        1530,
+        593
+      ],
+      "name": "Des Moines"
+    },
+    {
+      "coordinates": [
+        1629,
+        566
+      ],
+      "name": "Cedar Rapids"
+    },
+    {
+      "coordinates": [
+        1653,
+        633
+      ],
+      "name": "Davenport"
+    },
+    {
+      "coordinates": [
+        1674,
+        670
+      ],
+      "name": "Galesburg"
+    },
+    {
+      "coordinates": [
+        1715,
+        696
+      ],
+      "name": "Peoria"
+    },
+    {
+      "coordinates": [
+        1697,
+        758
+      ],
+      "name": "Springfield"
+    },
+    {
+      "coordinates": [
+        1771,
+        597
+      ],
+      "name": "Chicago"
+    },
+    {
+      "coordinates": [
+        1757,
+        635
+      ],
+      "name": "Joliet"
+    },
+    {
+      "coordinates": [
+        1755,
+        559
+      ],
+      "name": "Kenosha"
+    },
+    {
+      "coordinates": [
+        1747,
+        515
+      ],
+      "name": "Milwaukee"
+    },
+    {
+      "coordinates": [
+        1732,
+        611
+      ],
+      "name": "Naperville"
+    },
+    {
+      "coordinates": [
+        1702,
+        566
+      ],
+      "name": "Rockford"
+    },
+    {
+      "coordinates": [
+        1682,
+        516
+      ],
+      "name": "Madison"
+    },
+    {
+      "coordinates": [
+        1712,
+        475
+      ],
+      "name": "Appleton"
+    },
+    {
+      "coordinates": [
+        1732,
+        435
+      ],
+      "name": "Green Bay"
+    },
+    {
+      "coordinates": [
+        1677,
+        394
+      ],
+      "name": "Wausau"
+    },
+    {
+      "coordinates": [
+        1512,
+        502
+      ],
+      "name": "Rochester (MN)"
+    },
+    {
+      "coordinates": [
+        1497,
+        409
+      ],
+      "name": "Minneapolis"
+    },
+    {
+      "coordinates": [
+        1593,
+        425
+      ],
+      "name": "Eau Claire"
+    },
+    {
+      "coordinates": [
+        1519,
+        390
+      ],
+      "name": "St. Paul"
+    },
+    {
+      "coordinates": [
+        1588,
+        294
+      ],
+      "name": "Duluth"
+    },
+    {
+      "coordinates": [
+        1666,
+        892
+      ],
+      "name": "Jonesboro"
+    },
+    {
+      "coordinates": [
+        1838,
+        942
+      ],
+      "name": "Nashville"
+    },
+    {
+      "coordinates": [
+        1884,
+        1004
+      ],
+      "name": "Chattanooga"
+    },
+    {
+      "coordinates": [
+        1816,
+        1027
+      ],
+      "name": "Huntsville"
+    },
+    {
+      "coordinates": [
+        1823,
+        1087
+      ],
+      "name": "Birmingham"
+    },
+    {
+      "coordinates": [
+        1819,
+        1150
+      ],
+      "name": "Montgomery"
+    },
+    {
+      "coordinates": [
+        1773,
+        1206
+      ],
+      "name": "Mobile"
+    },
+    {
+      "coordinates": [
+        1963,
+        1062
+      ],
+      "name": "Atlanta"
+    },
+    {
+      "coordinates": [
+        2023,
+        1052
+      ],
+      "name": "Athens"
+    },
+    {
+      "coordinates": [
+        1997,
+        1116
+      ],
+      "name": "Macon"
+    },
+    {
+      "coordinates": [
+        2102,
+        1141
+      ],
+      "name": "Savannah"
+    },
+    {
+      "coordinates": [
+        2083,
+        1053
+      ],
+      "name": "Augusta"
+    },
+    {
+      "coordinates": [
+        1968,
+        1200
+      ],
+      "name": "Tallahassee"
+    },
+    {
+      "coordinates": [
+        2115,
+        1203
+      ],
+      "name": "Jacksonville"
+    },
+    {
+      "coordinates": [
+        1885,
+        1203
+      ],
+      "name": "Pensacola"
+    },
+    {
+      "coordinates": [
+        2064,
+        1236
+      ],
+      "name": "Gainesville"
+    },
+    {
+      "coordinates": [
+        2147,
+        1252
+      ],
+      "name": "Daytona Beach"
+    },
+    {
+      "coordinates": [
+        2108,
+        1285
+      ],
+      "name": "Orlando"
+    },
+    {
+      "coordinates": [
+        2084,
+        1314
+      ],
+      "name": "Tampa"
+    },
+    {
+      "coordinates": [
+        2103,
+        1335
+      ],
+      "name": "St. Petersburg"
+    },
+    {
+      "coordinates": [
+        2090,
+        1263
+      ],
+      "name": "Ocala"
+    },
+    {
+      "coordinates": [
+        2129,
+        1308
+      ],
+      "name": "Kissimmee"
+    },
+    {
+      "coordinates": [
+        2188,
+        1335
+      ],
+      "name": "Port St. Lucie"
+    },
+    {
+      "coordinates": [
+        2099,
+        1366
+      ],
+      "name": "Sarasota"
+    },
+    {
+      "coordinates": [
+        2215,
+        1420
+      ],
+      "name": "Miami"
+    },
+    {
+      "coordinates": [
+        2211,
+        1371
+      ],
+      "name": "West Palm Beach"
+    },
+    {
+      "coordinates": [
+        2210,
+        1397
+      ],
+      "name": "Fort Launderdale"
+    },
+    {
+      "coordinates": [
+        2140,
+        1413
+      ],
+      "name": "Fort Myers"
+    },
+    {
+      "coordinates": [
+        2192,
+        1454
+      ],
+      "name": "Everglades"
+    },
+    {
+      "coordinates": [
+        2162,
+        1499
+      ],
+      "name": "Key West"
+    },
+    {
+      "coordinates": [
+        409,
+        909
+      ],
+      "name": "Santa Monica"
+    },
+    {
+      "coordinates": [
+        456,
+        966
+      ],
+      "name": "Carlsbad"
+    },
+    {
+      "coordinates": [
+        443,
+        950
+      ],
+      "name": "Irvine"
+    },
+    {
+      "coordinates": [
+        426,
+        909
+      ],
+      "name": "Pasadena"
+    },
+    {
+      "coordinates": [
+        379,
+        718
+      ],
+      "name": "Modesto"
+    },
+    {
+      "coordinates": [
+        1843,
+        517
+      ],
+      "name": "Grand Rapids"
+    },
+    {
+      "coordinates": [
+        1909,
+        544
+      ],
+      "name": "Lansing"
+    },
+    {
+      "coordinates": [
+        1947,
+        535
+      ],
+      "name": "Detroit"
+    },
+    {
+      "coordinates": [
+        1854,
+        570
+      ],
+      "name": "Kalamazoo"
+    },
+    {
+      "coordinates": [
+        1880,
+        622
+      ],
+      "name": "Fort Wayne"
+    },
+    {
+      "coordinates": [
+        1843,
+        669
+      ],
+      "name": "Indianapolis"
+    },
+    {
+      "coordinates": [
+        1828,
+        806
+      ],
+      "name": "Louisville"
+    },
+    {
+      "coordinates": [
+        1917,
+        743
+      ],
+      "name": "Cincinnati"
+    },
+    {
+      "coordinates": [
+        1923,
+        680
+      ],
+      "name": "Dayton"
+    },
+    {
+      "coordinates": [
+        1993,
+        662
+      ],
+      "name": "Columbus"
+    },
+    {
+      "coordinates": [
+        2024,
+        581
+      ],
+      "name": "Cleveland"
+    },
+    {
+      "coordinates": [
+        2032,
+        621
+      ],
+      "name": "Akron"
+    },
+    {
+      "coordinates": [
+        1955,
+        601
+      ],
+      "name": "Toledo"
+    },
+    {
+      "coordinates": [
+        1910,
+        487
+      ],
+      "name": "Flint"
+    },
+    {
+      "coordinates": [
+        1863,
+        329
+      ],
+      "name": "Sault Ste. Marie"
+    },
+    {
+      "coordinates": [
+        1847,
+        419
+      ],
+      "name": "Traverse City"
+    },
+    {
+      "coordinates": [
+        2127,
+        476
+      ],
+      "name": "Buffalo"
+    },
+    {
+      "coordinates": [
+        2169,
+        461
+      ],
+      "name": "Rochester (NY)"
+    },
+    {
+      "coordinates": [
+        2123,
+        582
+      ],
+      "name": "Pittsburgh"
+    },
+    {
+      "coordinates": [
+        2196,
+        620
+      ],
+      "name": "Harrisburg"
+    },
+    {
+      "coordinates": [
+        2286,
+        598
+      ],
+      "name": "Philadelphia"
+    },
+    {
+      "coordinates": [
+        2281,
+        553
+      ],
+      "name": "Allentown"
+    },
+    {
+      "coordinates": [
+        2262,
+        519
+      ],
+      "name": "Scranton"
+    },
+    {
+      "coordinates": [
+        2233,
+        456
+      ],
+      "name": "Syracuse"
+    },
+    {
+      "coordinates": [
+        2108,
+        712
+      ],
+      "name": "Morgantown"
+    },
+    {
+      "coordinates": [
+        2083,
+        643
+      ],
+      "name": "Wheeling"
+    },
+    {
+      "coordinates": [
+        1988,
+        749
+      ],
+      "name": "Huntington"
+    },
+    {
+      "coordinates": [
+        2044,
+        762
+      ],
+      "name": "Charleston (WV)"
+    },
+    {
+      "coordinates": [
+        1938,
+        815
+      ],
+      "name": "Lexington"
+    },
+    {
+      "coordinates": [
+        1906,
+        797
+      ],
+      "name": "Frankfort"
+    },
+    {
+      "coordinates": [
+        1866,
+        874
+      ],
+      "name": "Bowling Green"
+    },
+    {
+      "coordinates": [
+        1953,
+        952
+      ],
+      "name": "Knoxville"
+    },
+    {
+      "coordinates": [
+        2023,
+        935
+      ],
+      "name": "Asheville"
+    },
+    {
+      "coordinates": [
+        2080,
+        994
+      ],
+      "name": "Columbia"
+    },
+    {
+      "coordinates": [
+        2245,
+        931
+      ],
+      "name": "Wilmington (NC)"
+    },
+    {
+      "coordinates": [
+        2153,
+        1036
+      ],
+      "name": "Charleston (SC)"
+    },
+    {
+      "coordinates": [
+        2191,
+        982
+      ],
+      "name": "Myrtle Beach"
+    },
+    {
+      "coordinates": [
+        2186,
+        837
+      ],
+      "name": "Durham"
+    },
+    {
+      "coordinates": [
+        2139,
+        829
+      ],
+      "name": "Winston-Salem"
+    },
+    {
+      "coordinates": [
+        2212,
+        881
+      ],
+      "name": "Raleigh"
+    },
+    {
+      "coordinates": [
+        2096,
+        909
+      ],
+      "name": "Charlotte"
+    },
+    {
+      "coordinates": [
+        2077,
+        824
+      ],
+      "name": "Roanoke"
+    },
+    {
+      "coordinates": [
+        2133,
+        773
+      ],
+      "name": "Lynchburg"
+    },
+    {
+      "coordinates": [
+        2229,
+        675
+      ],
+      "name": "Washington, DC"
+    },
+    {
+      "coordinates": [
+        2240,
+        648
+      ],
+      "name": "Baltimore"
+    },
+    {
+      "coordinates": [
+        2214,
+        703
+      ],
+      "name": "Alexandria"
+    },
+    {
+      "coordinates": [
+        2271,
+        797
+      ],
+      "name": "Norfolk"
+    },
+    {
+      "coordinates": [
+        2298,
+        792
+      ],
+      "name": "Virginia Beach"
+    },
+    {
+      "coordinates": [
+        2287,
+        656
+      ],
+      "name": "Wilmington"
+    },
+    {
+      "coordinates": [
+        2307,
+        680
+      ],
+      "name": "Dover"
+    },
+    {
+      "coordinates": [
+        2276,
+        679
+      ],
+      "name": "Annapolis"
+    },
+    {
+      "coordinates": [
+        2211,
+        765
+      ],
+      "name": "Richmnod"
+    },
+    {
+      "coordinates": [
+        2213,
+        734
+      ],
+      "name": "Fredericksburg"
+    },
+    {
+      "coordinates": [
+        2163,
+        725
+      ],
+      "name": "Staunton"
+    },
+    {
+      "coordinates": [
+        2315,
+        616
+      ],
+      "name": "Trenton"
+    },
+    {
+      "coordinates": [
+        2324,
+        641
+      ],
+      "name": "Atlantic City"
+    },
+    {
+      "coordinates": [
+        2338,
+        558
+      ],
+      "name": "New York City"
+    },
+    {
+      "coordinates": [
+        2328,
+        555
+      ],
+      "name": "Newark"
+    },
+    {
+      "coordinates": [
+        2339,
+        544
+      ],
+      "name": "Bronx"
+    },
+    {
+      "coordinates": [
+        2331,
+        521
+      ],
+      "name": "Yonkers"
+    },
+    {
+      "coordinates": [
+        2372,
+        509
+      ],
+      "name": "New Haven"
+    },
+    {
+      "coordinates": [
+        2354,
+        524
+      ],
+      "name": "Bridgeport"
+    },
+    {
+      "coordinates": [
+        2315,
+        450
+      ],
+      "name": "Albany"
+    },
+    {
+      "coordinates": [
+        2328,
+        434
+      ],
+      "name": "Troy"
+    },
+    {
+      "coordinates": [
+        2335,
+        336
+      ],
+      "name": "Burlington"
+    },
+    {
+      "coordinates": [
+        2344,
+        385
+      ],
+      "name": "Montpelier"
+    },
+    {
+      "coordinates": [
+        2363,
+        487
+      ],
+      "name": "Hartford"
+    },
+    {
+      "coordinates": [
+        2393,
+        452
+      ],
+      "name": "Worcester"
+    },
+    {
+      "coordinates": [
+        2426,
+        432
+      ],
+      "name": "Boston"
+    },
+    {
+      "coordinates": [
+        2443,
+        457
+      ],
+      "name": "Plymouth"
+    },
+    {
+      "coordinates": [
+        2486,
+        488
+      ],
+      "name": "Nantucket"
+    },
+    {
+      "coordinates": [
+        2427,
+        470
+      ],
+      "name": "Providence"
+    },
+    {
+      "coordinates": [
+        2425,
+        496
+      ],
+      "name": "Newport"
+    },
+    {
+      "coordinates": [
+        2400,
+        502
+      ],
+      "name": "New London"
+    },
+    {
+      "coordinates": [
+        2404,
+        401
+      ],
+      "name": "Manchester"
+    },
+    {
+      "coordinates": [
+        2384,
+        428
+      ],
+      "name": "Nashua"
+    },
+    {
+      "coordinates": [
+        2383,
+        365
+      ],
+      "name": "Concord"
+    },
+    {
+      "coordinates": [
+        2434,
+        364
+      ],
+      "name": "Portsmouth"
+    },
+    {
+      "coordinates": [
+        2448,
+        327
+      ],
+      "name": "Portland (ME)"
+    },
+    {
+      "coordinates": [
+        2458,
+        284
+      ],
+      "name": "Augusta (ME)"
+    },
+    {
+      "coordinates": [
+        2488,
+        275
+      ],
+      "name": "Bangor"
+    }
+  ],
   "id": "UnitedStates",
   "map": {
     "height": 1548,
@@ -87,251 +1980,400 @@
   "name": "United States",
   "nations": [
     {
-      "coordinates": [320, 692],
+      "coordinates": [
+        320,
+        692
+      ],
       "flag": "California",
       "name": "California"
     },
     {
-      "coordinates": [439, 344],
+      "coordinates": [
+        439,
+        344
+      ],
       "flag": "Oregon",
       "name": "Oregon"
     },
     {
-      "coordinates": [490, 174],
+      "coordinates": [
+        490,
+        174
+      ],
       "flag": "Washington",
       "name": "Washington"
     },
     {
-      "coordinates": [677, 375],
+      "coordinates": [
+        677,
+        375
+      ],
       "flag": "Idaho",
       "name": "Idaho"
     },
     {
-      "coordinates": [558, 658],
+      "coordinates": [
+        558,
+        658
+      ],
       "flag": "Nevada",
       "name": "Nevada"
     },
     {
-      "coordinates": [660, 941],
+      "coordinates": [
+        660,
+        941
+      ],
       "flag": "Arizona",
       "name": "Arizona"
     },
     {
-      "coordinates": [716, 681],
+      "coordinates": [
+        716,
+        681
+      ],
       "flag": "Utah",
       "name": "Utah"
     },
     {
-      "coordinates": [943, 279],
+      "coordinates": [
+        943,
+        279
+      ],
       "flag": "Montana",
       "name": "Montana"
     },
     {
-      "coordinates": [1005, 500],
+      "coordinates": [
+        1005,
+        500
+      ],
       "flag": "Wyoming",
       "name": "Wyoming"
     },
     {
-      "coordinates": [971, 735],
+      "coordinates": [
+        971,
+        735
+      ],
       "flag": "Colorado",
       "name": "Colorado"
     },
     {
-      "coordinates": [940, 922],
+      "coordinates": [
+        940,
+        922
+      ],
       "flag": "New_Mexico",
       "name": "New Mexico"
     },
     {
-      "coordinates": [1254, 1191],
+      "coordinates": [
+        1254,
+        1191
+      ],
       "flag": "Texas",
       "name": "Texas"
     },
     {
-      "coordinates": [1597, 1201],
+      "coordinates": [
+        1597,
+        1201
+      ],
       "flag": "Louisiana",
       "name": "Louisiana"
     },
     {
-      "coordinates": [1322, 961],
+      "coordinates": [
+        1322,
+        961
+      ],
       "flag": "Oklahoma",
       "name": "Oklahoma"
     },
     {
-      "coordinates": [1277, 262],
+      "coordinates": [
+        1277,
+        262
+      ],
       "flag": "North_Dakota",
       "name": "North Dakota"
     },
     {
-      "coordinates": [1274, 437],
+      "coordinates": [
+        1274,
+        437
+      ],
       "flag": "South_Dakota",
       "name": "South Dakota"
     },
     {
-      "coordinates": [1285, 621],
+      "coordinates": [
+        1285,
+        621
+      ],
       "flag": "Nebraska",
       "name": "Nebraska"
     },
     {
-      "coordinates": [1308, 817],
+      "coordinates": [
+        1308,
+        817
+      ],
       "flag": "Kansas",
       "name": "Kansas"
     },
     {
-      "coordinates": [1513, 383],
+      "coordinates": [
+        1513,
+        383
+      ],
       "flag": "Minnesota",
       "name": "Minnesota"
     },
     {
-      "coordinates": [1566, 593],
+      "coordinates": [
+        1566,
+        593
+      ],
       "flag": "Iowa",
       "name": "Iowa"
     },
     {
-      "coordinates": [1605, 767],
+      "coordinates": [
+        1605,
+        767
+      ],
       "flag": "Missouri",
       "name": "Missouri"
     },
     {
-      "coordinates": [1598, 972],
+      "coordinates": [
+        1598,
+        972
+      ],
       "flag": "Arkansas",
       "name": "Arkansas"
     },
     {
-      "coordinates": [1671, 475],
+      "coordinates": [
+        1671,
+        475
+      ],
       "flag": "Wisconsin",
       "name": "Wisconsin"
     },
     {
-      "coordinates": [1875, 457],
+      "coordinates": [
+        1875,
+        457
+      ],
       "flag": "Michigan",
       "name": "Michigan"
     },
     {
-      "coordinates": [1706, 670],
+      "coordinates": [
+        1706,
+        670
+      ],
       "flag": "Illinois",
       "name": "Illinois"
     },
     {
-      "coordinates": [1835, 664],
+      "coordinates": [
+        1835,
+        664
+      ],
       "flag": "Indiana",
       "name": "Indiana"
     },
     {
-      "coordinates": [1891, 799],
+      "coordinates": [
+        1891,
+        799
+      ],
       "flag": "Kentucky",
       "name": "Kentucky"
     },
     {
-      "coordinates": [1872, 921],
+      "coordinates": [
+        1872,
+        921
+      ],
       "flag": "Tennessee",
       "name": "Tennessee"
     },
     {
-      "coordinates": [1688, 1127],
+      "coordinates": [
+        1688,
+        1127
+      ],
       "flag": "Mississippi",
       "name": "Mississippi"
     },
     {
-      "coordinates": [1843, 1085],
+      "coordinates": [
+        1843,
+        1085
+      ],
       "flag": "Alabama",
       "name": "Alabama"
     },
     {
-      "coordinates": [2123, 1300],
+      "coordinates": [
+        2123,
+        1300
+      ],
       "flag": "Florida",
       "name": "Florida"
     },
     {
-      "coordinates": [2020, 1092],
+      "coordinates": [
+        2020,
+        1092
+      ],
       "flag": "Georgia_US",
       "name": "Georgia (US State)"
     },
     {
-      "coordinates": [1970, 646],
+      "coordinates": [
+        1970,
+        646
+      ],
       "flag": "Ohio",
       "name": "Ohio"
     },
     {
-      "coordinates": [2472, 245],
+      "coordinates": [
+        2472,
+        245
+      ],
       "flag": "Maine",
       "name": "Maine"
     },
     {
-      "coordinates": [2112, 996],
+      "coordinates": [
+        2112,
+        996
+      ],
       "flag": "South_Carolina",
       "name": "South Carolina"
     },
     {
-      "coordinates": [2154, 829],
+      "coordinates": [
+        2154,
+        829
+      ],
       "flag": "North_Carolina",
       "name": "North Carolina"
     },
     {
-      "coordinates": [2163, 727],
+      "coordinates": [
+        2163,
+        727
+      ],
       "flag": "Virginia",
       "name": "Virginia"
     },
     {
-      "coordinates": [2061, 703],
+      "coordinates": [
+        2061,
+        703
+      ],
       "flag": "West_Virginia",
       "name": "West Virginia"
     },
     {
-      "coordinates": [2241, 649],
+      "coordinates": [
+        2241,
+        649
+      ],
       "flag": "Maryland",
       "name": "Maryland"
     },
     {
-      "coordinates": [2294, 667],
+      "coordinates": [
+        2294,
+        667
+      ],
       "flag": "Delaware",
       "name": "Delaware"
     },
     {
-      "coordinates": [2201, 519],
+      "coordinates": [
+        2201,
+        519
+      ],
       "flag": "Pennsylvania",
       "name": "Pennsylvania"
     },
     {
-      "coordinates": [2318, 588],
+      "coordinates": [
+        2318,
+        588
+      ],
       "flag": "New_Jersey",
       "name": "New Jersey"
     },
     {
-      "coordinates": [2315, 481],
+      "coordinates": [
+        2315,
+        481
+      ],
       "flag": "New_York",
       "name": "New York"
     },
     {
-      "coordinates": [2402, 497],
+      "coordinates": [
+        2402,
+        497
+      ],
       "flag": "Connecticut",
       "name": "Connecticut"
     },
     {
-      "coordinates": [2415, 446],
+      "coordinates": [
+        2415,
+        446
+      ],
       "flag": "Massachusetts",
       "name": "Massachusetts"
     },
     {
-      "coordinates": [2430, 473],
+      "coordinates": [
+        2430,
+        473
+      ],
       "flag": "Rhode_Island",
       "name": "Rhode Island"
     },
     {
-      "coordinates": [2339, 358],
+      "coordinates": [
+        2339,
+        358
+      ],
       "flag": "Vermont",
       "name": "Vermont"
     },
     {
-      "coordinates": [2200, 660],
+      "coordinates": [
+        2200,
+        660
+      ],
       "flag": "District_of_Columbia",
       "name": "Washington D.C"
     },
     {
-      "coordinates": [2409, 334],
+      "coordinates": [
+        2409,
+        334
+      ],
       "flag": "New_Hampshire",
       "name": "New Hampshire"
     }
   ],
-  "themes": ["north_america"],
+  "themes": [
+    "north_america"
+  ],
   "translation_key": "map.unitedstates"
 }
