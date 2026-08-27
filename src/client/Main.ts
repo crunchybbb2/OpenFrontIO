@@ -15,28 +15,22 @@ import { GameEnv } from "../core/configuration/Config";
 import { GameType } from "../core/game/Game";
 import { UserSettings } from "../core/game/UserSettings";
 import "./AccountModal";
+import "./AccountSettingsModal";
 import { adGatekeeper } from "./AdGatekeeper";
 import { loadAdmiral, onAdmiralMeasured } from "./Admiral";
 import { getUserMe, invalidateUserMe } from "./Api";
 import { reauthAfterCrazyGamesChange, userAuth } from "./Auth";
+import "./ChangeUsernameModal";
 import "./ClanModal";
 import { joinLobby, type JoinLobbyResult } from "./ClientGameRunner";
-import { getPlayerCosmeticsRefs } from "./Cosmetics";
-import "./CosmeticsInput";
-import "./CosmeticsModal";
-import { CosmeticsModal } from "./CosmeticsModal";
+import {
+  completeCosmeticPurchaseReturn,
+  getPlayerCosmeticsRefs,
+} from "./Cosmetics";
 import { updateCrazyGamesNavButton } from "./CrazyGamesAccountButton";
 import { crazyGamesSDK } from "./CrazyGamesSDK";
-import {
-  composeVersionDisplay,
-  desktopVersion,
-  isDesktopShell,
-} from "./DesktopShell";
+import { desktopUpdate, isDesktopShell } from "./DesktopShell";
 import "./FeaturedStream";
-import "./FlagInput";
-import { FlagInput } from "./FlagInput";
-import "./FlagInputModal";
-import { FlagInputModal } from "./FlagInputModal";
 import "./GameModeSelector";
 import { GameModeSelector } from "./GameModeSelector";
 import { GameStartingModal } from "./GameStartingModal";
@@ -45,6 +39,7 @@ import { HelpModal } from "./HelpModal";
 import "./HomepagePromos";
 import { HostLobbyModal as HostPrivateLobbyModal } from "./HostLobbyModal";
 import { showInGameConfirm } from "./InGameModal";
+import "./InventoryModal";
 import { JoinLobbyModal } from "./JoinLobbyModal";
 import "./LangSelector";
 import { LangSelector } from "./LangSelector";
@@ -67,6 +62,7 @@ import {
 import "./SteamLinkModal";
 import { SteamLinkModal } from "./SteamLinkModal";
 import { StoreModal } from "./Store";
+import "./SubscriptionModal";
 import { TokenLoginModal } from "./TokenLoginModal";
 import {
   SendKickPlayerIntentEvent,
@@ -76,13 +72,19 @@ import {
 import { UserSettingModal } from "./UserSettingModal";
 import "./UsernameInput";
 import { genAnonUsername, UsernameInput } from "./UsernameInput";
-import { incrementGamesPlayed, isInIframe, translateText } from "./Utils";
+import { incrementGamesPlayed, translateText } from "./Utils";
 import { isReplayShellHost } from "./VersionedReplay";
 import "./components/BannedModal";
+import "./components/DesktopUpdateBar";
 import "./components/MarketingConsentToast";
-import { installSafariPinchZoomBlocker } from "./utilities/DisableSafariPinchZoom";
+import {
+  installCtrlWheelZoomBlocker,
+  installDoubleTapZoomBlocker,
+  installSafariPinchZoomBlocker,
+} from "./utilities/DisableSafariPinchZoom";
 
 import "./components/DesktopNavBar";
+import "./components/DetailedGameViewModal";
 import "./components/Footer";
 import "./components/MainLayout";
 import "./components/MobileNavBar";
@@ -153,6 +155,7 @@ declare global {
     "open-matchmaking": CustomEvent<{ mode?: "1v1" | "2v2" } | undefined>;
     "matchmaking-requeue": CustomEvent<{ mode?: "1v1" | "2v2" } | undefined>;
     userMeResponse: CustomEvent<UserMeResponse | false>;
+    "session-cleared": CustomEvent;
     "leave-lobby": CustomEvent;
     "game-starting": CustomEvent;
     "update-game-config": CustomEvent;
@@ -168,6 +171,34 @@ export interface JoinLobbyEvent {
   gameRecord?: GameRecord;
   source?: "public" | "private" | "host" | "matchmaking" | "singleplayer";
   publicLobbyInfo?: GameInfo | PublicGameInfo;
+  // Watch without playing.
+  spectator?: boolean;
+}
+
+/**
+ * The single point where "a match is running" is published.
+ *
+ * Two consumers, and they must never disagree:
+ *   - the `.in-game` body class, which the client's own markup keys off to hide
+ *     the footer, the nav bars and the desktop update snackbar;
+ *   - the Electron shell's updater, which pauses asset downloads and version
+ *     polling in-game so a cache-bust cannot saturate a player's connection
+ *     mid-match.
+ *
+ * Every add/remove of that class goes through here. Setting the class without
+ * telling the shell leaves the updater's pause dead; telling the shell without
+ * setting the class leaves downloads paused at a menu forever.
+ *
+ * `setInGame` is optional by the shell contract (the web build has no bridge at
+ * all, and a Steam shell older than the updater has no such method), and the
+ * IPC round trip is fire-and-forget: a rejection must never surface as an
+ * unhandled rejection in the client.
+ */
+function setInGameSignal(inGame: boolean): void {
+  document.body.classList.toggle("in-game", inGame);
+  void desktopUpdate()
+    ?.setInGame?.(inGame)
+    ?.catch(() => {});
 }
 
 class Client {
@@ -177,7 +208,6 @@ class Client {
   private currentUrl: string | null = null;
 
   private usernameInput: UsernameInput | null = null;
-  private flagInput: FlagInput | null = null;
 
   private hostModal: HostPrivateLobbyModal;
   private joinModal: JoinLobbyModal;
@@ -218,6 +248,10 @@ class Client {
       tag: "account-modal",
       pageId: "page-account",
     });
+    // Profile-menu modals: popup style, so no pageId.
+    modalRouter.register("account-settings", { tag: "account-settings-modal" });
+    modalRouter.register("change-username", { tag: "change-username-modal" });
+    modalRouter.register("subscription", { tag: "subscription-modal" });
     modalRouter.register("stats", {
       tag: "game-stats-modal",
       pageId: "page-stats",
@@ -240,13 +274,18 @@ class Client {
       tag: "ranked-modal",
       pageId: "page-ranked",
     });
+    modalRouter.register("detailed-view", {
+      tag: "detailed-view-modal",
+      pageId: "page-detailed-view",
+    });
     modalRouter.register("troubleshooting", {
       tag: "troubleshooting-modal",
       pageId: "page-troubleshooting",
     });
-    modalRouter.register("cosmetics", { tag: "cosmetics-modal" });
-    modalRouter.register("flag-input", { tag: "flag-input-modal" });
-
+    modalRouter.register("inventory", {
+      tag: "inventory-modal",
+      pageId: "page-inventory",
+    });
     // Prefetch turnstile token so it is available when the user joins a lobby.
     // Desktop (Steam) has no Turnstile script and is server-side exempt, so
     // skip it — otherwise getTurnstileToken() throws "Failed to load Turnstile
@@ -277,15 +316,13 @@ class Client {
     if (versionElements.length === 0) {
       console.warn("Game version element not found");
     } else {
+      // Game version only, so a player's version reads the same across web and
+      // Steam. The full string, shell version included, is in page-footer.
       const trimmed = version.trim();
       const displayVersion = trimmed.startsWith("v") ? trimmed : `v${trimmed}`;
-      const label = composeVersionDisplay(
-        displayVersion,
-        await desktopVersion(),
-      );
       versionElements.forEach((el) => {
         (el as HTMLElement).style.fontFamily = '"OpenFront", Inter, sans-serif';
-        el.textContent = label;
+        el.textContent = displayVersion;
       });
     }
 
@@ -294,11 +331,6 @@ class Client {
     ) as LangSelector;
     if (!langSelector) {
       console.warn("Lang selector element not found");
-    }
-
-    this.flagInput = document.querySelector("flag-input") as FlagInput;
-    if (!this.flagInput) {
-      console.warn("Flag input element not found");
     }
 
     this.usernameInput = document.querySelector(
@@ -315,6 +347,13 @@ class Client {
     window.addEventListener("beforeunload", async () => {
       console.log("Browser is closing");
       if (this.lobbyHandle !== null) {
+        // Leaving a game by navigating away (the popstate path's
+        // `window.location.href = "/"`, or a desktop renderer reload) tears the
+        // page down without ever running handleLeaveLobby, so nothing else
+        // clears the in-game signal. The body class dies with the document, but
+        // the shell's updater lives in the main process and would stay paused
+        // forever -- no downloads, no polling -- for the rest of the session.
+        setInGameSignal(false);
         this.lobbyHandle.stop(true);
         await crazyGamesSDK.gameplayStop();
       }
@@ -353,44 +392,9 @@ class Client {
       });
     }
 
-    const flagInputModal = document.querySelector(
-      "flag-input-modal",
-    ) as FlagInputModal;
-    if (!flagInputModal || !(flagInputModal instanceof FlagInputModal)) {
-      console.warn("Flag input modal element not found");
-    }
-
-    // Attach listener to any flag-input component (desktop or potentially others)
-    document.querySelectorAll("flag-input").forEach((flagInput) => {
-      flagInput.addEventListener("flag-input-click", () => {
-        if (flagInputModal && flagInputModal instanceof FlagInputModal) {
-          flagInputModal.open();
-        }
-      });
-    });
-
     this.storeModal = document.getElementById("page-item-store") as StoreModal;
     if (!this.storeModal || !(this.storeModal instanceof StoreModal)) {
       console.warn("Store modal element not found");
-    }
-
-    const cosmeticsModal = document.getElementById(
-      "cosmetics-modal",
-    ) as CosmeticsModal;
-    if (!cosmeticsModal || !(cosmeticsModal instanceof CosmeticsModal)) {
-      console.warn("Cosmetics modal element not found");
-    }
-
-    // Attach listener to any cosmetics-input component
-    document.querySelectorAll("cosmetics-input").forEach((cosmeticsInput) => {
-      cosmeticsInput.addEventListener("cosmetics-input-click", () => {
-        cosmeticsModal.open();
-      });
-    });
-
-    if (isInIframe()) {
-      const mobileCosmetics = document.getElementById("cosmetics-input-mobile");
-      if (mobileCosmetics) mobileCosmetics.style.display = "none";
     }
 
     this.storeModal.refresh();
@@ -500,8 +504,8 @@ class Client {
         // The server renamed this subscriber to TEMPORARY#### because their
         // bare name was exclusively taken while they were unentitled; the
         // rename is free (cooldown cleared). Prompt for a real name; takes
-        // priority over the rewards popup — the account modal shows the
-        // rewards panel anyway.
+        // priority over the rewards popup, which waits for the next load
+        // rather than stacking a second overlay on the rename form.
         const { usernameStatus, usernameBase } = userMeResponse.player;
         if (
           cleanHomepage &&
@@ -519,7 +523,7 @@ class Client {
             },
           );
           if (goRename) {
-            window.location.hash = "modal=account";
+            window.location.hash = "modal=change-username";
           }
           return;
         }
@@ -532,21 +536,46 @@ class Client {
       }
     };
 
+    // A profile request issued before a logout can still be in flight when the
+    // session goes, and its 200 was fetched with a JWT that was valid at the
+    // time. Applying it afterwards would put the expired account back in the
+    // nav and re-disable ads, so a response is only applied while the session
+    // it was fetched under is still current.
+    let authGeneration = 0;
+    const applyUserMe =
+      (generation: number) => (userMeResponse: UserMeResponse | false) => {
+        if (generation !== authGeneration) return;
+        void onUserMe(userMeResponse);
+      };
+
+    // A session dropped in the background — an expired refresh token, a 401 on
+    // any endpoint — clears itself deep inside Auth, where none of the above
+    // is reachable. Routing it through onUserMe means the nav button, its
+    // cached profile and window.adsEnabled all follow, rather than only the
+    // components listening for userMeResponse.
+    document.addEventListener("session-cleared", () => {
+      authGeneration++;
+      void onUserMe(false);
+    });
+
     if ((await userAuth()) === false) {
       // Not logged in
       onUserMe(false);
     } else {
       // JWT appears to be valid
       // TODO: Add caching
-      getUserMe().then(onUserMe);
+      getUserMe().then(applyUserMe(authGeneration));
     }
 
     // Re-run auth when the player signs into CrazyGames mid-session. Logout
     // reloads the page, so only login needs handling here.
     crazyGamesSDK.addAuthListener(() => {
       invalidateUserMe();
+      const generation = authGeneration;
       reauthAfterCrazyGamesChange().then((result) =>
-        result === false ? onUserMe(false) : getUserMe().then(onUserMe),
+        result === false
+          ? applyUserMe(generation)(false)
+          : getUserMe().then(applyUserMe(generation)),
       );
     });
 
@@ -757,28 +786,12 @@ class Client {
         return;
       }
 
-      const setCosmetic = () => {
-        if (cosmeticName.startsWith("pattern:")) {
-          this.userSettings.setSelectedPatternName(cosmeticName);
-        } else if (cosmeticName.startsWith("flag:")) {
-          this.userSettings.setFlag(cosmeticName);
-        }
-      };
-      const token = params.get("login-token");
-
-      if (token) {
-        strip();
-        window.addEventListener("beforeunload", () => {
-          // The page reloads after token login, so we need to save the pattern name
-          // in case it is unset during reload.
-          setCosmetic();
-        });
-        this.tokenLoginModal.openWithToken(token);
-      } else {
-        alertAndStrip(`purchase succeeded: ${cosmeticName}`);
-        setCosmetic();
-        this.storeModal.refresh();
-      }
+      completeCosmeticPurchaseReturn(cosmeticName, params.get("login-token"), {
+        strip,
+        alertAndStrip,
+        openTokenLogin: (token) => this.tokenLoginModal.openWithToken(token),
+        refreshStore: () => this.storeModal.refresh(),
+      });
       return;
     }
 
@@ -854,9 +867,14 @@ class Client {
         console.log(`reopening host lobby ${lobbyId}`);
         return;
       }
+      // ?spectate is the watch-only form of the same lobby link, so a cast or
+      // an archive can hand out a URL that never takes a player slot.
+      const spectate = new URLSearchParams(window.location.search).has(
+        "spectate",
+      );
       window.showPage?.("page-join-lobby");
-      this.joinModal.open({ lobbyId });
-      console.log(`joining lobby ${lobbyId}`);
+      this.joinModal.open({ lobbyId, spectate });
+      console.log(`${spectate ? "spectating" : "joining"} lobby ${lobbyId}`);
       return;
     }
     if (modalRouter.routeFromHash()) {
@@ -912,7 +930,7 @@ class Client {
     if (this.lobbyHandle !== null) {
       console.log("joining lobby, stopping existing game");
       this.lobbyHandle.stop(true);
-      document.body.classList.remove("in-game");
+      setInGameSignal(false);
     }
     if (lobby.source === "public") {
       this.joinModal?.open({
@@ -947,6 +965,7 @@ class Client {
           ? toWireGameStartInfo(lobby.gameRecord.info)
           : undefined),
       gameRecord: lobby.gameRecord,
+      spectator: lobby.spectator,
     });
 
     if (this.mostRecentJoinEvent !== event.timeStamp) {
@@ -986,17 +1005,19 @@ class Client {
         "help-modal",
         "user-setting",
         "troubleshooting-modal",
-        "cosmetics-modal",
+        "inventory-modal",
         "store-modal",
         "language-modal",
         "news-modal",
-        "flag-input-modal",
         "account-button",
         "leaderboard-button",
         "token-login",
         "steam-link-modal",
         "matchmaking-modal",
         "clan-modal",
+        "account-settings-modal",
+        "change-username-modal",
+        "subscription-modal",
         "lang-selector",
         "homepage-promos",
       ].forEach((tag) => {
@@ -1040,7 +1061,7 @@ class Client {
       }
       crazyGamesSDK.loadingStop();
       crazyGamesSDK.gameplayStart();
-      document.body.classList.add("in-game");
+      setInGameSignal(true);
 
       const lobbyIdHidden = !this.userSettings.lobbyIdVisibility();
       if (isReplayShellHost(window.location.hostname)) {
@@ -1104,7 +1125,7 @@ class Client {
       console.warn("Failed to restore URL on leave:", e);
     }
 
-    document.body.classList.remove("in-game");
+    setInGameSignal(false);
 
     if (this.joinModal.isOpen()) {
       this.joinModal.close();
@@ -1232,6 +1253,15 @@ const bootstrap = () => {
   // Prevent Safari's page-level pinch-zoom, which ignores `user-scalable=no`
   // on iOS and can softlock the HUD. See issue #2330.
   installSafariPinchZoomBlocker();
+
+  // Same for double-tap "smart zoom", which `touch-action: manipulation`
+  // alone does not reliably stop on iOS. See issue #4609.
+  installDoubleTapZoomBlocker();
+
+  // Chrome and Firefox report a trackpad pinch as ctrl+wheel, which only the
+  // map canvas cancels — so pinching over a HUD panel zoomed the page instead
+  // of the map. See issue #5098.
+  installCtrlWheelZoomBlocker();
 
   initLayout();
   new Client().initialize();

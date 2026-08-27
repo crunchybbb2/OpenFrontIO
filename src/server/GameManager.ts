@@ -47,7 +47,13 @@ export class GameManager {
   joinClient(
     client: Client,
     gameID: GameID,
-  ): "joined" | "kicked" | "rejected" | "not_allowlisted" | "not_found" {
+  ):
+    | "joined"
+    | "kicked"
+    | "rejected"
+    | "not_allowlisted"
+    | "not_trusted"
+    | "not_found" {
     const game = this.games.get(gameID);
     if (!game) return "not_found";
     return game.joinClient(client);
@@ -79,33 +85,37 @@ export class GameManager {
     }
 
     const game = new GameServer(
-      id,
-      this.log,
-      Date.now(),
       {
-        donateGold: false,
-        donateTroops: false,
-        gameMap: GameMapType.World,
-        gameType: GameType.Private,
-        gameMapSize: GameMapSize.Normal,
-        difficulty: Difficulty.Easy,
-        nations: "default",
-        infiniteGold: false,
-        infiniteTroops: false,
-        maxTimerValue: undefined,
-        instantBuild: false,
-        randomSpawn: false,
-        gameMode: GameMode.FFA,
-        bots: 400,
-        disabledUnits: [],
-        ...gameConfig,
+        id,
+        log: this.log,
+        createdAt: Date.now(),
+        gameConfig: {
+          donateGold: false,
+          donateTroops: false,
+          gameMap: GameMapType.World,
+          gameType: GameType.Private,
+          gameMapSize: GameMapSize.Normal,
+          difficulty: Difficulty.Easy,
+          nations: "default",
+          infiniteGold: false,
+          infiniteTroops: false,
+          maxTimerValue: undefined,
+          instantBuild: false,
+          randomSpawn: false,
+          gameMode: GameMode.FFA,
+          bots: 400,
+          disabledUnits: [],
+          ...gameConfig,
+        },
+        creatorPersistentID,
+        startsAt,
+        publicGameType,
+        matchmakingTeams,
       },
-      creatorPersistentID,
-      startsAt,
-      publicGameType,
-      matchmakingTeams,
-      this.telemetry,
-      this.telemetryBuildHash,
+      {
+        telemetry: this.telemetry,
+        telemetryBuildHash: this.telemetryBuildHash,
+      },
     );
     this.games.set(id, game);
     return game;

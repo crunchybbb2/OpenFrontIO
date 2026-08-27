@@ -177,6 +177,10 @@ export const UserMeResponseSchema = z.object({
     // True when the player may list a custom lobby publicly. The API decides
     // which subscriptions/grants confer this.
     canCreatePublicLobbies: z.boolean(),
+    // Account trust as computed by the API. "untrusted" means new, unlinked or
+    // banned, never an accusation. null when the API's computation failed;
+    // absent on an API that predates the field. Both read as untrusted.
+    trustTier: z.enum(["untrusted", "trusted"]).nullable().optional(),
     // Account username (custom-usernames). All optional so responses from an
     // API without the feature still parse; absent means the same as never set.
     // `username` is the server-resolved DISPLAY form — the bare base for an
@@ -223,6 +227,10 @@ export const UserMeResponseSchema = z.object({
           role: z.enum(["leader", "officer", "member"]),
           joinedAt: z.iso.datetime(),
           memberCount: z.number().int().min(1),
+          // Clan currency — see ClanInfoSchema in ClanApiSchemas.ts for the
+          // format. Decimal bigint strings; optional for older responses.
+          softBalance: z.string().optional(),
+          hardBalance: z.string().optional(),
         }),
       )
       .optional(),
@@ -340,6 +348,19 @@ export const PostTribeBoostResponseSchema = z.object({
 export type PostTribeBoostResponse = z.infer<
   typeof PostTribeBoostResponseSchema
 >;
+
+// POST /shop/purchase/pack response (200). `amount` is a stringified bigint;
+// `flareNames` are the flares granted (append them to the local flares list
+// or refetch /users/@me). currencyType is always "hard" today but stays a
+// plain string — a stricter literal would fail the parse (and show "purchase
+// failed") after the player was already charged.
+export const PurchasePackResponseSchema = z.object({
+  packName: z.string(),
+  currencyType: z.string(),
+  amount: z.string(),
+  flareNames: z.string().array(),
+});
+export type PurchasePackResponse = z.infer<typeof PurchasePackResponseSchema>;
 
 // GET /leaderboard/tribes?page=N — public, ranked by rolling 30-day player
 // reach. Pages are 1-based, 50 per page, capped at page 2 (top 100); the
@@ -513,6 +534,10 @@ export const PlayerProfileSchema = z.object({
         role: z.enum(["leader", "officer", "member"]),
         joinedAt: z.iso.datetime(),
         memberCount: z.number().int().min(1),
+        // Clan currency — see ClanInfoSchema in ClanApiSchemas.ts for the
+        // format. Decimal bigint strings; optional for older responses.
+        softBalance: z.string().optional(),
+        hardBalance: z.string().optional(),
       }),
     )
     .optional(),

@@ -2,6 +2,8 @@ import { assetUrl } from "src/core/AssetUrls";
 import { UserMeResponse } from "../core/ApiSchemas";
 import {
   ColorPalette,
+  CosmeticPack,
+  CosmeticPackItem,
   Cosmetics,
   CosmeticsSchema,
   Crown,
@@ -10,7 +12,6 @@ import {
   Flag,
   Pack,
   Pattern,
-  Product,
   Skin,
   Subscription,
 } from "../core/CosmeticSchemas";
@@ -27,6 +28,7 @@ import {
   getApiBase,
   getUserMe,
   invalidateUserMe,
+  purchaseCosmeticPack,
   purchaseWithCurrency,
 } from "./Api";
 import { showInGameAlert, showInGameConfirm } from "./InGameModal";
@@ -77,6 +79,29 @@ export interface InsufficientCurrency {
 
 /** Outcome of a purchase: unaffordable details, or void on success/redirect. */
 export type PurchaseResult = InsufficientCurrency | void;
+
+export interface CosmeticPurchaseReturnActions {
+  strip(): void;
+  alertAndStrip(message: string): void;
+  openTokenLogin(token: string): void;
+  refreshStore(): void;
+}
+
+export function completeCosmeticPurchaseReturn(
+  cosmeticName: string,
+  loginToken: string | null,
+  actions: CosmeticPurchaseReturnActions,
+): void {
+  if (loginToken) {
+    actions.strip();
+    actions.openTokenLogin(loginToken);
+    return;
+  }
+  actions.alertAndStrip(
+    translateText("store.purchase_success", { name: cosmeticName }),
+  );
+  actions.refreshStore();
+}
 
 export async function purchaseCosmetic(
   resolved: ResolvedCosmetic,
@@ -136,15 +161,17 @@ export async function purchaseCosmetic(
     }
   }
 
+  if (resolved.type === "cosmeticPack") {
+    return purchasePack(c as CosmeticPack, method);
+  }
+
   if (method === "dollar") {
-    if (!c.product) {
+    const product = "product" in c ? c.product : null;
+    if (!product) {
       await showInGameAlert(translateText("store.checkout_failed"));
       return;
     }
-    const url = await createCheckoutSession(
-      c.product.priceId,
-      colorPaletteName,
-    );
+    const url = await createCheckoutSession(product.priceId, colorPaletteName);
     if (url === false) {
       await showInGameAlert(translateText("store.checkout_failed"));
       return;
@@ -186,6 +213,16 @@ export async function purchaseCosmetic(
     } else {
       itemName = translateCosmetic("territory_patterns.pattern", c.name);
     }
+    // Every palette of a pattern shares one name, so say which colour is short.
+    if (resolved.colorPalette !== null) {
+      itemName = translateText("inventory.selected_cosmetic_variant", {
+        name: itemName,
+        variant: translateCosmetic(
+          "territory_patterns.color_palette",
+          resolved.colorPalette.name,
+        ),
+      });
+    }
     return {
       currency: currencyName,
       shortfall: price - balance,
@@ -216,6 +253,87 @@ export async function purchaseCosmetic(
   window.location.reload();
 }
 
+/**
+ * Buys a cosmetic pack (plutonium only). Mirrors the single-cosmetic currency
+ * flow: a local balance pre-check surfaces the insufficient-funds dialog
+ * before any request; a success reloads so every granted item shows as owned.
+ */
+async function purchasePack(
+  pack: CosmeticPack,
+  method: PaymentMethod,
+): Promise<PurchaseResult> {
+  if (method !== "hard") {
+    console.error("purchaseCosmetic: packs are only sold for hard currency");
+    return;
+  }
+  const userMe = await getUserMe();
+  if (userMe === false) {
+    alert(translateText("store.login_required"));
+    return;
+  }
+  const insufficient = (balance: number): InsufficientCurrency => ({
+    currency: translateText("cosmetics.hard"),
+    shortfall: pack.priceHard - balance,
+    item: pack.displayName,
+    canTopUp: true,
+  });
+  const balance = userMe.player.currency?.hard ?? 0;
+  if (balance < pack.priceHard) {
+    return insufficient(balance);
+  }
+
+  const result = await purchaseCosmeticPack(pack.name);
+  if (result.ok) {
+    alert(translateText("store.purchase_success", { name: pack.displayName }));
+    invalidateUserMe();
+    window.location.reload();
+    return;
+  }
+  switch (result.code) {
+    case "insufficient_balance": {
+      // The balance moved since the pre-check: re-read it for the shortfall.
+      invalidateUserMe();
+      const fresh = await getUserMe();
+      return insufficient(
+        fresh === false ? 0 : (fresh.player.currency?.hard ?? 0),
+      );
+    }
+    case "debt":
+      alert(translateText("store.pack_debt", { debt: result.debt }));
+      return;
+    case "already_owned":
+      // Either a genuine conflict or a retry of a purchase that did go
+      // through: both mean the local ownership state is stale, so refetch.
+      alert(
+        translateText("store.pack_already_owned", {
+          items: result.ownedFlareNames.map(flareDisplayName).join(", "),
+        }),
+      );
+      invalidateUserMe();
+      window.location.reload();
+      return;
+    case "unavailable":
+      alert(translateText("store.pack_unavailable"));
+      return;
+    default:
+      alert(translateText("store.purchase_failed"));
+      return;
+  }
+}
+
+/** The translated name of the cosmetic a flare ("<type>:<name>") refers to. */
+function flareDisplayName(flare: string): string {
+  const [type, name] = flare.split(":", 2);
+  const prefix = {
+    pattern: "territory_patterns.pattern",
+    skin: "territory_patterns.pattern",
+    flag: "flags",
+    crown: "crowns",
+    effect: "effects",
+  }[type];
+  return prefix && name ? translateCosmetic(prefix, name) : flare;
+}
+
 function simpleHash(str: string): string {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
@@ -230,7 +348,7 @@ export async function fetchCosmetics(): Promise<Cosmetics | null> {
   if (__cosmetics !== null) {
     return __cosmetics;
   }
-  __cosmetics = (async () => {
+  const request = (async () => {
     try {
       const response = await fetch(`${getApiBase()}/cosmetics.json`);
       if (!response.ok) {
@@ -243,9 +361,7 @@ export async function fetchCosmetics(): Promise<Cosmetics | null> {
         return null;
       }
       const patternKeys = Object.keys(result.data.patterns).sort();
-      const hashInput = patternKeys
-        .map((k) => k + (result.data.patterns[k].product ? "sale" : ""))
-        .join(",");
+      const hashInput = patternKeys.join(",");
       __cosmeticsHash = simpleHash(hashInput);
       __cosmeticsCache = result.data;
       return result.data;
@@ -254,7 +370,13 @@ export async function fetchCosmetics(): Promise<Cosmetics | null> {
       return null;
     }
   })();
-  return __cosmetics;
+  __cosmetics = request;
+  void request.then((result) => {
+    if (result === null && __cosmetics === request) {
+      __cosmetics = null;
+    }
+  });
+  return request;
 }
 
 export async function resolveFlagUrl(
@@ -282,7 +404,6 @@ export function cosmeticRelationship(
   opts: {
     wildcardFlare: string;
     requiredFlare: string;
-    product: Product | null;
     priceSoft?: number;
     priceHard?: number;
     affiliateCode: string | null;
@@ -305,16 +426,12 @@ export function cosmeticRelationship(
     return "blocked";
   }
 
-  // Purchasable if any purchase method is available
+  // Cosmetics are sold for currency only (USD checkout was removed).
   if (opts.priceSoft !== undefined || opts.priceHard !== undefined) {
     return "purchasable";
   }
 
-  if (opts.product === null) {
-    return "blocked";
-  }
-
-  return "purchasable";
+  return "blocked";
 }
 
 export function patternRelationship(
@@ -353,7 +470,6 @@ export function patternRelationship(
     {
       wildcardFlare: "pattern:*",
       requiredFlare: `pattern:${pattern.name}:${colorPalette.name}`,
-      product: pattern.product,
       priceSoft: pattern.priceSoft,
       priceHard: pattern.priceHard,
       affiliateCode,
@@ -372,7 +488,6 @@ export function flagRelationship(
     {
       wildcardFlare: "flag:*",
       requiredFlare: `flag:${flag.name}`,
-      product: flag.product,
       priceSoft: flag.priceSoft,
       priceHard: flag.priceHard,
       affiliateCode,
@@ -391,7 +506,6 @@ export function crownRelationship(
     {
       wildcardFlare: "crown:*",
       requiredFlare: `crown:${crown.name}`,
-      product: crown.product,
       priceSoft: crown.priceSoft,
       priceHard: crown.priceHard,
       affiliateCode,
@@ -410,7 +524,6 @@ export function skinRelationship(
     {
       wildcardFlare: "skin:*",
       requiredFlare: `skin:${skin.name}`,
-      product: skin.product,
       priceSoft: skin.priceSoft,
       priceHard: skin.priceHard,
       affiliateCode,
@@ -429,7 +542,6 @@ export function effectRelationship(
     {
       wildcardFlare: "effect:*",
       requiredFlare: `effect:${effect.name}`,
-      product: effect.product,
       priceSoft: effect.priceSoft,
       priceHard: effect.priceHard,
       affiliateCode,
@@ -437,6 +549,43 @@ export function effectRelationship(
     },
     userMeResponse,
   );
+}
+
+/** The flare a pack item's purchase grants, e.g. "pattern:camo". */
+export function packItemFlare(item: CosmeticPackItem): string {
+  return `${item.type}:${item.name}`;
+}
+
+/**
+ * The pack's items the player already owns — by the item's own flare or the
+ * type wildcard. Any owned item blocks buying the pack (the server answers
+ * 409; there is no partial grant), so callers use this to explain why.
+ */
+export function ownedPackItems(
+  pack: CosmeticPack,
+  userMeResponse: UserMeResponse | false,
+): CosmeticPackItem[] {
+  const flares =
+    userMeResponse === false ? [] : (userMeResponse.player.flares ?? []);
+  return pack.items.filter(
+    (item) =>
+      flares.includes(packItemFlare(item)) || flares.includes(`${item.type}:*`),
+  );
+}
+
+export function cosmeticPackRelationship(
+  pack: CosmeticPack,
+  userMeResponse: UserMeResponse | false,
+  affiliateCode: string | null,
+): "owned" | "purchasable" | "blocked" {
+  if (pack.items.length === 0) return "blocked";
+  const owned = ownedPackItems(pack, userMeResponse).length;
+  if (owned === pack.items.length) return "owned";
+  // Pack revenue isn't attributed to affiliates: hidden in affiliate mode.
+  if (affiliateCode !== null) return "blocked";
+  // Partially owned packs can't be bought (see ownedPackItems).
+  if (owned > 0) return "blocked";
+  return pack.priceHard > 0 ? "purchasable" : "blocked";
 }
 
 export type ResolvedCosmetic = {
@@ -447,14 +596,30 @@ export type ResolvedCosmetic = {
     | "crown"
     | "effect"
     | "pack"
+    | "cosmeticPack"
     | "subscription";
-  cosmetic: Pattern | Skin | Flag | Crown | Effect | Pack | Subscription | null;
+  cosmetic:
+    | Pattern
+    | Skin
+    | Flag
+    | Crown
+    | Effect
+    | Pack
+    | CosmeticPack
+    | Subscription
+    | null;
   colorPalette: ColorPalette | null;
   relationship: "owned" | "purchasable" | "blocked";
   /** Unique key for selection/identity, e.g. "pattern:hearts:red" or "skin:mountain" */
   key: string;
   /** For effects only: the effectType (also the catalog's outer key). */
   effectType?: string;
+  /**
+   * For cosmetic packs only: the pack's items resolved against this catalog,
+   * in pack order. An item whose cosmetic is no longer in the catalog is
+   * skipped (the server still sells whatever remains in the pack).
+   */
+  packItems?: ResolvedCosmetic[];
 };
 
 /**
@@ -570,6 +735,33 @@ export function resolveCosmetics(
     });
   }
 
+  // Cosmetic packs. Items reference cosmetics resolved above by (type, name);
+  // a pattern item is its uncoloured entry — the "pattern:<key>" one, with
+  // no palette segment — since the pack grants "pattern:<name>".
+  for (const [packKey, pack] of Object.entries(cosmetics.packs ?? {})) {
+    const packItems = pack.items.flatMap((item) => {
+      const found = result.find(
+        (r) =>
+          r.type === item.type &&
+          r.cosmetic?.name === item.name &&
+          (item.type !== "pattern" || r.key.split(":").length === 2),
+      );
+      return found ? [found] : [];
+    });
+    result.push({
+      type: "cosmeticPack",
+      cosmetic: pack,
+      colorPalette: null,
+      relationship: cosmeticPackRelationship(
+        pack,
+        userMeResponse,
+        affiliateCode,
+      ),
+      key: `cosmeticPack:${packKey}`,
+      packItems,
+    });
+  }
+
   // Subscriptions
   const flares =
     userMeResponse === false ? [] : (userMeResponse.player.flares ?? []);
@@ -636,6 +828,10 @@ export function resolvedToPlayerPattern(
 
 export async function getPlayerCosmeticsRefs(): Promise<PlayerCosmeticRefs> {
   const userSettings = new UserSettings();
+  // Resolve the profile first: getUserMe activates the per-player cosmetics
+  // scope (UserSettings.setPlayerId), which must happen before selections are
+  // read below.
+  await getUserMe();
   const cosmetics = await fetchCosmetics();
   let pattern: PlayerPattern | null =
     userSettings.getSelectedPatternName(cosmetics);

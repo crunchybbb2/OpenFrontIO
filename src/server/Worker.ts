@@ -10,16 +10,18 @@ import { z } from "zod";
 import { GameEnv } from "../core/configuration/Config";
 import { GameType } from "../core/game/Game";
 import {
-  ClientMessageSchema,
+  ClientMessage,
   ID,
   MAX_HOSTED_LOBBIES,
   ServerErrorMessage,
 } from "../core/Schemas";
 import { generateID, replacer } from "../core/Util";
 import { CreateGameInputSchema } from "../core/WorkerSchemas";
+import { decodeClientMessage, encodeServerMessage } from "../core/ZbinWire";
 import { registerAdminBotRoutes } from "./AdminBotRoutes";
 import { censorPlayer } from "./Censor";
 import { Client } from "./Client";
+import { gameApiCors } from "./GameApiCors";
 import { GameManager } from "./GameManager";
 import { registerGamePreviewRoute } from "./GamePreviewRoute";
 import type { GameServer } from "./GameServer";
@@ -141,6 +143,12 @@ export async function startWorker() {
       },
     }),
   );
+  // Before the rate limiter on purpose: a 429 still has to carry the CORS
+  // headers, or the desktop client sees an opaque CORS failure instead of the
+  // real status. Preflights are answered here and never reach the limiter,
+  // which is fine — they do no work.
+  app.use("/api", gameApiCors);
+
   app.use(
     rateLimit({
       windowMs: 1000, // 1 second
@@ -374,27 +382,30 @@ export async function startWorker() {
 
   // WebSocket handling
   wss.on("connection", (ws: WebSocket, req) => {
-    ws.on("message", async (message: string) => {
+    ws.on("message", async (message: Buffer) => {
       const ip = getClientIp(req);
 
       try {
-        // Parse and handle client messages
-        const parsed = ClientMessageSchema.safeParse(
-          JSON.parse(message.toString()),
-        );
-        if (!parsed.success) {
-          const error = z.prettifyError(parsed.error);
-          log.warn("Error parsing client message", error);
+        // Every frame is zbin (see ZbinWire.ts). Nothing before join carries a
+        // dictionary-mapped id, so this decodes without a context.
+        let clientMsg: ClientMessage;
+        try {
+          clientMsg = decodeClientMessage(message, undefined);
+        } catch (e) {
+          const error = String(e);
+          log.warn("Error decoding client message", error);
           ws.send(
-            JSON.stringify({
-              type: "error",
-              error: error.toString(),
-            } satisfies ServerErrorMessage),
+            encodeServerMessage(
+              {
+                type: "error",
+                error,
+              } satisfies ServerErrorMessage,
+              undefined,
+            ),
           );
           ws.close(1002, "ClientJoinMessageSchema");
           return;
         }
-        const clientMsg = parsed.data;
 
         if (clientMsg.type === "ping") {
           // Ignore ping
@@ -567,6 +578,7 @@ export async function startWorker() {
         let publicId: string | undefined;
         let friends: string[] = [];
         let ownedClanTags: string[] = [];
+        let trusted = false;
         let accountUsername:
           | { username?: string | null; usernameStatus?: string }
           | undefined;
@@ -594,6 +606,7 @@ export async function startWorker() {
           friends = result.response.player.friends;
           ownedClanTags = result.response.player.clans?.map((c) => c.tag) ?? [];
           accountUsername = result.response.player;
+          trusted = result.response.player.trustTier === "trusted";
 
           if (allowedFlares !== undefined) {
             const allowed =
@@ -666,6 +679,8 @@ export async function startWorker() {
           cosmeticResult.cosmetics,
           publicId,
           friends,
+          clientMsg.spectator === true,
+          trusted,
         );
 
         const joinResult = gm.joinClient(client, clientMsg.gameID);
@@ -685,6 +700,12 @@ export async function startWorker() {
             workerId,
           });
           ws.close(1002, "You are not whitelisted");
+        } else if (joinResult === "not_trusted") {
+          log.info(`untrusted client tried to join game ${clientMsg.gameID}`, {
+            gameID: clientMsg.gameID,
+            workerId,
+          });
+          ws.close(1002, "Trusted account required");
         } else if (joinResult === "rejected") {
           log.info(`client rejected from game ${clientMsg.gameID}`, {
             gameID: clientMsg.gameID,

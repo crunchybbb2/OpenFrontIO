@@ -66,6 +66,14 @@ export interface PlayerState {
   deathPosition: number | null;
   tilesOwned: number;
   gold: number;
+  /** Cumulative ship-trade revenue (live, from PlayerUpdate). */
+  tradeGold: number;
+  /** Cumulative train revenue: own trains + external stops (live). */
+  trainGold: number;
+  /** Cumulative piracy revenue: captured-ship payouts (live). */
+  piracyGold: number;
+  /** Cumulative gold received from all sources (live). */
+  goldEarned: number;
   troops: number;
   isTraitor: boolean;
   traitorRemainingTicks: number;
@@ -112,6 +120,10 @@ export interface UnitState {
   trainType: number | null; // 0=Engine, 1=TailEngine, 2=Carriage
   loaded: boolean | null;
   constructionStartTick: number | null;
+  samUpgradeStartTick: number | null;
+  samUpgradeStartRange: number | null;
+  samUpgradeTargetLevel: number | null;
+  samUpgradeDuration: number | null;
 }
 
 /** Minimal dead-unit data needed by the FX pass. */
@@ -253,6 +265,19 @@ export interface NukeTrajectoryData {
   tUntargetableEnd: number;
   /** t-value (0..1) of first SAM intercept point. 1.0 = no intercept. */
   tSamIntercept: number;
+}
+
+/**
+ * A rectangular region of terrain texels to re-upload, with its bytes stored
+ * row-major in a shared buffer (rects are concatenated in array order).
+ * Water-nuke deltas use one-row rects (h = 1); a full re-upload (context
+ * restore) is a single map-sized rect.
+ */
+export interface TerrainRect {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
 }
 
 /** Input data for attack ring visualization. */

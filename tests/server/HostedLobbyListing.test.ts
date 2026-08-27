@@ -9,10 +9,12 @@ import {
   GameType,
 } from "../../src/core/game/Game";
 import {
+  FEATURED_LOBBY_AUTO_START_MS,
   HOSTED_LOBBY_AUTO_START_MS,
+  LobbyLabelSchema,
   MAX_HOSTED_LOBBIES,
 } from "../../src/core/Schemas";
-import { Client } from "../../src/server/Client";
+import { LOBBY_LABEL_MAX, sanitizeLobbyLabel } from "../../src/core/Util";
 import { GameManager } from "../../src/server/GameManager";
 import {
   GamePhase,
@@ -26,6 +28,13 @@ import {
 import { MasterLobbyService } from "../../src/server/MasterLobbyService";
 import { ServerEnv } from "../../src/server/ServerEnv";
 import { WorkerLobbyService } from "../../src/server/WorkerLobbyService";
+import {
+  makeClient as harnessClient,
+  mockLogger as harnessLogger,
+  makeMockWs,
+  MockWs,
+} from "../util/GameServerHarness";
+import { decodeSentLobbyMessage, testGameConfig } from "../util/Wire";
 
 vi.mock("../../src/server/Logger", () => ({
   logger: {
@@ -41,12 +50,7 @@ vi.mock("../../src/server/PollingLoop", () => ({
   startPolling: vi.fn(),
 }));
 
-const mockLogger: any = {
-  child: vi.fn().mockReturnThis(),
-  info: vi.fn(),
-  warn: vi.fn(),
-  error: vi.fn(),
-};
+const mockLogger = harnessLogger();
 
 const CREATOR = "11111111-1111-4111-8111-111111111111";
 const OTHER_CREATOR = "22222222-2222-4222-8222-222222222222";
@@ -56,13 +60,13 @@ function makeGame(
   creatorPersistentID: string | undefined = CREATOR,
   config: Record<string, unknown> = {},
 ) {
-  return new GameServer(
+  return new GameServer({
     id,
-    mockLogger,
-    Date.now(),
-    { gameType: GameType.Private, ...config } as any,
+    log: mockLogger,
+    createdAt: Date.now(),
+    gameConfig: testGameConfig({ gameType: GameType.Private, ...config }),
     creatorPersistentID,
-  );
+  });
 }
 
 describe("GameServer listing", () => {
@@ -97,9 +101,12 @@ describe("GameServer listing", () => {
   });
 
   it("never matches a creator when created without one", () => {
-    const game = new GameServer("no-creator", mockLogger, Date.now(), {
-      gameType: GameType.Private,
-    } as any);
+    const game = new GameServer({
+      id: "no-creator",
+      log: mockLogger,
+      createdAt: Date.now(),
+      gameConfig: { gameType: GameType.Private } as any,
+    });
     expect(game.isCreator(CREATOR)).toBe(false);
     expect(game.hashedCreatorID()).toBeUndefined();
   });
@@ -139,9 +146,12 @@ describe("GameServer listing", () => {
     game.setListed(true);
     expect(game.gameInfo().listed).toBe(true);
 
-    const pub = new GameServer("pub", mockLogger, Date.now(), {
-      gameType: GameType.Public,
-    } as any);
+    const pub = new GameServer({
+      id: "pub",
+      log: mockLogger,
+      createdAt: Date.now(),
+      gameConfig: { gameType: GameType.Public } as any,
+    });
     expect(pub.gameInfo().listed).toBeUndefined();
   });
 });
@@ -171,7 +181,7 @@ describe("GameManager.listedLobbies", () => {
     const gm = new GameManager(mockLogger);
     const pub = gm.createGame(
       "g-public",
-      { gameType: GameType.Public } as any,
+      testGameConfig({ gameType: GameType.Public }),
       undefined,
     )!;
     pub.setListed(true);
@@ -253,29 +263,16 @@ describe("listed lobby auto-start", () => {
   });
 });
 
-function fakeWs() {
-  const ws = new EventEmitter() as any;
-  ws.readyState = WebSocket.OPEN;
-  ws.send = vi.fn();
-  ws.close = vi.fn();
-  return ws;
-}
+const fakeWs = makeMockWs;
 
-function makeClient(clientID: string, persistentID: string, ws: any) {
-  return new Client(
+function makeClient(clientID: string, persistentID: string, ws: MockWs) {
+  return harnessClient({
     clientID,
     persistentID,
-    null,
-    null,
-    undefined,
-    "1.2.3.4",
-    `user_${clientID}`,
-    null,
+    ip: "1.2.3.4",
+    username: `user_${clientID}`,
     ws,
-    undefined,
-    undefined,
-    [],
-  );
+  });
 }
 
 describe("host-left lobby teardown", () => {
@@ -288,7 +285,7 @@ describe("host-left lobby teardown", () => {
     vi.useRealTimers();
   });
 
-  it("ends, delists and prunes an unstarted lobby when the host leaves", () => {
+  it("ends, delists and prunes an unstarted lobby when the host leaves", async () => {
     const gm = new GameManager(mockLogger);
     const game = gm.createGame("g-host-leaves", undefined, CREATOR)!;
     game.setListed(true);
@@ -301,7 +298,7 @@ describe("host-left lobby teardown", () => {
     );
     expect(gm.listedLobbies()).toHaveLength(1);
 
-    hostWs.emit("close");
+    await hostWs.trigger("close");
 
     // Remaining players are kicked and the ghost leaves the listing...
     expect(guestWs.close).toHaveBeenCalled();
@@ -333,7 +330,7 @@ describe("host-left lobby teardown", () => {
     expect(game.joinClient({} as any)).toBe("rejected");
   });
 
-  it("does not tear down when the host disconnects during prestart", () => {
+  it("does not tear down when the host disconnects during prestart", async () => {
     // During the lobby -> game transition the host modal closes and sockets
     // churn; a starting game (e.g. listed-lobby auto-start) must survive it.
     const gm = new GameManager(mockLogger);
@@ -344,7 +341,7 @@ describe("host-left lobby teardown", () => {
     game.joinClient(makeClient("host", CREATOR, hostWs));
     (game as any)._hasPrestarted = true;
 
-    hostWs.emit("close");
+    await hostWs.trigger("close");
 
     expect((game as any)._hasEnded).toBe(false);
     expect(game.phase()).not.toBe(GamePhase.Finished);
@@ -606,6 +603,39 @@ describe("MasterLobbyService hosted lobbies", () => {
     expect(broadcasts[1].delistGameIDs).toEqual([`g${MAX_HOSTED_LOBBIES}`]);
   });
 
+  it("keeps a featured lobby listed when the cap overflows", () => {
+    // Delisting is permanent — the worker clears listedAt — so an announced
+    // event that loses the cap never comes back and its audience arrives to
+    // nothing. The featured lobby here sorts LAST by gameID, so without
+    // priority it is exactly the one the overflow would drop.
+    const { service, workers } = createService();
+    const ordinary = Array.from({ length: MAX_HOSTED_LOBBIES }, (_, i) =>
+      hostedLobby(`g${String(i).padStart(2, "0")}`, `creator-${i}`),
+    );
+    const featured = hostedLobby("zzz", "creator-adminbot", {
+      featured: true,
+      label: "Europe — OFM Scrims",
+    });
+    workers[0].emit("message", {
+      type: "lobbyList",
+      lobbies: [...ordinary, featured],
+    });
+
+    (service as any).broadcastLobbies();
+    (service as any).broadcastLobbies();
+
+    const broadcasts = sentMessages(workers[0]).filter(
+      (m) => m.type === "lobbiesBroadcast",
+    );
+    const hosted = broadcasts[0].publicGames.games.hosted;
+    expect(hosted).toHaveLength(MAX_HOSTED_LOBBIES);
+    expect(hosted[0].gameID).toBe("zzz");
+    // An ordinary lobby takes the overflow instead.
+    expect(broadcasts[1].delistGameIDs).toEqual([
+      `g${String(MAX_HOSTED_LOBBIES - 1).padStart(2, "0")}`,
+    ]);
+  });
+
   it("does not delist when the duplicate disappears after one broadcast", () => {
     const { service, workers } = createService();
     workers[0].emit("message", {
@@ -706,7 +736,7 @@ describe("WorkerLobbyService hosted lobbies", () => {
   }
 
   function sentPayloads(ws: { send: ReturnType<typeof vi.fn> }): any[] {
-    return ws.send.mock.calls.map((c) => JSON.parse(c[0]));
+    return ws.send.mock.calls.map((c) => decodeSentLobbyMessage(c[0]));
   }
 
   it("reports listed lobbies to master as hosted, with creatorID and without host-only config", () => {
@@ -735,24 +765,24 @@ describe("WorkerLobbyService hosted lobbies", () => {
   });
 
   it("excludes matchmaking games (Public but no publicGameType) from the report", () => {
-    const ranked = new GameServer(
-      "ranked-g1",
-      mockLogger,
-      Date.now(),
-      { gameType: GameType.Public, allowedPublicIds: ["p1", "p2"] } as any,
-      undefined,
-      Date.now() + 7000,
-      undefined, // matchmaking games are created without a publicGameType
-    );
-    const ffa = new GameServer(
-      "ffa-g1",
-      mockLogger,
-      Date.now(),
-      { gameType: GameType.Public } as any,
-      undefined,
-      undefined,
-      "ffa",
-    );
+    const ranked = new GameServer({
+      id: "ranked-g1",
+      log: mockLogger,
+      createdAt: Date.now(),
+      gameConfig: testGameConfig({
+        gameType: GameType.Public,
+        allowedPublicIds: ["p1", "p2"],
+      }),
+      startsAt: Date.now() + 7000,
+      // matchmaking games are created without a publicGameType
+    });
+    const ffa = new GameServer({
+      id: "ffa-g1",
+      log: mockLogger,
+      createdAt: Date.now(),
+      gameConfig: { gameType: GameType.Public } as any,
+      publicGameType: "ffa",
+    });
     gm.publicLobbies.mockReturnValue([ranked, ffa]);
 
     emitBroadcast({ ffa: [], team: [], special: [], hosted: [] });
@@ -904,5 +934,112 @@ describe("WorkerLobbyService hosted lobbies", () => {
     ]);
 
     expect(game.isListed()).toBe(false);
+  });
+});
+
+describe("featured lobbies", () => {
+  beforeEach(() => {
+    // The deadline assertions compare absolute timestamps, so time must not
+    // advance mid-test (the same reason the listing suite fakes timers).
+    vi.useFakeTimers();
+  });
+  afterEach(() => {
+    vi.clearAllTimers();
+    vi.useRealTimers();
+  });
+
+  it("is not featured by default and carries no label", () => {
+    const game = makeGame();
+    expect(game.isFeatured()).toBe(false);
+    expect(game.lobbyLabel()).toBeUndefined();
+  });
+
+  it("extends the auto-start deadline to the featured window", () => {
+    const game = makeGame();
+    game.setListed(true);
+    expect(game.autoStartAt()).toBe(Date.now() + HOSTED_LOBBY_AUTO_START_MS);
+    game.setFeatured({ label: "Europe — OFM Scrims" });
+    expect(game.autoStartAt()).toBe(Date.now() + FEATURED_LOBBY_AUTO_START_MS);
+  });
+
+  it("has no deadline at all while unlisted", () => {
+    const game = makeGame();
+    game.setFeatured({ label: "Europe — OFM Scrims" });
+    expect(game.autoStartAt()).toBeUndefined();
+  });
+
+  it("keeps emoji but strips control characters and bidi overrides", () => {
+    // A bidi override renders following text right-to-left, which is how a
+    // label gets to claim it is something it is not.
+    expect(sanitizeLobbyLabel("🏆 OFM\u202E evil\u0000")).toBe("🏆 OFM evil");
+  });
+
+  it("strips U+061C but keeps the ZWJ that emoji sequences need", () => {
+    // ARABIC LETTER MARK is zero-width and bidi-active, so it goes. U+200D is
+    // what joins 👨‍👩‍👧 into one glyph, so it must stay.
+    expect(sanitizeLobbyLabel("OFM\u061C Scrims")).toBe("OFM Scrims");
+    expect(sanitizeLobbyLabel("\u{1F468}\u200D\u{1F469}\u200D\u{1F467}")).toBe(
+      "\u{1F468}\u200D\u{1F469}\u200D\u{1F467}",
+    );
+  });
+
+  it("accepts a label of exactly LOBBY_LABEL_MAX emoji", () => {
+    // 48 emoji is 96 UTF-16 code units: a z.string().max() cap would reject a
+    // label the sanitiser considers perfectly legal.
+    const label = "\u{1F3C6}".repeat(LOBBY_LABEL_MAX);
+    expect(LobbyLabelSchema.safeParse(label).success).toBe(true);
+    expect(Array.from(sanitizeLobbyLabel(label))).toHaveLength(LOBBY_LABEL_MAX);
+    expect(
+      LobbyLabelSchema.safeParse("\u{1F3C6}".repeat(LOBBY_LABEL_MAX + 1))
+        .success,
+    ).toBe(false);
+  });
+
+  it("collapses whitespace and caps length", () => {
+    expect(sanitizeLobbyLabel("  a\n\n  b  ")).toBe("a b");
+    expect(sanitizeLobbyLabel("x".repeat(200))).toHaveLength(LOBBY_LABEL_MAX);
+  });
+
+  it("turns a line break into a space instead of eating it", () => {
+    // Newline and tab are C0 controls, but they are also word separators:
+    // dropping them the way the other controls are dropped welds the words
+    // together. Note the words here are NOT flanked by spaces — a stray space
+    // either side would hide the bug behind the collapse step.
+    expect(sanitizeLobbyLabel("Europe\nOFM Scrims")).toBe("Europe OFM Scrims");
+    expect(sanitizeLobbyLabel("Europe\tOFM")).toBe("Europe OFM");
+    expect(sanitizeLobbyLabel("Europe\r\n\r\nOFM")).toBe("Europe OFM");
+  });
+
+  it("stores a sanitised label, never the raw one", () => {
+    const game = makeGame();
+    game.setFeatured({ label: "  OFM\u0007  Scrims  ", accent: "gold" });
+    expect(game.lobbyLabel()).toBe("OFM Scrims");
+    expect(game.lobbyAccent()).toBe("gold");
+  });
+
+  it("drops a label that sanitises away to nothing", () => {
+    const game = makeGame();
+    game.setFeatured({ label: "\u0000\u202E   " });
+    expect(game.lobbyLabel()).toBeUndefined();
+    expect(game.isFeatured()).toBe(true);
+  });
+
+  it("cannot be featured through update_game_config", () => {
+    const game = makeGame();
+    const result = game.handleIntent(
+      {
+        type: "update_game_config",
+        config: { featured: true, label: "Official Event" },
+      } as any,
+      {
+        clientID: "c1",
+        isLobbyCreator: true,
+        isAdmin: false,
+        isAdminBot: false,
+      },
+    );
+    expect(result.status).toBe(200);
+    expect(game.isFeatured()).toBe(false);
+    expect(game.lobbyLabel()).toBeUndefined();
   });
 });

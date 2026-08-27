@@ -33,6 +33,13 @@ const SPECIAL_ONLY_MAPS = new Set<GameMapType>([
 // Hard cap on player count for performance. Applied after compact-map reduction.
 const MAX_PLAYER_COUNT = 125;
 
+// Share of public FFA games that run with overtime enabled.
+const OVERTIME_FFA_CHANCE = 0.25;
+// Share of scheduled public games (FFA, team and special alike) that are
+// trusted-only (GameConfig.trusted): only accounts the API reports as trusted
+// may join. Rolled independently of the map and modifier rolls.
+const TRUSTED_PUBLIC_CHANCE = 1 / 3;
+
 const TEAM_WEIGHTS: { config: TeamCountConfig; weight: number }[] = [
   { config: 2, weight: 10 },
   { config: 3, weight: 10 },
@@ -139,6 +146,14 @@ export class MapPlaylist {
   };
 
   public async gameConfig(type: ScheduledPublicGameType): Promise<GameConfig> {
+    const config = await this.rollConfig(type);
+    if (Math.random() < TRUSTED_PUBLIC_CHANCE) {
+      config.trusted = true;
+    }
+    return config;
+  }
+
+  private async rollConfig(type: ScheduledPublicGameType): Promise<GameConfig> {
     if (type === "special") {
       return this.getSpecialConfig();
     }
@@ -146,11 +161,16 @@ export class MapPlaylist {
     const mode = type === "ffa" ? GameMode.FFA : GameMode.Team;
     const map = this.getNextMap(type);
 
-    const playerTeams =
+    let playerTeams =
       mode === GameMode.Team ? this.getTeamCount(map) : undefined;
 
     let isCompact: boolean | undefined =
       this.playlists[type].length % 3 === 0 || undefined;
+    // Overtime (the win threshold sinking after 30 minutes) runs as a
+    // modifier on a quarter of public FFA games.
+    const isOvertime: boolean | undefined =
+      (mode === GameMode.FFA && Math.random() < OVERTIME_FFA_CHANCE) ||
+      undefined;
     if (
       isCompact &&
       mode === GameMode.Team &&
@@ -159,15 +179,26 @@ export class MapPlaylist {
       isCompact = undefined;
     }
 
+    const unadjustedMaxPlayers = await this.lobbyMaxPlayers(
+      map,
+      mode,
+      isCompact,
+    );
+    playerTeams = this.adjustTeamCountForPlayerCapacity(
+      playerTeams,
+      unadjustedMaxPlayers,
+    );
+
     return {
       donateGold: mode === GameMode.Team,
       donateTroops: mode === GameMode.Team,
       gameMap: map,
-      maxPlayers: await this.lobbyMaxPlayers(map, mode, playerTeams, isCompact),
+      maxPlayers: this.adjustForTeams(unadjustedMaxPlayers, playerTeams),
       gameType: GameType.Public,
       gameMapSize: isCompact ? GameMapSize.Compact : GameMapSize.Normal,
       publicGameModifiers: {
         isCompact,
+        isOvertime,
       },
       difficulty:
         playerTeams === HumansVsNations ? Difficulty.Hard : Difficulty.Medium,
@@ -186,13 +217,14 @@ export class MapPlaylist {
       spawnImmunityDuration: this.getSpawnImmunityDuration(playerTeams),
       disabledUnits: [],
       disableClanTags: mode === GameMode.FFA ? true : undefined,
+      overtime: isOvertime ? { enabled: true } : undefined,
     } satisfies GameConfig;
   }
 
   private async getSpecialConfig(): Promise<GameConfig> {
     const mode = Math.random() < 0.5 ? GameMode.FFA : GameMode.Team;
     const map = this.getNextMap("special");
-    const playerTeams =
+    let playerTeams =
       mode === GameMode.Team ? this.getTeamCount(map) : undefined;
 
     const excludedModifiers: ModifierKey[] = [];
@@ -275,9 +307,7 @@ export class MapPlaylist {
     let crowdedMaxPlayers: number | undefined;
     if (isCrowded) {
       crowdedMaxPlayers = await this.getCrowdedMaxPlayers(map, !!isCompact);
-      if (crowdedMaxPlayers !== undefined) {
-        crowdedMaxPlayers = this.adjustForTeams(crowdedMaxPlayers, playerTeams);
-      } else {
+      if (crowdedMaxPlayers === undefined) {
         // Map doesn't support crowded. Drop it and pick one replacement only
         // if it was the sole modifier, so the lobby always has at least one.
         isCrowded = undefined;
@@ -316,10 +346,15 @@ export class MapPlaylist {
       }
     }
 
+    const unadjustedMaxPlayers =
+      crowdedMaxPlayers ?? (await this.lobbyMaxPlayers(map, mode, isCompact));
+    playerTeams = this.adjustTeamCountForPlayerCapacity(
+      playerTeams,
+      unadjustedMaxPlayers,
+    );
     const maxPlayers = Math.max(
       2,
-      crowdedMaxPlayers ??
-        (await this.lobbyMaxPlayers(map, mode, playerTeams, isCompact)),
+      this.adjustForTeams(unadjustedMaxPlayers, playerTeams),
     );
 
     const nations: GameConfig["nations"] =
@@ -629,10 +664,16 @@ export class MapPlaylist {
     p = Math.min(Math.max(3, Math.floor(p * 0.25)), MAX_PLAYER_COUNT);
     // Apply team adjustment
     p = this.adjustForTeams(p, playerTeams);
-    // Check at least 2 players per team AND at least 2 teams
+    return this.supportsTeamPlayerCount(p, playerTeams);
+  }
+
+  private supportsTeamPlayerCount(
+    adjustedPlayerCount: number,
+    playerTeams: TeamCountConfig,
+  ): boolean {
     return (
-      this.playersPerTeam(p, playerTeams) >= 2 &&
-      this.numberOfTeams(p, playerTeams) >= 2
+      this.playersPerTeam(adjustedPlayerCount, playerTeams) >= 2 &&
+      this.numberOfTeams(adjustedPlayerCount, playerTeams) >= 2
     );
   }
 
@@ -707,7 +748,6 @@ export class MapPlaylist {
   private async lobbyMaxPlayers(
     map: GameMapType,
     mode: GameMode,
-    numPlayerTeams: TeamCountConfig | undefined,
     isCompactMap?: boolean,
   ): Promise<number> {
     const landTiles = await getMapLandTiles(map);
@@ -721,7 +761,26 @@ export class MapPlaylist {
     }
     // Cap for performance
     p = Math.min(p, MAX_PLAYER_COUNT);
-    return this.adjustForTeams(p, numPlayerTeams);
+    return p;
+  }
+
+  // Numeric team modes specify a number of teams, so ensure every team can
+  // receive at least two players before rounding the lobby capacity.
+  private adjustTeamCountForPlayerCapacity(
+    playerTeams: TeamCountConfig | undefined,
+    unadjustedMaxPlayers: number,
+  ): TeamCountConfig | undefined {
+    if (
+      typeof playerTeams !== "number" ||
+      this.supportsTeamPlayerCount(
+        this.adjustForTeams(unadjustedMaxPlayers, playerTeams),
+        playerTeams,
+      )
+    ) {
+      return playerTeams;
+    }
+
+    return Math.max(2, Math.floor(unadjustedMaxPlayers / 2));
   }
 
   private adjustForTeams(

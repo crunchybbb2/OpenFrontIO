@@ -20,6 +20,8 @@ import {
   PostTribeNameResponseSchema,
   PublicPlayerGamesResponse,
   PublicPlayerGamesResponseSchema,
+  PurchasePackResponse,
+  PurchasePackResponseSchema,
   PutUsernameResponse,
   PutUsernameResponseSchema,
   RankedLeaderboardResponse,
@@ -37,7 +39,14 @@ import {
   ArchivedAnalyticsRecordSchema,
   GameInfo,
 } from "../core/Schemas";
-import { getAuthHeader, getPlayToken, logOut, userAuth } from "./Auth";
+import { UserSettings } from "../core/game/UserSettings";
+import {
+  getAuthHeader,
+  getPlayToken,
+  isSessionActive,
+  logOut,
+  userAuth,
+} from "./Auth";
 import { ClientEnv } from "./ClientEnv";
 
 export async function fetchPlayerById(
@@ -167,6 +176,13 @@ export async function fetchPublicPlayerGames(
 }
 
 let __userMe: Promise<UserMeResponse | false> | null = null;
+
+// The profile outlives the session it describes unless this is dropped with
+// it: getUserMe answers from the cache before it checks authentication, so a
+// consumer calling it after a background logout would read the expired
+// account straight back. Handled here rather than in Auth, which cannot
+// import this module — the dependency runs the other way.
+document.addEventListener("session-cleared", () => invalidateUserMe());
 export async function getUserMe(): Promise<UserMeResponse | false> {
   if (__userMe !== null) {
     return __userMe;
@@ -175,7 +191,7 @@ export async function getUserMe(): Promise<UserMeResponse | false> {
     try {
       const userAuthResult = await userAuth();
       if (!userAuthResult) return false;
-      const { jwt } = userAuthResult;
+      const { jwt, claims } = userAuthResult;
 
       // Get the user object
       const response = await fetch(getApiBase() + "/users/@me", {
@@ -184,6 +200,9 @@ export async function getUserMe(): Promise<UserMeResponse | false> {
         },
       });
       if (response.status === 401) {
+        // Clearing the session announces itself (see clearLocalSession), so
+        // consumers holding account state don't mistake this for the
+        // transient failure the `false` below also represents.
         await logOut();
         return false;
       }
@@ -195,6 +214,13 @@ export async function getUserMe(): Promise<UserMeResponse | false> {
         console.error("Invalid response", error);
         return false;
       }
+      // Activate this player's cosmetic selections (and adopt any made while
+      // logged out) before the profile is handed to callers — but not if the
+      // session changed (logout, account switch) while the request was in
+      // flight: a stale response must not reactivate the old player's scope.
+      if (isSessionActive(claims.sub)) {
+        UserSettings.setPlayerId(result.data.player.publicId);
+      }
       return result.data;
     } catch (e) {
       return false;
@@ -205,6 +231,61 @@ export async function getUserMe(): Promise<UserMeResponse | false> {
 
 export function invalidateUserMe() {
   __userMe = null;
+}
+
+export type DeleteAccountResult =
+  | { ok: true }
+  // 401: missing/unknown/expired refresh token — already logged out, and the
+  // server cleared the cookie.
+  | { ok: false; code: "logged_out" }
+  // 403: refused by policy. `message` is the server's player-facing reason
+  // (root player / banned account), shown as-is.
+  | { ok: false; code: "forbidden"; message?: string }
+  // 409: the player authored content other players depend on — deletion needs
+  // support. The body's message is for support, not end users.
+  | { ok: false; code: "blocked" }
+  // Anything else, including 429 rate limiting: the client shows a
+  // "contact support" failure.
+  | { ok: false; code: "failed" };
+
+// DELETE /users/@me — deletes the account immediately and irreversibly. The
+// HttpOnly refresh cookie is the credential (same as /auth/logout), so no
+// Authorization header. On 204 every session on every device is invalidated
+// and the cookie is cleared — callers drop local auth state themselves and
+// must NOT call /auth/logout afterwards.
+export async function deleteAccount(): Promise<DeleteAccountResult> {
+  try {
+    const response = await fetch(`${getApiBase()}/users/@me`, {
+      method: "DELETE",
+      credentials: "include",
+    });
+    if (response.status === 401) {
+      return { ok: false, code: "logged_out" };
+    }
+    if (response.status === 403) {
+      const body = await response.json().catch(() => null);
+      return {
+        ok: false,
+        code: "forbidden",
+        message: typeof body?.message === "string" ? body.message : undefined,
+      };
+    }
+    if (response.status === 409) {
+      return { ok: false, code: "blocked" };
+    }
+    if (!response.ok) {
+      console.error(
+        "deleteAccount: request failed",
+        response.status,
+        response.statusText,
+      );
+      return { ok: false, code: "failed" };
+    }
+    return { ok: true };
+  } catch (e) {
+    console.error("deleteAccount: request failed", e);
+    return { ok: false, code: "failed" };
+  }
 }
 
 // POST /marketing/consent — record the player's marketing-email choice
@@ -568,6 +649,99 @@ export async function purchaseWithCurrency(
   }
 }
 
+export type PurchaseCosmeticPackResult =
+  | { ok: true; data: PurchasePackResponse }
+  // 400 "Insufficient balance": the balance moved since the client's
+  // pre-check. Nothing charged.
+  | { ok: false; code: "insufficient_balance" }
+  // 400 insufficient_balance_debt: a refund/chargeback left the wallet
+  // negative; `debt` (bigint string) must be settled before anything is
+  // spendable. Nothing charged.
+  | { ok: false; code: "debt"; debt: string }
+  // 400 for a stale listing: pack not found / not for sale / zero price /
+  // all items deleted.
+  | { ok: false; code: "unavailable" }
+  // 409: the player already owns one or more items (`ownedFlareNames` says
+  // which). Also what a retry after a timed-out success returns — treat it as
+  // "already bought" and refetch /users/@me. Nothing charged.
+  | { ok: false; code: "already_owned"; ownedFlareNames: string[] }
+  | { ok: false; code: "failed" };
+
+const PACK_UNAVAILABLE_REASONS = [
+  "Pack not found",
+  "Pack is not for sale",
+  "Pack not available for hard currency",
+  "Pack has no items",
+];
+
+// POST /shop/purchase/pack — buy a cosmetic pack (see CosmeticPackSchema) for
+// its hard-currency price, granting every item's flare in one transaction.
+// Any error means no debit and no grants.
+export async function purchaseCosmeticPack(
+  packName: string,
+): Promise<PurchaseCosmeticPackResult> {
+  try {
+    const response = await fetch(`${getApiBase()}/shop/purchase/pack`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: await getAuthHeader(),
+      },
+      body: JSON.stringify({ packName }),
+    });
+    if (response.status === 401) {
+      await logOut();
+      return { ok: false, code: "failed" };
+    }
+    if (response.status === 400) {
+      const body = await response.json().catch(() => null);
+      const reason = typeof body?.reason === "string" ? body.reason : "";
+      if (reason === "Insufficient balance") {
+        return { ok: false, code: "insufficient_balance" };
+      }
+      if (reason === "insufficient_balance_debt") {
+        return { ok: false, code: "debt", debt: String(body.debt ?? "") };
+      }
+      if (PACK_UNAVAILABLE_REASONS.includes(reason)) {
+        return { ok: false, code: "unavailable" };
+      }
+      console.error("purchaseCosmeticPack: bad request", body);
+      return { ok: false, code: "failed" };
+    }
+    if (response.status === 409) {
+      const body = await response.json().catch(() => null);
+      const owned: unknown = body?.ownedFlareNames;
+      return {
+        ok: false,
+        code: "already_owned",
+        ownedFlareNames: Array.isArray(owned)
+          ? owned.filter((f): f is string => typeof f === "string")
+          : [],
+      };
+    }
+    if (!response.ok) {
+      console.error(
+        "purchaseCosmeticPack: request failed",
+        response.status,
+        response.statusText,
+      );
+      return { ok: false, code: "failed" };
+    }
+    const parsed = PurchasePackResponseSchema.safeParse(await response.json());
+    if (!parsed.success) {
+      console.error(
+        "purchaseCosmeticPack: Zod validation failed",
+        parsed.error,
+      );
+      return { ok: false, code: "failed" };
+    }
+    return { ok: true, data: parsed.data };
+  } catch (e) {
+    console.error("purchaseCosmeticPack: request failed", e);
+    return { ok: false, code: "failed" };
+  }
+}
+
 // POST /rewards/:rewardId/claim — claims a single unclaimed reward and
 // credits the balance atomically. "not_found" covers unknown, already-claimed
 // and other players' rewards (indistinguishable by design); the usual cause is
@@ -823,7 +997,7 @@ export async function openSubscriptionPortal(): Promise<string | false> {
 export async function fetchLobbyListed(gameID: string): Promise<boolean> {
   try {
     const res = await fetch(
-      `/${ClientEnv.workerPath(gameID)}/api/game/${gameID}`,
+      `${ClientEnv.serverHttpBase()}/${ClientEnv.workerPath(gameID)}/api/game/${gameID}`,
       { headers: { Accept: "application/json" } },
     );
     if (!res.ok) return false;
@@ -847,7 +1021,7 @@ export async function setLobbyListed(
   try {
     const token = await getPlayToken();
     const response = await fetch(
-      `/${ClientEnv.workerPath(gameID)}/api/game/${gameID}/listing`,
+      `${ClientEnv.serverHttpBase()}/${ClientEnv.workerPath(gameID)}/api/game/${gameID}/listing`,
       {
         method: "POST",
         headers: {
@@ -871,6 +1045,42 @@ export async function setLobbyListed(
   }
 }
 
+// POST /api/create_game on the game server — mints a fresh private lobby with
+// the caller as creator. Deliberately has no worker prefix and no id: the edge
+// (nginx in prod, the vite dev proxy locally) picks a worker, which mints a
+// self-owned id and returns it.
+export async function createLobby(): Promise<GameInfo> {
+  // Send JWT token for creator identification - server extracts persistentID from it
+  // persistentID should never be exposed to other clients
+  const token = await getPlayToken();
+  try {
+    const response = await fetch(
+      `${ClientEnv.serverHttpBase()}/api/create_game`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Server error response:", errorText);
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Success:", data);
+
+    return data as GameInfo;
+  } catch (error) {
+    console.error("Error creating lobby:", error);
+    throw error;
+  }
+}
+
 // POST /wX/api/create_game?previous=<gameID>, targeted at the worker that owns
 // the finished game — mints a successor private lobby (same creator, default
 // settings) and has the old game broadcast the new id to everyone still
@@ -881,7 +1091,7 @@ export async function createNextLobby(
 ): Promise<GameInfo> {
   const token = await getPlayToken();
   const response = await fetch(
-    `/${ClientEnv.workerPath(previousGameID)}/api/create_game?previous=${previousGameID}`,
+    `${ClientEnv.serverHttpBase()}/${ClientEnv.workerPath(previousGameID)}/api/create_game?previous=${previousGameID}`,
     {
       method: "POST",
       headers: {

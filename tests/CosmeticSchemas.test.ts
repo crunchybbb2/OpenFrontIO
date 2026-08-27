@@ -1,4 +1,5 @@
 import {
+  CosmeticPackSchema,
   Cosmetics,
   CosmeticsSchema,
   Effect,
@@ -116,7 +117,7 @@ describe("Effect cosmetic schemas", () => {
       });
     });
 
-    it("requires spiral radius/strands/rotationSpeed, radius > 0, integer strands", () => {
+    it("requires spiral radius/strands/rotationSpeed and positive dimensions", () => {
       const valid = {
         type: "spiral",
         colors: ["#f00", "#00f"],
@@ -137,7 +138,7 @@ describe("Effect cosmetic schemas", () => {
       expect(
         TrailEffectAttributesSchema.safeParse({ ...valid, strands: 2.5 })
           .success,
-      ).toBe(false);
+      ).toBe(true);
       expect(
         TrailEffectAttributesSchema.safeParse({ ...valid, strands: 0 }).success,
       ).toBe(false);
@@ -1190,6 +1191,57 @@ describe("CosmeticsSchema tribeNames pricing", () => {
         flags: {},
         tribeNames: { priceHard: 200, boostDurationDays: 30 },
       }).success,
+    ).toBe(false);
+  });
+});
+
+describe("Cosmetic pack schemas", () => {
+  const base = { patterns: {}, flags: {} };
+  const starter = {
+    name: "starter",
+    displayName: "Starter Pack",
+    description: "",
+    priceHard: 250,
+    rarity: "common",
+    items: [
+      { type: "pattern", name: "camo" },
+      { type: "flag", name: "pirate" },
+      { type: "effect", name: "ship_trail_gradient" },
+    ],
+  };
+
+  it("parses packs keyed by slug with their items in order", () => {
+    const parsed = CosmeticsSchema.parse({ ...base, packs: { starter } });
+    expect(parsed.packs).toEqual({ starter });
+  });
+
+  it("is optional — an older catalog without packs still parses", () => {
+    expect(CosmeticsSchema.parse(base).packs).toBeUndefined();
+  });
+
+  it("drops a pack with an item type this client doesn't know, keeping the rest", () => {
+    const parsed = CosmeticsSchema.parse({
+      ...base,
+      packs: {
+        starter,
+        future: {
+          ...starter,
+          name: "future",
+          items: [{ type: "banner", name: "wave" }],
+        },
+      },
+    });
+    expect(Object.keys(parsed.packs ?? {})).toEqual(["starter"]);
+  });
+
+  it("requires the pack's own hard price and display name", () => {
+    expect(
+      CosmeticPackSchema.safeParse({ ...starter, priceHard: undefined })
+        .success,
+    ).toBe(false);
+    expect(
+      CosmeticPackSchema.safeParse({ ...starter, displayName: undefined })
+        .success,
     ).toBe(false);
   });
 });

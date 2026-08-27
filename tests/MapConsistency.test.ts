@@ -34,6 +34,8 @@ const FREQUENCY_EXEMPTIONS: Set<GameMapName> = new Set([
   "Tourney4",
   "EuropeClassic",
   "BritanniaClassic",
+  "ChoppingBlock",
+  "Luna",
 ]);
 
 // Keys in the en.json "map" section that are UI strings, not map names.

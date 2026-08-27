@@ -44,6 +44,7 @@ export function getDefaultKeybinds(isMac: boolean): Record<string, string> {
     moveRight: "KeyD",
     buildMenuModifier: isMac ? "MetaLeft" : "ControlLeft",
     emojiMenuModifier: "AltLeft",
+    boxSelectWarships: "ShiftLeft",
     shiftKey: "ShiftLeft",
     resetGfx: "KeyR",
     selectAllWarships: "KeyF",
@@ -69,6 +70,10 @@ export const KEYBINDS_KEY = "settings.keybinds";
 export const GRAPHICS_KEY = "settings.graphics";
 export const GRAPHICS_PRESETS_KEY = "settings.graphicsPresets";
 export const EFFECTS_KEY = "settings.effects";
+/** Saved cosmetic loadouts — see {@link CosmeticLoadout}. */
+export const LOADOUTS_KEY = "settings.cosmeticLoadouts";
+/** The loadout slot equip changes are written back into, if any. */
+export const ACTIVE_LOADOUT_KEY = "settings.activeLoadout";
 // Keep the existing storage key so the rename does not reset saved columns.
 export const PLAYER_STATS_COLUMNS_KEY = "settings.leaderboardColumns";
 export const TEAM_STATS_COLUMNS_KEY = "settings.teamStatsColumns";
@@ -77,8 +82,115 @@ const STATS_COLUMNS_KEYS: Record<StatsTableKind, string> = {
   team: TEAM_STATS_COLUMNS_KEY,
 };
 
+/**
+ * Cosmetic selections are stored per player: while logged in, the storage key
+ * is suffixed with the player's publicId so selections survive logout and are
+ * restored on the next login (#4955). Logged out, the bare key is used.
+ */
+const PER_PLAYER_KEYS: readonly string[] = [
+  PATTERN_KEY,
+  FLAG_KEY,
+  CROWN_KEY,
+  EFFECTS_KEY,
+  LOADOUTS_KEY,
+  ACTIVE_LOADOUT_KEY,
+];
+
+/**
+ * A named snapshot of every equip slot, so a player can switch their whole
+ * cosmetic set in one action. Values are the raw stored forms of the slots:
+ * `pattern` is a PATTERN_KEY value (`"pattern:<name>[:<palette>]"` or
+ * `"skin:<name>"`), `flag` a FLAG_KEY value, `crown` a crown name, and
+ * `effects` the EFFECTS_KEY slot map. `null` means the slot is unequipped.
+ */
+export interface CosmeticLoadout {
+  name: string;
+  pattern: string | null;
+  flag: string | null;
+  crown: string | null;
+  effects: Record<string, string>;
+}
+
+/** Loadouts live in localStorage, so the list is bounded. */
+export const MAX_LOADOUTS = 10;
+
+/** Slots are numbered rather than named: "01", "02", … */
+export function loadoutSlotName(slot: number): string {
+  return slot.toString().padStart(2, "0");
+}
+
+function parseLoadout(value: unknown): CosmeticLoadout | null {
+  if (value === null || typeof value !== "object" || Array.isArray(value)) {
+    return null;
+  }
+  const entry = value as Record<string, unknown>;
+  if (typeof entry.name !== "string" || entry.name === "") return null;
+  const slot = (key: string): string | null =>
+    typeof entry[key] === "string" ? (entry[key] as string) : null;
+  const effects: Record<string, string> = {};
+  if (
+    entry.effects !== null &&
+    typeof entry.effects === "object" &&
+    !Array.isArray(entry.effects)
+  ) {
+    for (const [key, name] of Object.entries(
+      entry.effects as Record<string, unknown>,
+    )) {
+      if (typeof name === "string") effects[key] = name;
+    }
+  }
+  return {
+    name: entry.name,
+    pattern: slot("pattern"),
+    flag: slot("flag"),
+    crown: slot("crown"),
+    effects,
+  };
+}
+
 export class UserSettings {
   private static cache = new Map<string, string | null>();
+  /** publicId of the logged-in player, or null when logged out. */
+  private static playerId: string | null = null;
+  /** Set while applyLoadout writes, to stop the mirror writing back. */
+  private static applyingLoadout = false;
+
+  /**
+   * Sets which player's cosmetic selections are active. Called with the
+   * player's publicId when /users/@me resolves, and with null on logout.
+   *
+   * Selections made while logged out — including values written by builds
+   * that predate per-player keying — are moved into the player's scope,
+   * overwriting the stored ones (the most recent selection wins), so existing
+   * users keep their cosmetics.
+   */
+  static setPlayerId(playerId: string | null): void {
+    if (UserSettings.playerId === playerId) return;
+    UserSettings.playerId = playerId;
+    const settings = new UserSettings();
+    if (playerId !== null) {
+      for (const key of PER_PLAYER_KEYS) {
+        const bare = localStorage.getItem(key);
+        if (bare === null) continue;
+        const scopedKey = `${key}:${playerId}`;
+        localStorage.setItem(scopedKey, bare);
+        UserSettings.cache.set(scopedKey, bare);
+        localStorage.removeItem(key);
+        UserSettings.cache.set(key, null);
+      }
+    }
+    // The active selections changed with the identity; let listeners re-read.
+    for (const key of PER_PLAYER_KEYS) {
+      settings.emitChange(key, settings.getCached(key));
+    }
+  }
+
+  private storageKey(key: string): string {
+    if (UserSettings.playerId !== null && PER_PLAYER_KEYS.includes(key)) {
+      return `${key}:${UserSettings.playerId}`;
+    }
+    return key;
+  }
 
   private emitChange(key: string, value: any): void {
     try {
@@ -95,23 +207,28 @@ export class UserSettings {
   }
 
   private getCached(key: string): string | null {
-    if (!UserSettings.cache.has(key)) {
-      UserSettings.cache.set(key, localStorage.getItem(key));
+    const storageKey = this.storageKey(key);
+    if (!UserSettings.cache.has(storageKey)) {
+      UserSettings.cache.set(storageKey, localStorage.getItem(storageKey));
     }
-    return UserSettings.cache.get(key) ?? null;
+    return UserSettings.cache.get(storageKey) ?? null;
   }
 
+  // Change events always use the base key — listeners subscribe with the
+  // exported key constants, not the per-player storage key.
   private setCached(key: string, value: string, emitChange: boolean = true) {
-    localStorage.setItem(key, value);
-    UserSettings.cache.set(key, value);
+    const storageKey = this.storageKey(key);
+    localStorage.setItem(storageKey, value);
+    UserSettings.cache.set(storageKey, value);
     if (emitChange) {
       this.emitChange(key, value);
     }
   }
 
   public removeCached(key: string, emitChange: boolean = true) {
-    localStorage.removeItem(key);
-    UserSettings.cache.set(key, null);
+    const storageKey = this.storageKey(key);
+    localStorage.removeItem(storageKey);
+    UserSettings.cache.set(storageKey, null);
     if (emitChange) {
       this.emitChange(key, null);
     }
@@ -249,6 +366,21 @@ export class UserSettings {
     this.setBool("settings.goToPlayer", !this.goToPlayer());
   }
 
+  nukeAllianceSafetyDuration(): number {
+    const raw = this.getCached("settings.nukeAllianceSafetyDuration");
+    if (raw === null || raw.trim() === "") return 5;
+    const val = Number(raw);
+    if (!Number.isInteger(val) || val < 0 || val > 30) {
+      return 5;
+    }
+    return val;
+  }
+
+  setNukeAllianceSafetyDuration(duration: number) {
+    const val = Math.max(0, Math.min(30, Math.round(duration)));
+    this.setCached("settings.nukeAllianceSafetyDuration", val.toString());
+  }
+
   // For development only. Used for testing patterns, set in the console manually.
   getDevOnlyPattern(): PlayerPattern | undefined {
     const data = localStorage.getItem("dev-pattern") ?? undefined;
@@ -297,6 +429,7 @@ export class UserSettings {
     } else {
       this.setCached(PATTERN_KEY, value);
     }
+    this.syncActiveLoadout();
   }
 
   /** Returns the bare skin name (no `skin:` prefix), or null if a pattern (or nothing) is selected. */
@@ -324,6 +457,7 @@ export class UserSettings {
     } else {
       this.setCached(CROWN_KEY, name);
     }
+    this.syncActiveLoadout();
   }
 
   getFlag(): string | null {
@@ -343,11 +477,13 @@ export class UserSettings {
       this.clearFlag(true);
     } else {
       this.setCached(FLAG_KEY, flag);
+      this.syncActiveLoadout();
     }
   }
 
   clearFlag(emitChange: boolean = false): void {
     this.removeCached(FLAG_KEY, emitChange);
+    this.syncActiveLoadout();
   }
 
   /**
@@ -376,8 +512,154 @@ export class UserSettings {
     const map = this.getSelectedEffects();
     if (name === undefined) delete map[slot];
     else map[slot] = name;
-    if (Object.keys(map).length === 0) this.removeCached(EFFECTS_KEY);
-    else this.setString(EFFECTS_KEY, JSON.stringify(map));
+    this.setSelectedEffects(map);
+  }
+
+  /** Replaces every effect slot at once, e.g. when applying a loadout. */
+  setSelectedEffects(effects: Record<string, string>): void {
+    if (Object.keys(effects).length === 0) this.removeCached(EFFECTS_KEY);
+    else this.setString(EFFECTS_KEY, JSON.stringify(effects));
+    this.syncActiveLoadout();
+  }
+
+  /**
+   * Saved loadouts, oldest first. Corrupt storage and malformed entries are
+   * dropped rather than thrown, matching the getSelectedEffects pattern.
+   */
+  getLoadouts(): CosmeticLoadout[] {
+    const raw = this.getString(LOADOUTS_KEY, "");
+    if (!raw) return [];
+    try {
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return [];
+      return parsed
+        .map(parseLoadout)
+        .filter((loadout): loadout is CosmeticLoadout => loadout !== null)
+        .slice(0, MAX_LOADOUTS);
+    } catch {
+      return [];
+    }
+  }
+
+  getLoadout(name: string): CosmeticLoadout | null {
+    return this.getLoadouts().find((loadout) => loadout.name === name) ?? null;
+  }
+
+  /** The currently equipped cosmetics, as a loadout under the given name. */
+  captureLoadout(name: string): CosmeticLoadout {
+    return {
+      name,
+      pattern: this.getCached(PATTERN_KEY),
+      flag: this.getCached(FLAG_KEY),
+      crown: this.getCached(CROWN_KEY),
+      effects: this.getSelectedEffects(),
+    };
+  }
+
+  /**
+   * Stores the currently equipped cosmetics under `name`, replacing a loadout
+   * of the same name in place. Returns null when the name is blank, or when a
+   * new loadout would exceed MAX_LOADOUTS.
+   */
+  saveLoadout(name: string): CosmeticLoadout | null {
+    const trimmed = name.trim();
+    if (trimmed === "") return null;
+    const loadouts = this.getLoadouts();
+    const loadout = this.captureLoadout(trimmed);
+    const existing = loadouts.findIndex((entry) => entry.name === trimmed);
+    if (existing >= 0) {
+      loadouts[existing] = loadout;
+    } else {
+      if (loadouts.length >= MAX_LOADOUTS) return null;
+      loadouts.push(loadout);
+    }
+    this.setLoadouts(loadouts);
+    return loadout;
+  }
+
+  /**
+   * Adds a loadout in the lowest free slot number, holding whatever is
+   * equipped now, and makes it active. Returns null at MAX_LOADOUTS.
+   */
+  addLoadout(): CosmeticLoadout | null {
+    const taken = new Set(this.getLoadouts().map((loadout) => loadout.name));
+    for (let slot = 1; slot <= MAX_LOADOUTS; slot++) {
+      const name = loadoutSlotName(slot);
+      if (taken.has(name)) continue;
+      const loadout = this.saveLoadout(name);
+      if (loadout !== null) this.setActiveLoadout(name);
+      return loadout;
+    }
+    return null;
+  }
+
+  deleteLoadout(name: string): void {
+    const loadouts = this.getLoadouts();
+    const remaining = loadouts.filter((loadout) => loadout.name !== name);
+    if (remaining.length === loadouts.length) return;
+    this.setLoadouts(remaining);
+    if (this.getActiveLoadout() === name) this.setActiveLoadout(null);
+  }
+
+  /**
+   * Equips every slot of the named loadout, clearing slots it left empty, and
+   * makes it the active one. Returns false when no such loadout exists.
+   */
+  applyLoadout(name: string): boolean {
+    const loadout = this.getLoadout(name);
+    if (loadout === null) return false;
+    // The writes below would otherwise each mirror straight back into the
+    // loadout being read from.
+    UserSettings.applyingLoadout = true;
+    try {
+      this.setSelectedPatternName(loadout.pattern ?? undefined);
+      if (loadout.flag === null) this.clearFlag(true);
+      else this.setFlag(loadout.flag);
+      this.setSelectedCrownName(loadout.crown ?? undefined);
+      this.setSelectedEffects(loadout.effects);
+    } finally {
+      UserSettings.applyingLoadout = false;
+    }
+    this.setActiveLoadout(name);
+    return true;
+  }
+
+  /** The loadout equip changes are mirrored into, or null when none is. */
+  getActiveLoadout(): string | null {
+    const name = this.getCached(ACTIVE_LOADOUT_KEY);
+    if (name === null) return null;
+    // A loadout deleted in another tab leaves the pointer dangling.
+    return this.getLoadout(name) === null ? null : name;
+  }
+
+  setActiveLoadout(name: string | null): void {
+    if (name === null) this.removeCached(ACTIVE_LOADOUT_KEY);
+    else this.setCached(ACTIVE_LOADOUT_KEY, name);
+  }
+
+  /**
+   * Mirrors the equipped cosmetics into the active loadout, so the slot always
+   * shows what's being worn. A no-op when no slot is active, or while a
+   * loadout is being applied.
+   */
+  private syncActiveLoadout(): void {
+    if (UserSettings.applyingLoadout) return;
+    const active = this.getActiveLoadout();
+    if (active === null) return;
+    this.saveLoadout(active);
+  }
+
+  /** Clears every equip slot. Saved loadouts are left alone. */
+  unequipAll(): void {
+    this.setSelectedPatternName(undefined);
+    this.clearFlag(true);
+    this.setSelectedCrownName(undefined);
+    this.setSelectedEffects({});
+  }
+
+  private setLoadouts(loadouts: readonly CosmeticLoadout[]): void {
+    if (loadouts.length === 0) this.removeCached(LOADOUTS_KEY);
+    else this.setString(LOADOUTS_KEY, JSON.stringify(loadouts));
   }
 
   // Invalid/corrupt storage, unknown ids, or an empty result fall back to
