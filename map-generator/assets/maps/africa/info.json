@@ -227,5 +227,1364 @@
       "flag": "st"
     }
   ],
+
+  "custom_tribes": [
+    {
+      "coordinates": [1359, 242],
+      "name": "Cairo"
+    },
+    {
+      "coordinates": [630, 882],
+      "name": "Lagos"
+    },
+    {
+      "coordinates": [937, 1185],
+      "name": "Kinshasa"
+    },
+    {
+      "coordinates": [1275, 1780],
+      "name": "Johannesburg"
+    },
+    {
+      "coordinates": [1507, 1098],
+      "name": "Nairobi"
+    },
+    {
+      "coordinates": [1325, 211],
+      "name": "Alexandria"
+    },
+    {
+      "coordinates": [1558, 817],
+      "name": "Addis Ababa"
+    },
+    {
+      "coordinates": [313, 142],
+      "name": "Casablanca"
+    },
+    {
+      "coordinates": [428, 918],
+      "name": "Abidjan"
+    },
+    {
+      "coordinates": [1394, 640],
+      "name": "Khartoum"
+    },
+    {
+      "coordinates": [1021, 1991],
+      "name": "Cape Town"
+    },
+    {
+      "coordinates": [1572, 1249],
+      "name": "Dar es Salaam"
+    },
+    {
+      "coordinates": [516, 900],
+      "name": "Accra"
+    },
+    {
+      "coordinates": [615, 59],
+      "name": "Algiers"
+    },
+    {
+      "coordinates": [759, 735],
+      "name": "Kano"
+    },
+    {
+      "coordinates": [1354, 1879],
+      "name": "Durban"
+    },
+    {
+      "coordinates": [45, 650],
+      "name": "Dakar"
+    },
+    {
+      "coordinates": [1260, 1382],
+      "name": "Lubumbashi"
+    },
+    {
+      "coordinates": [882, 165],
+      "name": "Tripoli"
+    },
+    {
+      "coordinates": [1357, 1520],
+      "name": "Harare"
+    },
+    {
+      "coordinates": [802, 58],
+      "name": "Tunis"
+    },
+    {
+      "coordinates": [884, 1305],
+      "name": "Luanda"
+    },
+    {
+      "coordinates": [637, 862],
+      "name": "Ibadan"
+    },
+    {
+      "coordinates": [730, 815],
+      "name": "Abuja"
+    },
+    {
+      "coordinates": [322, 718],
+      "name": "Bamako"
+    },
+    {
+      "coordinates": [1732, 1007],
+      "name": "Mogadishu"
+    },
+    {
+      "coordinates": [1389, 1049],
+      "name": "Kampala"
+    },
+    {
+      "coordinates": [1790, 1579],
+      "name": "Antananarivo"
+    },
+    {
+      "coordinates": [868, 663],
+      "name": "N'Djamena"
+    },
+    {
+      "coordinates": [494, 725],
+      "name": "Ouagadougou"
+    },
+    {
+      "coordinates": [1281, 1485],
+      "name": "Lusaka"
+    },
+    {
+      "coordinates": [1158, 1232],
+      "name": "Mbuji-Mayi"
+    },
+    {
+      "coordinates": [790, 953],
+      "name": "Douala"
+    },
+    {
+      "coordinates": [838, 958],
+      "name": "Yaounde"
+    },
+    {
+      "coordinates": [1395, 1774],
+      "name": "Maputo"
+    },
+    {
+      "coordinates": [172, 803],
+      "name": "Conakry"
+    },
+    {
+      "coordinates": [1279, 1768],
+      "name": "Pretoria"
+    },
+    {
+      "coordinates": [1341, 1115],
+      "name": "Kigali"
+    },
+    {
+      "coordinates": [1359, 243],
+      "name": "Giza"
+    },
+    {
+      "coordinates": [1126, 1225],
+      "name": "Kananga"
+    },
+    {
+      "coordinates": [471, 862],
+      "name": "Kumasi"
+    },
+    {
+      "coordinates": [923, 1163],
+      "name": "Brazzaville"
+    },
+    {
+      "coordinates": [184, 832],
+      "name": "Freetown"
+    },
+    {
+      "coordinates": [1200, 1049],
+      "name": "Kisangani"
+    },
+    {
+      "coordinates": [248, 892],
+      "name": "Monrovia"
+    },
+    {
+      "coordinates": [346, 133],
+      "name": "Rabat"
+    },
+    {
+      "coordinates": [720, 932],
+      "name": "Port Harcourt"
+    },
+    {
+      "coordinates": [1427, 1446],
+      "name": "Lilongwe"
+    },
+    {
+      "coordinates": [590, 694],
+      "name": "Niamey"
+    },
+    {
+      "coordinates": [1582, 1174],
+      "name": "Mombasa"
+    },
+    {
+      "coordinates": [1210, 1992],
+      "name": "Port Elizabeth"
+    },
+    {
+      "coordinates": [1067, 186],
+      "name": "Benghazi"
+    },
+    {
+      "coordinates": [1403, 1133],
+      "name": "Mwanza"
+    },
+    {
+      "coordinates": [587, 878],
+      "name": "Cotonou"
+    },
+    {
+      "coordinates": [1306, 1110],
+      "name": "Goma"
+    },
+    {
+      "coordinates": [1017, 901],
+      "name": "Bangui"
+    },
+    {
+      "coordinates": [1289, 1615],
+      "name": "Bulawayo"
+    },
+    {
+      "coordinates": [784, 1052],
+      "name": "Libreville"
+    },
+    {
+      "coordinates": [555, 879],
+      "name": "Lome"
+    },
+    {
+      "coordinates": [402, 134],
+      "name": "Fez"
+    },
+    {
+      "coordinates": [322, 199],
+      "name": "Marrakesh"
+    },
+    {
+      "coordinates": [1368, 931],
+      "name": "Juba"
+    },
+    {
+      "coordinates": [1346, 1200],
+      "name": "Bujumbura"
+    },
+    {
+      "coordinates": [1563, 644],
+      "name": "Asmara"
+    },
+    {
+      "coordinates": [1674, 747],
+      "name": "Djibouti"
+    },
+    {
+      "coordinates": [985, 1680],
+      "name": "Windhoek"
+    },
+    {
+      "coordinates": [1219, 1738],
+      "name": "Gaborone"
+    },
+    {
+      "coordinates": [1260, 1865],
+      "name": "Maseru"
+    },
+    {
+      "coordinates": [1357, 1783],
+      "name": "Mbabane"
+    },
+    {
+      "coordinates": [517, 88],
+      "name": "Oran"
+    },
+    {
+      "coordinates": [709, 69],
+      "name": "Constantine"
+    },
+    {
+      "coordinates": [364, 82],
+      "name": "Tangier"
+    },
+    {
+      "coordinates": [1388, 209],
+      "name": "Port Said"
+    },
+    {
+      "coordinates": [1394, 244],
+      "name": "Suez"
+    },
+    {
+      "coordinates": [1397, 361],
+      "name": "Luxor"
+    },
+    {
+      "coordinates": [1403, 406],
+      "name": "Aswan"
+    },
+    {
+      "coordinates": [1517, 528],
+      "name": "Port Sudan"
+    },
+    {
+      "coordinates": [1496, 641],
+      "name": "Kassala"
+    },
+    {
+      "coordinates": [804, 107],
+      "name": "Sfax"
+    },
+    {
+      "coordinates": [815, 84],
+      "name": "Sousse"
+    },
+    {
+      "coordinates": [933, 178],
+      "name": "Misrata"
+    },
+    {
+      "coordinates": [739, 55],
+      "name": "Annaba"
+    },
+    {
+      "coordinates": [680, 441],
+      "name": "Tamanghasset"
+    },
+    {
+      "coordinates": [280, 232],
+      "name": "Agadir"
+    },
+    {
+      "coordinates": [457, 115],
+      "name": "Oujda"
+    },
+    {
+      "coordinates": [193, 301],
+      "name": "El-Aaiun"
+    },
+    {
+      "coordinates": [97, 443],
+      "name": "Dakhla"
+    },
+    {
+      "coordinates": [114, 657],
+      "name": "Touba"
+    },
+    {
+      "coordinates": [86, 659],
+      "name": "Thies"
+    },
+    {
+      "coordinates": [98, 626],
+      "name": "Saint-Louis"
+    },
+    {
+      "coordinates": [104, 720],
+      "name": "Ziguinchor"
+    },
+    {
+      "coordinates": [66, 696],
+      "name": "Banjul"
+    },
+    {
+      "coordinates": [123, 751],
+      "name": "Bissau"
+    },
+    {
+      "coordinates": [288, 780],
+      "name": "Kankan"
+    },
+    {
+      "coordinates": [224, 846],
+      "name": "Bo"
+    },
+    {
+      "coordinates": [284, 872],
+      "name": "Gbarnga"
+    },
+    {
+      "coordinates": [405, 482],
+      "name": "Taoudenni"
+    },
+    {
+      "coordinates": [423, 667],
+      "name": "Mopti"
+    },
+    {
+      "coordinates": [454, 605],
+      "name": "Timbuktu"
+    },
+    {
+      "coordinates": [533, 619],
+      "name": "Gao"
+    },
+    {
+      "coordinates": [420, 758],
+      "name": "Bobo-Dioulasso"
+    },
+    {
+      "coordinates": [771, 686],
+      "name": "Zinder"
+    },
+    {
+      "coordinates": [722, 694],
+      "name": "Maradi"
+    },
+    {
+      "coordinates": [745, 600],
+      "name": "Agadez"
+    },
+    {
+      "coordinates": [964, 780],
+      "name": "Moundou"
+    },
+    {
+      "coordinates": [1085, 686],
+      "name": "Abeche"
+    },
+    {
+      "coordinates": [401, 853],
+      "name": "Bouake"
+    },
+    {
+      "coordinates": [394, 877],
+      "name": "Yamoussoukro"
+    },
+    {
+      "coordinates": [353, 914],
+      "name": "San-Pedro"
+    },
+    {
+      "coordinates": [512, 807],
+      "name": "Tamale"
+    },
+    {
+      "coordinates": [463, 923],
+      "name": "Sekondi-Takoradi"
+    },
+    {
+      "coordinates": [564, 818],
+      "name": "Sokode"
+    },
+    {
+      "coordinates": [605, 871],
+      "name": "Porto-Novo"
+    },
+    {
+      "coordinates": [603, 808],
+      "name": "Parakou"
+    },
+    {
+      "coordinates": [669, 888],
+      "name": "Benin City"
+    },
+    {
+      "coordinates": [837, 757],
+      "name": "Maiduguri"
+    },
+    {
+      "coordinates": [738, 760],
+      "name": "Zaria"
+    },
+    {
+      "coordinates": [731, 776],
+      "name": "Kaduna"
+    },
+    {
+      "coordinates": [1179, 522],
+      "name": "Fada"
+    },
+    {
+      "coordinates": [654, 832],
+      "name": "Ilorin"
+    },
+    {
+      "coordinates": [732, 888],
+      "name": "Enugu"
+    },
+    {
+      "coordinates": [735, 918],
+      "name": "Aba"
+    },
+    {
+      "coordinates": [713, 896],
+      "name": "Onitsha"
+    },
+    {
+      "coordinates": [754, 928],
+      "name": "Calabar"
+    },
+    {
+      "coordinates": [1297, 1132],
+      "name": "Bukavu"
+    },
+    {
+      "coordinates": [847, 1195],
+      "name": "Pointe-Noire"
+    },
+    {
+      "coordinates": [1013, 455],
+      "name": "Faya-Largeau"
+    },
+    {
+      "coordinates": [802, 901],
+      "name": "Bamenda"
+    },
+    {
+      "coordinates": [766, 1083],
+      "name": "Port-Gentil"
+    },
+    {
+      "coordinates": [766, 961],
+      "name": "Malabo"
+    },
+    {
+      "coordinates": [792, 1013],
+      "name": "Bata"
+    },
+    {
+      "coordinates": [712, 1054],
+      "name": "Sao Tome"
+    },
+    {
+      "coordinates": [950, 1413],
+      "name": "Huambo"
+    },
+    {
+      "coordinates": [892, 1402],
+      "name": "Lobito"
+    },
+    {
+      "coordinates": [1042, 1439],
+      "name": "Kuito"
+    },
+    {
+      "coordinates": [890, 1472],
+      "name": "Lubango"
+    },
+    {
+      "coordinates": [856, 1215],
+      "name": "Cabinda"
+    },
+    {
+      "coordinates": [1640, 802],
+      "name": "Dire Dawa"
+    },
+    {
+      "coordinates": [1577, 694],
+      "name": "Mekelle"
+    },
+    {
+      "coordinates": [1524, 719],
+      "name": "Gondar"
+    },
+    {
+      "coordinates": [1551, 871],
+      "name": "Hawassa"
+    },
+    {
+      "coordinates": [1522, 747],
+      "name": "Bahir Dar"
+    },
+    {
+      "coordinates": [1458, 1086],
+      "name": "Kisumu"
+    },
+    {
+      "coordinates": [1487, 1072],
+      "name": "Nakuru"
+    },
+    {
+      "coordinates": [1318, 861],
+      "name": "Eldoret"
+    },
+    {
+      "coordinates": [1698, 803],
+      "name": "Hargeisa"
+    },
+    {
+      "coordinates": [1834, 755],
+      "name": "Bosaso"
+    },
+    {
+      "coordinates": [1658, 1074],
+      "name": "Kismayo"
+    },
+    {
+      "coordinates": [1344, 1080],
+      "name": "Mbarara"
+    },
+    {
+      "coordinates": [1402, 971],
+      "name": "Gulu"
+    },
+    {
+      "coordinates": [1503, 1155],
+      "name": "Arusha"
+    },
+    {
+      "coordinates": [1478, 1232],
+      "name": "Dodoma"
+    },
+    {
+      "coordinates": [1418, 1306],
+      "name": "Mbeya"
+    },
+    {
+      "coordinates": [1570, 1232],
+      "name": "Zanzibar City"
+    },
+    {
+      "coordinates": [1567, 1202],
+      "name": "Tanga"
+    },
+    {
+      "coordinates": [1529, 1249],
+      "name": "Morogoro"
+    },
+    {
+      "coordinates": [1227, 1860],
+      "name": "Bloemfontein"
+    },
+    {
+      "coordinates": [1272, 1966],
+      "name": "East London"
+    },
+    {
+      "coordinates": [1312, 1717],
+      "name": "Polokwane"
+    },
+    {
+      "coordinates": [1352, 1760],
+      "name": "Nelspruit"
+    },
+    {
+      "coordinates": [1188, 1849],
+      "name": "Kimberley"
+    },
+    {
+      "coordinates": [1455, 1606],
+      "name": "Beira"
+    },
+    {
+      "coordinates": [1572, 1477],
+      "name": "Nampula"
+    },
+    {
+      "coordinates": [1509, 1553],
+      "name": "Quelimane"
+    },
+    {
+      "coordinates": [1605, 1418],
+      "name": "Pemba"
+    },
+    {
+      "coordinates": [1421, 1505],
+      "name": "Tete"
+    },
+    {
+      "coordinates": [1355, 1556],
+      "name": "Chitungwiza"
+    },
+    {
+      "coordinates": [1397, 1582],
+      "name": "Mutare"
+    },
+    {
+      "coordinates": [1322, 1595],
+      "name": "Gweru"
+    },
+    {
+      "coordinates": [1279, 1414],
+      "name": "Kitwe"
+    },
+    {
+      "coordinates": [1291, 1418],
+      "name": "Ndola"
+    },
+    {
+      "coordinates": [1286, 1458],
+      "name": "Kabwe"
+    },
+    {
+      "coordinates": [1217, 1551],
+      "name": "Livingstone"
+    },
+    {
+      "coordinates": [1261, 1642],
+      "name": "Francistown"
+    },
+    {
+      "coordinates": [1153, 1609],
+      "name": "Maun"
+    },
+    {
+      "coordinates": [917, 1691],
+      "name": "Walvis Bay"
+    },
+    {
+      "coordinates": [918, 1684],
+      "name": "Swakopmund"
+    },
+    {
+      "coordinates": [1056, 1554],
+      "name": "Rundu"
+    },
+    {
+      "coordinates": [1363, 1788],
+      "name": "Manzini"
+    },
+    {
+      "coordinates": [1459, 1496],
+      "name": "Blantyre"
+    },
+    {
+      "coordinates": [1433, 1377],
+      "name": "Mzuzu"
+    },
+    {
+      "coordinates": [1839, 1560],
+      "name": "Toamasina"
+    },
+    {
+      "coordinates": [1777, 1606],
+      "name": "Antsirabe"
+    },
+    {
+      "coordinates": [1764, 1512],
+      "name": "Mahajanga"
+    },
+    {
+      "coordinates": [1778, 1650],
+      "name": "Fianarantsoa"
+    },
+    {
+      "coordinates": [1731, 1725],
+      "name": "Toliara"
+    },
+    {
+      "coordinates": [1870, 1429],
+      "name": "Antsiranana"
+    },
+    {
+      "coordinates": [1708, 1382],
+      "name": "Moroni"
+    },
+    {
+      "coordinates": [1137, 19],
+      "name": "Athens"
+    },
+    {
+      "coordinates": [912, 73],
+      "name": "Valletta"
+    },
+    {
+      "coordinates": [1204, 92],
+      "name": "Heraklion"
+    },
+    {
+      "coordinates": [1416, 103],
+      "name": "Nicosia"
+    },
+    {
+      "coordinates": [1465, 195],
+      "name": "Jerusalem"
+    },
+    {
+      "coordinates": [1453, 186],
+      "name": "Tel Aviv"
+    },
+    {
+      "coordinates": [1484, 190],
+      "name": "Amman"
+    },
+    {
+      "coordinates": [1508, 119],
+      "name": "Beirut"
+    },
+    {
+      "coordinates": [1493, 148],
+      "name": "Damascus"
+    },
+    {
+      "coordinates": [1600, 459],
+      "name": "Jeddah"
+    },
+    {
+      "coordinates": [1635, 499],
+      "name": "Mecca"
+    },
+    {
+      "coordinates": [1581, 394],
+      "name": "Medina"
+    },
+    {
+      "coordinates": [1768, 388],
+      "name": "Riyadh"
+    },
+    {
+      "coordinates": [1702, 643],
+      "name": "Sana'a"
+    },
+    {
+      "coordinates": [1732, 697],
+      "name": "Aden"
+    },
+    {
+      "coordinates": [387, 137],
+      "name": "Meknes"
+    },
+    {
+      "coordinates": [94, 557],
+      "name": "Nouakchott"
+    },
+    {
+      "coordinates": [360, 127],
+      "name": "Kenitra"
+    },
+    {
+      "coordinates": [392, 91],
+      "name": "Tetouan"
+    },
+    {
+      "coordinates": [499, 110],
+      "name": "Tlemcen"
+    },
+    {
+      "coordinates": [697, 91],
+      "name": "Batna"
+    },
+    {
+      "coordinates": [677, 75],
+      "name": "Setif"
+    },
+    {
+      "coordinates": [685, 111],
+      "name": "Biskra"
+    },
+    {
+      "coordinates": [170, 344],
+      "name": "Boucraa"
+    },
+    {
+      "coordinates": [145, 388],
+      "name": "Guelta Zemmur"
+    },
+    {
+      "coordinates": [675, 190],
+      "name": "Ouargla"
+    },
+    {
+      "coordinates": [801, 138],
+      "name": "Gabes"
+    },
+    {
+      "coordinates": [904, 18],
+      "name": "Palermo"
+    },
+    {
+      "coordinates": [801, 88],
+      "name": "Kairouan"
+    },
+    {
+      "coordinates": [1167, 186],
+      "name": "Tobruk"
+    },
+    {
+      "coordinates": [915, 325],
+      "name": "Sabha"
+    },
+    {
+      "coordinates": [972, 210],
+      "name": "Sirte"
+    },
+    {
+      "coordinates": [1356, 321],
+      "name": "Asyut"
+    },
+    {
+      "coordinates": [1387, 227],
+      "name": "Ismailia"
+    },
+    {
+      "coordinates": [1349, 262],
+      "name": "Faiyum"
+    },
+    {
+      "coordinates": [1353, 221],
+      "name": "Tanta"
+    },
+    {
+      "coordinates": [1363, 215],
+      "name": "Mansoura"
+    },
+    {
+      "coordinates": [1366, 228],
+      "name": "Zagazig"
+    },
+    {
+      "coordinates": [1191, 734],
+      "name": "Nyala"
+    },
+    {
+      "coordinates": [1333, 703],
+      "name": "El Obeid"
+    },
+    {
+      "coordinates": [1420, 670],
+      "name": "Wad Madani"
+    },
+    {
+      "coordinates": [1469, 680],
+      "name": "Gedaref"
+    },
+    {
+      "coordinates": [1204, 691],
+      "name": "El Fasher"
+    },
+    {
+      "coordinates": [1432, 579],
+      "name": "Atbara"
+    },
+    {
+      "coordinates": [160, 731],
+      "name": "Gabu"
+    },
+    {
+      "coordinates": [143, 781],
+      "name": "Catio"
+    },
+    {
+      "coordinates": [559, 513],
+      "name": "Aguelhok"
+    },
+    {
+      "coordinates": [233, 699],
+      "name": "Ballou"
+    },
+    {
+      "coordinates": [334, 861],
+      "name": "Man"
+    },
+    {
+      "coordinates": [490, 909],
+      "name": "Cape Coast"
+    },
+    {
+      "coordinates": [794, 536],
+      "name": "In Guezzam"
+    },
+    {
+      "coordinates": [347, 377],
+      "name": "Tindouf"
+    },
+    {
+      "coordinates": [641, 657],
+      "name": "Abomey"
+    },
+    {
+      "coordinates": [622, 868],
+      "name": "Abeokuta"
+    },
+    {
+      "coordinates": [671, 865],
+      "name": "Akure"
+    },
+    {
+      "coordinates": [646, 841],
+      "name": "Ogbomoso"
+    },
+    {
+      "coordinates": [654, 851],
+      "name": "Osogbo"
+    },
+    {
+      "coordinates": [686, 912],
+      "name": "Warri"
+    },
+    {
+      "coordinates": [672, 707],
+      "name": "Sokoto"
+    },
+    {
+      "coordinates": [735, 709],
+      "name": "Katsina"
+    },
+    {
+      "coordinates": [794, 782],
+      "name": "Bauchi"
+    },
+    {
+      "coordinates": [828, 441],
+      "name": "Djanet"
+    },
+    {
+      "coordinates": [864, 812],
+      "name": "Yola"
+    },
+    {
+      "coordinates": [913, 774],
+      "name": "Maroua"
+    },
+    {
+      "coordinates": [893, 864],
+      "name": "Ngaoundere"
+    },
+    {
+      "coordinates": [809, 913],
+      "name": "Bafoussam"
+    },
+    {
+      "coordinates": [1019, 747],
+      "name": "Sarh"
+    },
+    {
+      "coordinates": [1016, 1062],
+      "name": "Mbandaka"
+    },
+    {
+      "coordinates": [891, 1223],
+      "name": "Matadi"
+    },
+    {
+      "coordinates": [1031, 1201],
+      "name": "Kikwit"
+    },
+    {
+      "coordinates": [1084, 1239],
+      "name": "Tshikapa"
+    },
+    {
+      "coordinates": [1219, 1144],
+      "name": "Kindu"
+    },
+    {
+      "coordinates": [1334, 1021],
+      "name": "Bunia"
+    },
+    {
+      "coordinates": [1207, 1356],
+      "name": "Kolwezi"
+    },
+    {
+      "coordinates": [1507, 853],
+      "name": "Jimma"
+    },
+    {
+      "coordinates": [1581, 759],
+      "name": "Dessie"
+    },
+    {
+      "coordinates": [1665, 808],
+      "name": "Jijiga"
+    },
+    {
+      "coordinates": [1688, 979],
+      "name": "Baidoa"
+    },
+    {
+      "coordinates": [1787, 878],
+      "name": "Galkayo"
+    },
+    {
+      "coordinates": [1723, 778],
+      "name": "Berbera"
+    },
+    {
+      "coordinates": [1514, 1091],
+      "name": "Thika"
+    },
+    {
+      "coordinates": [1594, 1151],
+      "name": "Malindi"
+    },
+    {
+      "coordinates": [1582, 1076],
+      "name": "Garissa"
+    },
+    {
+      "coordinates": [1139, 905],
+      "name": "Bambari"
+    },
+    {
+      "coordinates": [1082, 851],
+      "name": "Bria"
+    },
+    {
+      "coordinates": [1407, 1012],
+      "name": "Lira"
+    },
+    {
+      "coordinates": [1400, 1201],
+      "name": "Tabora"
+    },
+    {
+      "coordinates": [1317, 1197],
+      "name": "Kigoma"
+    },
+    {
+      "coordinates": [1477, 1276],
+      "name": "Iringa"
+    },
+    {
+      "coordinates": [1520, 1154],
+      "name": "Moshi"
+    },
+    {
+      "coordinates": [1417, 1164],
+      "name": "Shinyanga"
+    },
+    {
+      "coordinates": [1270, 1407],
+      "name": "Chingola"
+    },
+    {
+      "coordinates": [1397, 1437],
+      "name": "Chipata"
+    },
+    {
+      "coordinates": [1358, 1343],
+      "name": "Kasama"
+    },
+    {
+      "coordinates": [1468, 1484],
+      "name": "Zomba"
+    },
+    {
+      "coordinates": [1322, 1581],
+      "name": "Kwekwe"
+    },
+    {
+      "coordinates": [1349, 1612],
+      "name": "Masvingo"
+    },
+    {
+      "coordinates": [1609, 1461],
+      "name": "Nacala"
+    },
+    {
+      "coordinates": [1419, 1587],
+      "name": "Chimoio"
+    },
+    {
+      "coordinates": [1423, 1748],
+      "name": "Xai-Xai"
+    },
+    {
+      "coordinates": [1240, 1676],
+      "name": "Serowe"
+    },
+    {
+      "coordinates": [1270, 1782],
+      "name": "Soweto"
+    },
+    {
+      "coordinates": [1337, 1872],
+      "name": "Pietermaritzburg"
+    },
+    {
+      "coordinates": [1282, 1780],
+      "name": "Benoni"
+    },
+    {
+      "coordinates": [1272, 1792],
+      "name": "Vereeniging"
+    },
+    {
+      "coordinates": [1240, 1829],
+      "name": "Welkom"
+    },
+    {
+      "coordinates": [1325, 1822],
+      "name": "Newcastle"
+    },
+    {
+      "coordinates": [1127, 1992],
+      "name": "George"
+    },
+    {
+      "coordinates": [1035, 1985],
+      "name": "Paarl"
+    },
+    {
+      "coordinates": [1095, 1841],
+      "name": "Upington"
+    },
+    {
+      "coordinates": [1254, 1766],
+      "name": "Rustenburg"
+    },
+    {
+      "coordinates": [1239, 1799],
+      "name": "Klerksdorp"
+    },
+    {
+      "coordinates": [1294, 1927],
+      "name": "Mthatha"
+    },
+    {
+      "coordinates": [1381, 1850],
+      "name": "Richards Bay"
+    },
+    {
+      "coordinates": [1908, 342],
+      "name": "Bahrain"
+    },
+    {
+      "coordinates": [1927, 379],
+      "name": "Doha"
+    },
+    {
+      "coordinates": [1178, 966],
+      "name": "Gemena"
+    },
+    {
+      "coordinates": [1005, 984],
+      "name": "Impfondo"
+    },
+    {
+      "coordinates": [945, 1050],
+      "name": "Ouesso"
+    },
+    {
+      "coordinates": [930, 1123],
+      "name": "Owando"
+    },
+    {
+      "coordinates": [833, 1092],
+      "name": "Lambarene"
+    },
+    {
+      "coordinates": [823, 1138],
+      "name": "Tchibanga"
+    },
+    {
+      "coordinates": [881, 1156],
+      "name": "Sibiti"
+    },
+    {
+      "coordinates": [881, 1047],
+      "name": "Mekambo"
+    },
+    {
+      "coordinates": [1242, 401],
+      "name": "Kharga"
+    },
+    {
+      "coordinates": [1116, 373],
+      "name": "El Qasr"
+    },
+    {
+      "coordinates": [1124, 291],
+      "name": "Swia Oasis"
+    },
+    {
+      "coordinates": [1024, 282],
+      "name": "Awjilah"
+    },
+    {
+      "coordinates": [1328, 523],
+      "name": "Abri"
+    },
+    {
+      "coordinates": [1334, 582],
+      "name": "Dongola"
+    },
+    {
+      "coordinates": [1139, 1285],
+      "name": "Kabinda"
+    },
+    {
+      "coordinates": [1064, 1324],
+      "name": "Mwene-Ditu"
+    },
+    {
+      "coordinates": [1167, 1327],
+      "name": "Kamina"
+    },
+    {
+      "coordinates": [1120, 1394],
+      "name": "Saurimo"
+    },
+    {
+      "coordinates": [980, 1315],
+      "name": "Malanje"
+    },
+    {
+      "coordinates": [847, 1529],
+      "name": "Namibe"
+    },
+    {
+      "coordinates": [995, 1515],
+      "name": "Menongue"
+    },
+    {
+      "coordinates": [1058, 1685],
+      "name": "Gobabis"
+    },
+    {
+      "coordinates": [987, 1748],
+      "name": "Mariental"
+    },
+    {
+      "coordinates": [1026, 1820],
+      "name": "Keetmanshoop"
+    },
+    {
+      "coordinates": [946, 1816],
+      "name": "Luderitz"
+    },
+    {
+      "coordinates": [1504, 1398],
+      "name": "Lichinga"
+    },
+    {
+      "coordinates": [1588, 1343],
+      "name": "Lindi"
+    },
+    {
+      "coordinates": [1492, 1322],
+      "name": "Makambako"
+    },
+    {
+      "coordinates": [1512, 1464],
+      "name": "Gurue"
+    },
+    {
+      "coordinates": [1487, 1698],
+      "name": "Maxixe"
+    },
+    {
+      "coordinates": [1085, 1022],
+      "name": "Boende"
+    },
+    {
+      "coordinates": [1110, 1115],
+      "name": "Lodja"
+    },
+    {
+      "coordinates": [1565, 994],
+      "name": "Marsabit"
+    },
+    {
+      "coordinates": [1469, 994],
+      "name": "Lodwar"
+    },
+    {
+      "coordinates": [1554, 1052],
+      "name": "Wajir"
+    }
+  ],
   "themes": ["africa"]
 }
