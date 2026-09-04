@@ -1,0 +1,89 @@
+{
+  "name": "English Channel",
+  "id": "EnglishChannel",
+  "translation_key": "map.englishchannel",
+  "categories": ["europe", "new"],
+  "multiplayer_frequency": 5,
+  "nations": [
+    {
+      "coordinates": [509, 79],
+      "name": "Wales",
+      "flag": "gb-wls"
+    },
+    {
+      "coordinates": [534, 360],
+      "name": "Wessex",
+      "flag": "1_Wessex"
+    },
+    {
+      "coordinates": [821, 66],
+      "name": "Mercia",
+      "flag": "1_Mercia"
+    },
+    {
+      "coordinates": [1537, 240],
+      "name": "Kent",
+      "flag": "1_Kent"
+    },
+    {
+      "coordinates": [911, 332],
+      "name": "Sussex",
+      "flag": "1_Sussex"
+    },
+    {
+      "coordinates": [1495, 13],
+      "name": "East Anglia",
+      "flag": "1_East Anglia"
+    },
+    {
+      "coordinates": [1282, 295],
+      "name": "Essex",
+      "flag": "1_Essex"
+    },
+    {
+      "coordinates": [1198, 148],
+      "name": "London",
+      "flag": "gb-eng"
+    },
+    {
+      "coordinates": [1173, 1006],
+      "name": "Duchy of Normandy",
+      "flag": "normandy"
+    },
+    {
+      "coordinates": [519, 1180],
+      "name": "Duchy of Brittany",
+      "flag": "Brittany"
+    },
+    {
+      "coordinates": [1916, 323],
+      "name": "County of Flanders",
+      "flag": "Flanders"
+    },
+    {
+      "coordinates": [1690, 447],
+      "name": "County of Boulogne",
+      "flag": "1_Franks"
+    },
+    {
+      "coordinates": [1676, 661],
+      "name": "County of Ponthieu",
+      "flag": "1_Franks"
+    },
+    {
+      "coordinates": [1553, 1029],
+      "name": "County of Maine",
+      "flag": "1_Franks"
+    },
+    {
+      "coordinates": [1342, 1215],
+      "name": "County of Anjou",
+      "flag": "1_Franks"
+    },
+    {
+      "coordinates": [1878, 1102],
+      "name": "Paris",
+      "flag": "paris"
+    }
+  ]
+}

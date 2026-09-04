@@ -1,0 +1,104 @@
+{
+  "categories": ["europe", "new"],
+  "id": "EnglishChannel",
+  "map": {
+    "height": 1228,
+    "num_land_tiles": 1196119,
+    "width": 1952
+  },
+  "map16x": {
+    "height": 307,
+    "num_land_tiles": 72853,
+    "width": 488
+  },
+  "map4x": {
+    "height": 614,
+    "num_land_tiles": 296428,
+    "width": 976
+  },
+  "multiplayer_frequency": 5,
+  "name": "English Channel",
+  "nations": [
+    {
+      "coordinates": [509, 79],
+      "flag": "gb-wls",
+      "name": "Wales"
+    },
+    {
+      "coordinates": [534, 360],
+      "flag": "1_Wessex",
+      "name": "Wessex"
+    },
+    {
+      "coordinates": [821, 66],
+      "flag": "1_Mercia",
+      "name": "Mercia"
+    },
+    {
+      "coordinates": [1537, 240],
+      "flag": "1_Kent",
+      "name": "Kent"
+    },
+    {
+      "coordinates": [911, 332],
+      "flag": "1_Sussex",
+      "name": "Sussex"
+    },
+    {
+      "coordinates": [1495, 13],
+      "flag": "1_East Anglia",
+      "name": "East Anglia"
+    },
+    {
+      "coordinates": [1282, 295],
+      "flag": "1_Essex",
+      "name": "Essex"
+    },
+    {
+      "coordinates": [1198, 148],
+      "flag": "gb-eng",
+      "name": "London"
+    },
+    {
+      "coordinates": [1173, 1006],
+      "flag": "normandy",
+      "name": "Duchy of Normandy"
+    },
+    {
+      "coordinates": [519, 1180],
+      "flag": "Brittany",
+      "name": "Duchy of Brittany"
+    },
+    {
+      "coordinates": [1916, 323],
+      "flag": "Flanders",
+      "name": "County of Flanders"
+    },
+    {
+      "coordinates": [1690, 447],
+      "flag": "1_Franks",
+      "name": "County of Boulogne"
+    },
+    {
+      "coordinates": [1676, 661],
+      "flag": "1_Franks",
+      "name": "County of Ponthieu"
+    },
+    {
+      "coordinates": [1553, 1029],
+      "flag": "1_Franks",
+      "name": "County of Maine"
+    },
+    {
+      "coordinates": [1342, 1215],
+      "flag": "1_Franks",
+      "name": "County of Anjou"
+    },
+    {
+      "coordinates": [1878, 1102],
+      "flag": "paris",
+      "name": "Paris"
+    }
+  ],
+  "translation_key": "map.englishchannel"
+}
