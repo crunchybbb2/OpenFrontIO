@@ -557,17 +557,17 @@
   "id": "LosAngeles",
   "map": {
     "height": 2276,
-    "num_land_tiles": 2065301,
+    "num_land_tiles": 2080151,
     "width": 1800
   },
   "map16x": {
     "height": 569,
-    "num_land_tiles": 122927,
+    "num_land_tiles": 125614,
     "width": 450
   },
   "map4x": {
     "height": 1138,
-    "num_land_tiles": 507774,
+    "num_land_tiles": 513881,
     "width": 900
   },
   "multiplayer_frequency": 8,
