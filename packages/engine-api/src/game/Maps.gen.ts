@@ -30,6 +30,7 @@ export enum GameMapType {
   BranchingPaths = "Branching Paths", // map-generator/assets/maps/branchingpaths/info.json
   Britannia = "Britannia", // map-generator/assets/maps/britannia/info.json
   BritanniaClassic = "Britannia Classic", // map-generator/assets/maps/britanniaclassic/info.json
+  California = "California", // map-generator/assets/maps/california/info.json
   CanaryIslands = "Canary Islands", // map-generator/assets/maps/canaryislands/info.json
   CapeCod = "Cape Cod", // map-generator/assets/maps/capecod/info.json
   CapeOfGoodHope = "Cape Of Good Hope", // map-generator/assets/maps/capeofgoodhope/info.json
@@ -472,6 +473,14 @@ export const maps: readonly MapInfo[] = [
     categories: ["europe"],
     defaultNationCount: 23,
     themes: ["europe"],
+  },
+  {
+    id: "California",
+    type: GameMapType.California,
+    translationKey: "map.california",
+    categories: ["north_america"],
+    defaultNationCount: 63,
+    themes: ["north_america", "western"],
   },
   {
     id: "CanaryIslands",

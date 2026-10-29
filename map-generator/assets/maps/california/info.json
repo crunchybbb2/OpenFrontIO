@@ -1,0 +1,325 @@
+{
+  "$schema": "../../../info.schema.json",
+  "id": "California",
+  "name": "California",
+  "translation_key": "map.california",
+  "categories": ["north_america"],
+  "themes": ["north_america", "western"],
+  "nations": [
+    {
+      "coordinates": [1128, 1697],
+      "name": "Los Angeles County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1257, 1809],
+      "name": "Orange County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1408, 1937],
+      "name": "San Diego County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1458, 1773],
+      "name": "Riverside County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1664, 1876],
+      "name": "Imperial County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1466, 1547],
+      "name": "San Bernardino County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [997, 1627],
+      "name": "Ventura County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [840, 1587],
+      "name": "Santa Barbara County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [758, 1397],
+      "name": "San Luis Obispo County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1146, 1474],
+      "name": "Kern County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [444, 975],
+      "name": "San Francisco County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [463, 1027],
+      "name": "San Mateo County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [528, 1054],
+      "name": "Santa Clara County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [523, 980],
+      "name": "Alameda County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [508, 937],
+      "name": "Contra Costa County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [522, 1120],
+      "name": "Santa Cruz County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [624, 1308],
+      "name": "Monterey County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [662, 1204],
+      "name": "San Benito County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [910, 1228],
+      "name": "Fresno County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [908, 1387],
+      "name": "Kings County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1017, 1298],
+      "name": "Tulare County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1198, 1155],
+      "name": "Inyo County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [993, 917],
+      "name": "Mono County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [864, 1099],
+      "name": "Madera County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [680, 1083],
+      "name": "Merced County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [617, 946],
+      "name": "San Joaquin County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [649, 1010],
+      "name": "Stanislaus County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [792, 997],
+      "name": "Mariposa County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [633, 804],
+      "name": "Sacramento County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [741, 849],
+      "name": "Amador County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [846, 911],
+      "name": "Tuolumne County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [751, 920],
+      "name": "Calaveras County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [749, 777],
+      "name": "El Dorado County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [855, 767],
+      "name": "Alpine County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1022, 1111],
+      "name": "Yosemite National Park",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1508, 1384],
+      "name": "Death Valley National Park",
+      "flag": "California"
+    },
+    {
+      "coordinates": [704, 723],
+      "name": "Placer County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [773, 652],
+      "name": "Nevada County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [703, 593],
+      "name": "Sierra County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [734, 511],
+      "name": "Plumas County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [712, 351],
+      "name": "Lassen County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [672, 186],
+      "name": "Modoc County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [515, 872],
+      "name": "Solano County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [466, 870],
+      "name": "Napa County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [417, 928],
+      "name": "Marin County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [380, 872],
+      "name": "Sonoma County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [404, 719],
+      "name": "Lake County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [503, 805],
+      "name": "Yolo County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [493, 723],
+      "name": "Colusa County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [466, 622],
+      "name": "Glenn County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [312, 628],
+      "name": "Mendocino County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [484, 517],
+      "name": "Tehama County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [634, 690],
+      "name": "Yuba County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [565, 725],
+      "name": "Sutter County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [584, 595],
+      "name": "Butte County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [491, 386],
+      "name": "Shasta County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [222, 378],
+      "name": "Humboldt County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [499, 188],
+      "name": "Siskiyou County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [350, 283],
+      "name": "Trinity County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [229, 120],
+      "name": "Del Norte County",
+      "flag": "California"
+    },
+    {
+      "coordinates": [881, 1733],
+      "name": "Channel Islands",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1107, 1859],
+      "name": "Santa Catalina",
+      "flag": "California"
+    },
+    {
+      "coordinates": [1161, 1297],
+      "name": "Sequoia National Park",
+      "flag": "California"
+    }
+  ]
+}
